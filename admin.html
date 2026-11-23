@@ -6,21 +6,20 @@
   <title>لوحة الإدارة المتكاملة | Eng. Rana El Mashad</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy-dark: #071124;
-      --navy-main: #0c1d3d;
-      --navy-card: #112752;
-      --navy-input: #08152e;
-      --gold: #d8b24c;
-      --gold-light: #f3dc94;
-      --gold-dark: #a68224;
+      --navy-dark: #061021;
+      --navy-main: #0a1931;
+      --navy-card: #112547;
+      --navy-input: #08152c;
+      --gold: #c9a23f;
+      --gold-light: #e6cb7a;
+      --gold-dark: #9f7c24;
       --white: #ffffff;
       --text-soft: #dce5f5;
-      --text-muted: #a7b8d6;
-      --border-gold: rgba(216, 178, 76, 0.32);
-      --danger: #ff6b6b;
+      --line-gold: rgba(201, 162, 63, 0.28);
+      --danger: #ff7373;
       --success: #4cd98b;
     }
 
@@ -31,7 +30,7 @@
     }
 
     body {
-      font-family: 'Cairo', sans-serif;
+      font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
       background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy-main) 100%);
       color: var(--white);
       line-height: 1.75;
@@ -48,22 +47,21 @@
       max-width: 430px;
       margin: 65px auto;
       background: var(--navy-card);
-      border: 1px solid var(--border-gold);
+      border: 1px solid var(--line-gold);
       border-radius: 16px;
       padding: 32px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
     }
 
     .login-box h1 {
       color: var(--gold-light);
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       text-align: center;
       margin-bottom: 6px;
     }
 
     .login-box p {
       color: var(--text-soft);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       text-align: center;
       margin-bottom: 24px;
     }
@@ -79,7 +77,7 @@
       flex-wrap: wrap;
       gap: 12px;
       background: var(--navy-card);
-      border: 1px solid var(--border-gold);
+      border: 1px solid var(--line-gold);
       border-radius: 14px;
       padding: 18px 22px;
       margin-bottom: 18px;
@@ -87,7 +85,7 @@
 
     .top-bar h2 {
       color: var(--gold-light);
-      font-size: 1.35rem;
+      font-size: 1.3rem;
     }
 
     .top-bar small {
@@ -105,19 +103,18 @@
     .tab-btn {
       background: var(--navy-card);
       color: var(--white);
-      border: 1px solid var(--border-gold);
-      padding: 9px 15px;
+      border: 1px solid var(--line-gold);
+      padding: 9px 14px;
       border-radius: 9px;
-      font-family: 'Cairo', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.88rem;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
 
     .tab-btn.active,
     .tab-btn:hover {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      background: var(--gold);
       color: var(--navy-dark);
     }
 
@@ -131,7 +128,7 @@
 
     .panel {
       background: var(--navy-card);
-      border: 1px solid var(--border-gold);
+      border: 1px solid var(--line-gold);
       border-radius: 14px;
       padding: 24px;
       margin-bottom: 22px;
@@ -139,16 +136,42 @@
 
     .panel h3 {
       color: var(--gold-light);
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       margin-bottom: 16px;
       padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-gold);
+      border-bottom: 1px solid var(--line-gold);
     }
 
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 14px;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+    }
+
+    .color-item {
+      background: var(--navy-input);
+      border: 1px solid var(--line-gold);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .color-item input[type="color"] {
+      width: 48px;
+      height: 36px;
+      padding: 2px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
     }
 
     .form-group {
@@ -158,7 +181,7 @@
     label {
       display: block;
       font-size: 0.9rem;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--white);
       margin-bottom: 5px;
     }
@@ -166,12 +189,12 @@
     input, textarea, select {
       width: 100%;
       background: var(--navy-input);
-      border: 1px solid rgba(216, 178, 76, 0.35);
+      border: 1px solid var(--line-gold);
       border-radius: 8px;
       padding: 10px 13px;
       color: var(--white);
-      font-family: 'Cairo', sans-serif;
-      font-size: 0.94rem;
+      font-family: inherit;
+      font-size: 0.92rem;
     }
 
     input:focus, textarea:focus, select:focus {
@@ -203,14 +226,14 @@
     }
 
     .btn-gold {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      background: var(--gold);
       color: var(--navy-dark);
       border: none;
       border-radius: 8px;
       padding: 10px 20px;
-      font-family: 'Cairo', sans-serif;
-      font-weight: 800;
-      font-size: 0.92rem;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.9rem;
       cursor: pointer;
     }
 
@@ -220,8 +243,8 @@
       border: 1px solid var(--gold);
       border-radius: 8px;
       padding: 9px 16px;
-      font-family: 'Cairo', sans-serif;
-      font-weight: 700;
+      font-family: inherit;
+      font-weight: 600;
       font-size: 0.88rem;
       cursor: pointer;
       text-decoration: none;
@@ -230,13 +253,13 @@
     }
 
     .btn-danger {
-      background: rgba(255, 107, 107, 0.16);
+      background: rgba(255, 115, 115, 0.16);
       color: #ff9d9d;
-      border: 1px solid rgba(255, 107, 107, 0.5);
+      border: 1px solid rgba(255, 115, 115, 0.45);
       border-radius: 7px;
       padding: 6px 12px;
-      font-family: 'Cairo', sans-serif;
-      font-weight: 700;
+      font-family: inherit;
+      font-weight: 600;
       font-size: 0.84rem;
       cursor: pointer;
     }
@@ -263,7 +286,7 @@
 
     .list-item {
       background: var(--navy-input);
-      border: 1px solid rgba(216, 178, 76, 0.25);
+      border: 1px solid var(--line-gold);
       border-radius: 10px;
       padding: 14px;
       display: flex;
@@ -293,7 +316,7 @@
 
     .media-card {
       background: var(--navy-input);
-      border: 1px solid var(--border-gold);
+      border: 1px solid var(--line-gold);
       border-radius: 10px;
       padding: 10px;
       display: flex;
@@ -365,10 +388,10 @@
       <button type="button" class="tab-btn" data-tab="tab-media">مكتبة الوسائط والصور</button>
       <button type="button" class="tab-btn" data-tab="tab-schedules">المواعيد والدورات</button>
       <button type="button" class="tab-btn" data-tab="tab-stats-links">الإحصائيات والروابط</button>
-      <button type="button" class="tab-btn" data-tab="tab-layout-backup">الأقسام والمعاينة والنسخ الاحتياطي</button>
+      <button type="button" class="tab-btn" data-tab="tab-theme-layout">الألوان والأقسام والنسخ الاحتياطي</button>
     </div>
 
-    <!-- TAB 1: Profile, Bio, Credentials & Highlights -->
+    <!-- TAB 1 -->
     <div class="tab-panel active" id="tab-profile">
       <div class="panel">
         <h3>الواجهة الرئيسية والسيرة الذاتية</h3>
@@ -460,7 +483,7 @@
       </div>
     </div>
 
-    <!-- TAB 2: Gallery, Championships, Certificates, Awards & Videos -->
+    <!-- TAB 2 -->
     <div class="tab-panel" id="tab-gallery">
       <div class="panel">
         <h3 id="gal-form-heading">إضافة إنجاز / بطولة / شهادة / فيديو للمعرض</h3>
@@ -481,7 +504,7 @@
         </div>
         <div class="grid-2">
           <div class="form-group">
-            <label for="gal-category">اسم البطولة أو التصنيف (يمكن كتابة تصنيف جديد)</label>
+            <label for="gal-category">اسم البطولة أو التصنيف</label>
             <input type="text" id="gal-category" list="categories-datalist" placeholder="مثال: بطولة الحساب الذهني" />
             <datalist id="categories-datalist"></datalist>
           </div>
@@ -506,11 +529,11 @@
         </div>
         <div class="grid-2">
           <div class="form-group">
-            <label for="gal-video">رابط الفيديو (يوتيوب / فيسبوك / تيك توك - اختياري)</label>
+            <label for="gal-video">رابط الفيديو (اختياري)</label>
             <input type="url" id="gal-video" placeholder="https://..." />
           </div>
           <div class="form-group">
-            <label for="gal-order">رقم الترتيب (الأقل يظهر أولاً بعد المميزين)</label>
+            <label for="gal-order">رقم الترتيب</label>
             <input type="number" id="gal-order" placeholder="1" />
           </div>
         </div>
@@ -526,18 +549,15 @@
       </div>
 
       <div class="panel">
-        <h3>إدارة عناصر المعرض والترتيب والحذف والتعديل</h3>
+        <h3>إدارة عناصر المعرض والتعديل والحذف</h3>
         <div class="list-box" id="admin-gallery-list"></div>
       </div>
     </div>
 
-    <!-- TAB 3: Media Library (Multi-upload, Compress, Thumbnail, Alt, Search/Filter) -->
+    <!-- TAB 3 -->
     <div class="tab-panel" id="tab-media">
       <div class="panel">
         <h3>رفع صور متعددة وضغطها وتصغيرها تلقائياً</h3>
-        <p style="color: var(--text-soft); font-size: 0.9rem; margin-bottom: 14px;">
-          يتم ضغط الصور في المتصفح مع الحفاظ على جودتها وتوليد صورة مصغرة وحفظها في مكتبة الوسائط مع نص بديل.
-        </p>
         <div class="grid-2">
           <div class="form-group">
             <label for="media-files-input">اختر صورة أو عدة صور دفعة واحدة</label>
@@ -545,15 +565,15 @@
           </div>
           <div class="form-group">
             <label for="media-default-alt">نص بديل افتراضي للصور المرفوعة</label>
-            <input type="text" id="media-default-alt" placeholder="مثال: تكريم أبطال أكاديمية القمة ماث" />
+            <input type="text" id="media-default-alt" />
           </div>
         </div>
         <div class="grid-2">
           <div class="form-group">
             <label for="media-format">صيغة الضغط</label>
             <select id="media-format">
-              <option value="image/webp">WebP (عصري وخفيف)</option>
-              <option value="image/jpeg">JPEG (توافق واسع)</option>
+              <option value="image/webp">WebP</option>
+              <option value="image/jpeg">JPEG</option>
             </select>
           </div>
           <div class="form-group">
@@ -566,11 +586,11 @@
       </div>
 
       <div class="panel">
-        <h3>مكتبة الوسائط (بحث وتصفية ونسخ الرابط)</h3>
+        <h3>مكتبة الوسائط</h3>
         <div class="grid-2">
           <div class="form-group">
             <label for="media-search">بحث بالاسم أو النص البديل</label>
-            <input type="text" id="media-search" placeholder="ابحث..." />
+            <input type="text" id="media-search" />
           </div>
           <div class="form-group">
             <label for="media-filter-type">تصفية حسب الصيغة</label>
@@ -585,13 +605,13 @@
       </div>
     </div>
 
-    <!-- TAB 4: Schedules & Courses -->
+    <!-- TAB 4 -->
     <div class="tab-panel" id="tab-schedules">
       <div class="panel">
         <h3>إدارة المواعيد والدورات التدريبية</h3>
         <div class="grid-2">
           <div class="form-group">
-            <label for="sched-tag">التصنيف (مثال: مجموعات الأطفال / TOT)</label>
+            <label for="sched-tag">التصنيف</label>
             <input type="text" id="sched-tag" />
           </div>
           <div class="form-group">
@@ -609,26 +629,26 @@
       </div>
     </div>
 
-    <!-- TAB 5: Stats & Links -->
+    <!-- TAB 5 -->
     <div class="tab-panel" id="tab-stats-links">
       <div class="panel">
         <h3>التحكم في الإحصائيات والأرقام</h3>
         <div class="grid-2">
           <div class="form-group">
             <label for="stat-championships">عدد البطولات والمسابقات</label>
-            <input type="text" id="stat-championships" placeholder="+25" />
+            <input type="text" id="stat-championships" />
           </div>
           <div class="form-group">
             <label for="stat-trainers">عدد المدربين المؤهلين (TOT)</label>
-            <input type="text" id="stat-trainers" placeholder="+120" />
+            <input type="text" id="stat-trainers" />
           </div>
           <div class="form-group">
             <label for="stat-champions">عدد الأبطال والمتدربين</label>
-            <input type="text" id="stat-champions" placeholder="+500" />
+            <input type="text" id="stat-champions" />
           </div>
           <div class="form-group">
             <label for="stat-experience">سنوات الخبرة والاعتماد</label>
-            <input type="text" id="stat-experience" placeholder="+8" />
+            <input type="text" id="stat-experience" />
           </div>
         </div>
         <button type="button" id="save-stats-btn" class="btn-gold">حفظ الإحصائيات</button>
@@ -660,8 +680,43 @@
       </div>
     </div>
 
-    <!-- TAB 6: Sections Visibility/Order, Preview & Backup -->
-    <div class="tab-panel" id="tab-layout-backup">
+    <!-- TAB 6: Colors, Sections & Backup -->
+    <div class="tab-panel" id="tab-theme-layout">
+      <div class="panel">
+        <h3>تخصيص ألوان الموقع</h3>
+        <div class="color-grid">
+          <div class="color-item">
+            <label for="col-navy-royal" style="margin: 0;">اللون الأساسي الداكن</label>
+            <input type="color" id="col-navy-royal" value="#0a1931" />
+          </div>
+          <div class="color-item">
+            <label for="col-navy-deep" style="margin: 0;">لون الهيدر والعمق</label>
+            <input type="color" id="col-navy-deep" value="#061021" />
+          </div>
+          <div class="color-item">
+            <label for="col-navy-surface" style="margin: 0;">لون الكروت والأسطح</label>
+            <input type="color" id="col-navy-surface" value="#112547" />
+          </div>
+          <div class="color-item">
+            <label for="col-offwhite" style="margin: 0;">لون الأقسام الفاتحة</label>
+            <input type="color" id="col-offwhite" value="#f7f8fb" />
+          </div>
+          <div class="color-item">
+            <label for="col-gold" style="margin: 0;">اللون الذهبي الأساسي</label>
+            <input type="color" id="col-gold" value="#c9a23f" />
+          </div>
+          <div class="color-item">
+            <label for="col-gold-soft" style="margin: 0;">اللون الذهبي الفاتح</label>
+            <input type="color" id="col-gold-soft" value="#e6cb7a" />
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top: 16px;">
+          <button type="button" id="save-theme-btn" class="btn-gold">حفظ الألوان وتطبيقها</button>
+          <button type="button" id="reset-theme-btn" class="btn-outline">استعادة الافتراضي</button>
+        </div>
+        <div id="theme-status" class="status-msg"></div>
+      </div>
+
       <div class="panel">
         <h3>إظهار وإخفاء وترتيب أقسام الصفحة الرئيسية</h3>
         <div id="sections-order-list" class="list-box"></div>
@@ -702,15 +757,25 @@
     const auth = getAuth(app);
     const db = getDatabase(app);
 
+    const DEFAULT_THEME = {
+      navyRoyal: "#0a1931",
+      navyDeep: "#061021",
+      navySurface: "#112547",
+      offwhite: "#f7f8fb",
+      gold: "#c9a23f",
+      goldSoft: "#e6cb7a"
+    };
+
     const DEFAULT_SECTIONS = [
       { key: "hero", label: "الواجهة الرئيسية والتعريف", order: 1, visible: true },
-      { key: "stats", label: "إحصائيات الإنجازات والأكاديمية", order: 2, visible: true },
-      { key: "about", label: "السيرة الذاتية والرسالة", order: 3, visible: true },
-      { key: "highlights", label: "أبرز الإنجازات", order: 4, visible: true },
-      { key: "academy", label: "أكاديمية القمة ماث والاعتمادات", order: 5, visible: true },
-      { key: "gallery", label: "معرض البطولات والإنجازات والوسائط", order: 6, visible: true },
-      { key: "schedules", label: "المواعيد والدورات التدريبية", order: 7, visible: true },
-      { key: "contact", label: "التواصل والروابط الرسمية", order: 8, visible: true }
+      { key: "about", label: "نبذة عن المهندسة رنا", order: 2, visible: true },
+      { key: "academy", label: "التعريف بأكاديمية القمة ماث", order: 3, visible: true },
+      { key: "programs", label: "البرامج والأنشطة التعليمية", order: 4, visible: true },
+      { key: "achievements", label: "الإنجازات والبطولات", order: 5, visible: true },
+      { key: "gallery", label: "المعرض المصور", order: 6, visible: true },
+      { key: "credentials", label: "الاعتمادات والشهادات", order: 7, visible: true },
+      { key: "stats", label: "الإحصائيات", order: 8, visible: true },
+      { key: "contact", label: "التواصل", order: 9, visible: true }
     ];
 
     let latestSiteData = {};
@@ -723,6 +788,7 @@
     function isSafeOptionalUrl(url) {
       const trimmed = cleanText(url);
       if (!trimmed) return true;
+      if (trimmed.startsWith("data:image/")) return true;
       try {
         const parsed = new URL(trimmed);
         return parsed.protocol === "https:" || parsed.protocol === "http:";
@@ -736,7 +802,6 @@
       el.className = "status-msg " + (isOk ? "status-ok" : "status-err");
     }
 
-    // Tabs switching
     document.querySelectorAll(".tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
@@ -747,7 +812,6 @@
       });
     });
 
-    // Auth
     const loginForm = document.getElementById("login-form");
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -781,6 +845,16 @@
       }
     });
 
+    function fillThemeInputs(theme) {
+      const t = { ...DEFAULT_THEME, ...(theme || {}) };
+      document.getElementById("col-navy-royal").value = t.navyRoyal;
+      document.getElementById("col-navy-deep").value = t.navyDeep;
+      document.getElementById("col-navy-surface").value = t.navySurface;
+      document.getElementById("col-offwhite").value = t.offwhite;
+      document.getElementById("col-gold").value = t.gold;
+      document.getElementById("col-gold-soft").value = t.goldSoft;
+    }
+
     function renderSectionsEditor(sectionsConfig) {
       const listEl = document.getElementById("sections-order-list");
       listEl.replaceChildren();
@@ -813,7 +887,6 @@
         orderInput.value = String(sec.order);
         orderInput.style.width = "76px";
         orderInput.className = "sec-order-input";
-        orderInput.setAttribute("aria-label", "ترتيب القسم");
 
         const visLabel = document.createElement("label");
         visLabel.style.margin = "0";
@@ -826,9 +899,7 @@
         visCheck.checked = sec.visible;
         visCheck.className = "sec-vis-checkbox";
 
-        const visText = document.createTextNode("ظاهر");
-        visLabel.append(visCheck, visText);
-
+        visLabel.append(visCheck, document.createTextNode("ظاهر"));
         controlsWrap.append(orderInput, visLabel);
         row.append(titleWrap, controlsWrap);
         listEl.appendChild(row);
@@ -844,8 +915,7 @@
       const filtered = mediaLibraryList.filter((m) => {
         if (filterFmt && m.mimeType !== filterFmt) return false;
         if (!searchQ) return true;
-        const hay = `${m.name || ""} ${m.altText || ""}`.toLowerCase();
-        return hay.includes(searchQ);
+        return `${m.name || ""} ${m.altText || ""}`.toLowerCase().includes(searchQ);
       });
 
       filtered.forEach((m) => {
@@ -862,11 +932,11 @@
         const altEl = document.createElement("small");
         altEl.textContent = "Alt: " + (m.altText || "-");
 
-        const copyBtn = document.createElement("button");
-        copyBtn.type = "button";
-        copyBtn.className = "btn-outline";
-        copyBtn.textContent = "استخدام في المعرض";
-        copyBtn.addEventListener("click", () => {
+        const useBtn = document.createElement("button");
+        useBtn.type = "button";
+        useBtn.className = "btn-outline";
+        useBtn.textContent = "استخدام في المعرض";
+        useBtn.addEventListener("click", () => {
           document.getElementById("gal-img").value = m.dataUrl || "";
           document.getElementById("gal-alt").value = m.altText || "";
           document.querySelector('[data-tab="tab-gallery"]').click();
@@ -878,7 +948,7 @@
         delBtn.textContent = "حذف";
         delBtn.addEventListener("click", () => remove(ref(db, `siteContent/mediaLibrary/${m.id}`)));
 
-        card.append(img, nameEl, altEl, copyBtn, delBtn);
+        card.append(img, nameEl, altEl, useBtn, delBtn);
         grid.appendChild(card);
       });
     }
@@ -887,6 +957,8 @@
       onValue(ref(db, "siteContent"), (snap) => {
         const data = snap.val() || {};
         latestSiteData = data;
+
+        fillThemeInputs(data.themeConfig);
 
         if (data.profile) {
           document.getElementById("name-ar").value = data.profile.nameAr || "";
@@ -916,7 +988,6 @@
           document.getElementById("ig-link").value = data.links.instagram || "";
         }
 
-        // Highlights & Credentials
         const hList = document.getElementById("highlights-list");
         hList.replaceChildren();
         const highlightsArr = Array.isArray(data.highlights) ? data.highlights : [];
@@ -933,10 +1004,7 @@
           del.type = "button";
           del.className = "btn-danger";
           del.textContent = "حذف";
-          del.addEventListener("click", async () => {
-            const next = highlightsArr.filter((_, i) => i !== idx);
-            await set(ref(db, "siteContent/highlights"), next);
-          });
+          del.addEventListener("click", () => set(ref(db, "siteContent/highlights"), highlightsArr.filter((_, i) => i !== idx)));
           row.append(info, del);
           hList.appendChild(row);
         });
@@ -957,15 +1025,11 @@
           del.type = "button";
           del.className = "btn-danger";
           del.textContent = "حذف";
-          del.addEventListener("click", async () => {
-            const next = credsArr.filter((_, i) => i !== idx);
-            await set(ref(db, "siteContent/credentials"), next);
-          });
+          del.addEventListener("click", () => set(ref(db, "siteContent/credentials"), credsArr.filter((_, i) => i !== idx)));
           row.append(info, del);
           cList.appendChild(row);
         });
 
-        // Schedules
         const schedList = document.getElementById("schedules-list");
         schedList.replaceChildren();
         if (data.schedules && typeof data.schedules === "object") {
@@ -988,7 +1052,6 @@
           });
         }
 
-        // Gallery & Categories Datalist
         const galList = document.getElementById("admin-gallery-list");
         galList.replaceChildren();
         const catDatalist = document.getElementById("categories-datalist");
@@ -1050,18 +1113,43 @@
           });
         }
 
-        // Media Library
         mediaLibraryList = data.mediaLibrary && typeof data.mediaLibrary === "object"
           ? Object.entries(data.mediaLibrary).map(([id, val]) => ({ id, ...val })).reverse()
           : [];
         renderMediaLibrary();
-
-        // Sections order/visibility
         renderSectionsEditor(data.sectionsConfig);
       });
     }
 
-    // Profile Preview & Save
+    // Theme Save & Reset
+    document.getElementById("save-theme-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("theme-status");
+      try {
+        await set(ref(db, "siteContent/themeConfig"), {
+          navyRoyal: document.getElementById("col-navy-royal").value,
+          navyDeep: document.getElementById("col-navy-deep").value,
+          navySurface: document.getElementById("col-navy-surface").value,
+          offwhite: document.getElementById("col-offwhite").value,
+          gold: document.getElementById("col-gold").value,
+          goldSoft: document.getElementById("col-gold-soft").value
+        });
+        setStatus(statusEl, "تم حفظ الألوان وتطبيقها على الموقع بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر حفظ الألوان.", false);
+      }
+    });
+
+    document.getElementById("reset-theme-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("theme-status");
+      fillThemeInputs(DEFAULT_THEME);
+      try {
+        await set(ref(db, "siteContent/themeConfig"), DEFAULT_THEME);
+        setStatus(statusEl, "تمت استعادة الألوان الافتراضية.", true);
+      } catch {
+        setStatus(statusEl, "تعذر استعادة الألوان الافتراضية.", false);
+      }
+    });
+
     document.getElementById("preview-profile-btn").addEventListener("click", () => {
       const box = document.getElementById("profile-preview");
       box.style.display = "block";
@@ -1077,7 +1165,7 @@
       const statusEl = document.getElementById("profile-status");
       const photoUrl = cleanText(document.getElementById("photo-url").value);
       if (!isSafeOptionalUrl(photoUrl)) {
-        setStatus(statusEl, "رابط الصورة الشخصية يجب أن يبدأ بـ https:// أو http://", false);
+        setStatus(statusEl, "رابط الصورة الشخصية غير صالح.", false);
         return;
       }
       try {
@@ -1096,11 +1184,10 @@
         });
         setStatus(statusEl, "تم حفظ النبذة والبيانات ونشرها بنجاح.", true);
       } catch {
-        setStatus(statusEl, "تعذر الحفظ، تحقق من تسجيل الدخول والصلاحيات.", false);
+        setStatus(statusEl, "تعذر الحفظ.", false);
       }
     });
 
-    // Add Highlights / Credentials
     document.getElementById("add-hc-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("hc-status");
       const target = document.getElementById("item-target-type").value;
@@ -1121,7 +1208,6 @@
       }
     });
 
-    // Gallery Add / Edit
     function resetGalleryForm() {
       document.getElementById("gal-edit-id").value = "";
       document.getElementById("gal-title").value = "";
@@ -1180,11 +1266,10 @@
         }
         resetGalleryForm();
       } catch {
-        setStatus(statusEl, "تعذر حفظ العنصر في المعرض.", false);
+        setStatus(statusEl, "تعذر حفظ العنصر.", false);
       }
     });
 
-    // Image Compression + Thumbnail Generator in Browser
     function compressImageFile(file, maxWidth, mimeType, quality) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -1198,15 +1283,13 @@
             const canvas = document.createElement("canvas");
             canvas.width = targetW;
             canvas.height = targetH;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, targetW, targetH);
+            canvas.getContext("2d").drawImage(img, 0, 0, targetW, targetH);
 
             const thumbScale = targetW > 320 ? 320 / targetW : 1;
             const thumbCanvas = document.createElement("canvas");
             thumbCanvas.width = Math.round(targetW * thumbScale);
             thumbCanvas.height = Math.round(targetH * thumbScale);
-            const tCtx = thumbCanvas.getContext("2d");
-            tCtx.drawImage(canvas, 0, 0, thumbCanvas.width, thumbCanvas.height);
+            thumbCanvas.getContext("2d").drawImage(canvas, 0, 0, thumbCanvas.width, thumbCanvas.height);
 
             resolve({
               dataUrl: canvas.toDataURL(mimeType, quality),
@@ -1252,14 +1335,13 @@
         filesInput.value = "";
         setStatus(statusEl, "تم ضغط الصور وإضافتها إلى مكتبة الوسائط بنجاح.", true);
       } catch {
-        setStatus(statusEl, "تعذر معالجة بعض الصور، تأكد من حجمها وصيغتها.", false);
+        setStatus(statusEl, "تعذر معالجة بعض الصور.", false);
       }
     });
 
     document.getElementById("media-search").addEventListener("input", renderMediaLibrary);
     document.getElementById("media-filter-type").addEventListener("change", renderMediaLibrary);
 
-    // Schedules
     document.getElementById("add-schedule-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("schedule-status");
       const title = cleanText(document.getElementById("sched-title").value);
@@ -1282,7 +1364,6 @@
       }
     });
 
-    // Stats
     document.getElementById("save-stats-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("stats-status");
       try {
@@ -1298,7 +1379,6 @@
       }
     });
 
-    // Links
     document.getElementById("save-links-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("links-status");
       const fb = cleanText(document.getElementById("fb-link").value);
@@ -1321,7 +1401,6 @@
       }
     });
 
-    // Sections Config Save
     document.getElementById("save-sections-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("sections-status");
       const config = {};
@@ -1339,7 +1418,6 @@
       }
     });
 
-    // Backup Export & Import
     document.getElementById("export-backup-btn").addEventListener("click", () => {
       const blob = new Blob([JSON.stringify(latestSiteData, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
