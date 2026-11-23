@@ -1373,9 +1373,24 @@
       });
     }
 
+    function applyThemeConfig(themeConfig) {
+      if (!themeConfig || typeof themeConfig !== "object") return;
+      const root = document.documentElement;
+      if (themeConfig.navyRoyal) root.style.setProperty("--navy-royal", themeConfig.navyRoyal);
+      if (themeConfig.navyDeep) root.style.setProperty("--navy-deep", themeConfig.navyDeep);
+      if (themeConfig.navySurface) root.style.setProperty("--navy-surface", themeConfig.navySurface);
+      if (themeConfig.offwhite) root.style.setProperty("--offwhite", themeConfig.offwhite);
+      if (themeConfig.gold) root.style.setProperty("--gold", themeConfig.gold);
+      if (themeConfig.goldSoft) root.style.setProperty("--gold-soft", themeConfig.goldSoft);
+    }
+
     onValue(ref(db, "siteContent"), (snapshot) => {
       const data = snapshot.val();
       if (!data) return;
+
+      if (data.themeConfig) {
+        applyThemeConfig(data.themeConfig);
+      }
 
       if (data.sectionsConfig) {
         applySectionsConfig(data.sectionsConfig);
