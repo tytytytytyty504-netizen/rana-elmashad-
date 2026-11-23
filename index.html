@@ -728,6 +728,148 @@
       transform: translateY(-2px);
     }
 
+    /* Floating Announcements Button & Drawer/Modal */
+    .ad-fab-btn {
+      position: fixed;
+      bottom: 22px;
+      left: 22px;
+      z-index: 450;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--bg-header);
+      border: 2px solid var(--accent-soft);
+      font-weight: 800;
+      font-size: 0.9rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .ad-fab-btn:hover {
+      background: var(--accent-soft);
+      transform: translateY(-2px);
+    }
+
+    .ad-count-pill {
+      background: var(--bg-header);
+      color: var(--accent-soft);
+      border-radius: 999px;
+      padding: 1px 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .ad-modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 550;
+      background: rgba(4, 9, 18, 0.72);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .ad-modal-backdrop.open {
+      display: flex;
+    }
+
+    .ad-modal-panel {
+      width: 100%;
+      max-width: 560px;
+      max-height: 82vh;
+      overflow-y: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    .ad-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .ad-modal-head h3 {
+      color: var(--accent-soft);
+      font-size: 1.08rem;
+      font-weight: 800;
+    }
+
+    .ad-modal-close {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border-dark);
+      background: var(--bg-header);
+      color: var(--bg-white);
+      font-size: 1rem;
+    }
+
+    .ad-items-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .ad-card {
+      background: var(--bg-header);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ad-card img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .ad-tag {
+      align-self: flex-start;
+      background: var(--accent-tint);
+      color: var(--accent-soft);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    .ad-card h4 {
+      color: var(--bg-white);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .ad-card p {
+      color: var(--text-muted-light);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .ad-action-btn {
+      align-self: flex-start;
+      margin-top: 2px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: var(--bg-header);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
     /* Lightbox */
     .lightbox {
       display: none;
@@ -897,6 +1039,12 @@
         padding: 10px 14px;
         font-size: 0.88rem;
       }
+      .ad-fab-btn {
+        bottom: 16px;
+        left: 16px;
+        padding: 10px 15px;
+        font-size: 0.84rem;
+      }
     }
   </style>
 </head>
@@ -1024,7 +1172,7 @@
           </div>
           <div class="info-card">
             <h3>ألعاب الذكاء وتنمية المهارات</h3>
-            <p>أنشطة تفاعلية لتنمية التفكير المنطقي وحل المشكلات والمرونة الذهنية لدى الأطفال.</p>
+            <p>أنشطة تفاعلية لتنمية التفكير المنطقي وحل المشكلات والمرونة الذنية لدى الأطفال.</p>
           </div>
           <div class="info-card">
             <h3>إعداد المدربين TOT والدورات</h3>
@@ -1167,6 +1315,29 @@
 
   </main>
 
+  <!-- Floating Announcements Button -->
+  <button type="button" class="ad-fab-btn" id="open-ads-btn" aria-label="فتح الإعلانات">
+    <span>📢 الإعلانات</span>
+    <span class="ad-count-pill" id="ads-count-badge">0</span>
+  </button>
+
+  <!-- Floating Announcements Modal -->
+  <div class="ad-modal-backdrop" id="ads-modal" role="dialog" aria-modal="true" aria-label="الإعلانات والتنبيهات">
+    <div class="ad-modal-panel">
+      <div class="ad-modal-head">
+        <h3>الإعلانات والتنبيهات العائمة</h3>
+        <button type="button" class="ad-modal-close" id="close-ads-btn" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="ad-items-stack" id="ads-items-list">
+        <div class="ad-card">
+          <span class="ad-tag">تنبيه</span>
+          <h4>لا توجد إعلانات منشورة حالياً</h4>
+          <p>يمكن إضافة وتفعيل الإعلانات العائمة من لوحة الإدارة لتظهر هنا مباشرة.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="عرض الصورة بحجم كبير">
     <div class="lightbox-box">
       <button type="button" class="lightbox-close" id="lightbox-close" aria-label="إغلاق">✕</button>
@@ -1214,6 +1385,18 @@
     backdrop.addEventListener("click", () => setDrawerOpen(false));
     document.querySelectorAll(".drawer-link").forEach((link) => {
       link.addEventListener("click", () => setDrawerOpen(false));
+    });
+
+    // Floating Announcements Modal
+    const adsModal = document.getElementById("ads-modal");
+    document.getElementById("open-ads-btn").addEventListener("click", () => {
+      adsModal.classList.add("open");
+    });
+    document.getElementById("close-ads-btn").addEventListener("click", () => {
+      adsModal.classList.remove("open");
+    });
+    adsModal.addEventListener("click", (e) => {
+      if (e.target === adsModal) adsModal.classList.remove("open");
     });
 
     const lightbox = document.getElementById("lightbox");
@@ -1304,6 +1487,80 @@
         if (!el) return;
         el.classList.toggle("section-hidden", cfg && cfg.visible === false);
         stack.appendChild(el);
+      });
+    }
+
+    function renderFloatingAds(announcementsObj) {
+      const listEl = document.getElementById("ads-items-list");
+      const badgeEl = document.getElementById("ads-count-badge");
+      const openBtn = document.getElementById("open-ads-btn");
+
+      const activeAds = announcementsObj && typeof announcementsObj === "object"
+        ? Object.entries(announcementsObj)
+            .map(([id, item]) => ({ id, ...item }))
+            .filter((item) => item.active !== false)
+            .sort((a, b) => (Number(b.updatedAt) || 0) - (Number(a.updatedAt) || 0))
+        : [];
+
+      badgeEl.textContent = String(activeAds.length);
+      openBtn.style.display = activeAds.length ? "inline-flex" : "none";
+
+      listEl.replaceChildren();
+      if (!activeAds.length) {
+        const emptyCard = document.createElement("div");
+        emptyCard.className = "ad-card";
+        const tag = document.createElement("span");
+        tag.className = "ad-tag";
+        tag.textContent = "إعلانات";
+        const h4 = document.createElement("h4");
+        h4.textContent = "لا توجد إعلانات نشطة حالياً";
+        const p = document.createElement("p");
+        p.textContent = "أضف إعلاناً جديداً من لوحة الإدارة ليظهر هنا للزوار.";
+        emptyCard.append(tag, h4, p);
+        listEl.appendChild(emptyCard);
+        return;
+      }
+
+      activeAds.forEach((ad) => {
+        const card = document.createElement("div");
+        card.className = "ad-card";
+
+        if (ad.badge) {
+          const tag = document.createElement("span");
+          tag.className = "ad-tag";
+          tag.textContent = ad.badge;
+          card.appendChild(tag);
+        }
+
+        if (ad.imageUrl && isSafeUrl(ad.imageUrl)) {
+          const img = document.createElement("img");
+          img.src = ad.imageUrl.trim();
+          img.alt = ad.title || "إعلان";
+          img.addEventListener("click", () => openLightbox(ad.imageUrl.trim(), ad.title || "إعلان"));
+          card.appendChild(img);
+        }
+
+        const h4 = document.createElement("h4");
+        h4.textContent = ad.title || "";
+        card.appendChild(h4);
+
+        if (ad.body) {
+          const p = document.createElement("p");
+          p.textContent = ad.body;
+          card.appendChild(p);
+        }
+
+        if (ad.linkUrl && isSafeUrl(ad.linkUrl)) {
+          const btn = document.createElement("a");
+          btn.className = "ad-action-btn";
+          btn.href = ad.linkUrl.trim();
+          btn.target = "_blank";
+          btn.rel = "noopener noreferrer";
+          btn.textContent = ad.linkText || "التفاصيل والتسجيل ↗";
+          card.appendChild(btn);
+        }
+
+        listEl.appendChild(card);
       });
     }
 
@@ -1477,6 +1734,7 @@
 
       if (data.themeConfig) applyThemeConfig(data.themeConfig);
       if (data.sectionsConfig) applySectionsConfig(data.sectionsConfig);
+      renderFloatingAds(data.announcements);
 
       if (data.profile) {
         if (data.profile.nameAr) {
