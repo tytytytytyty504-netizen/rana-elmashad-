@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة إدارة الموقع | Eng. Rana El Mashad</title>
+  <title>لوحة الإدارة المتكاملة | Eng. Rana El Mashad</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-main: #0a0a0c;
-      --bg-card: #131317;
-      --bg-input: #0d0d10;
-      --gold: #d4af37;
-      --gold-light: #f1d37a;
-      --gold-dark: #9e7d1c;
-      --text-main: #f5f5f7;
-      --text-muted: #a8a8b3;
-      --border-gold: rgba(212, 175, 55, 0.28);
-      --danger: #e05252;
-      --success: #38b778;
+      --navy-dark: #071124;
+      --navy-main: #0c1d3d;
+      --navy-card: #112752;
+      --navy-input: #08152e;
+      --gold: #d8b24c;
+      --gold-light: #f3dc94;
+      --gold-dark: #a68224;
+      --white: #ffffff;
+      --text-soft: #dce5f5;
+      --text-muted: #a7b8d6;
+      --border-gold: rgba(216, 178, 76, 0.32);
+      --danger: #ff6b6b;
+      --success: #4cd98b;
     }
 
     * {
@@ -30,36 +32,37 @@
 
     body {
       font-family: 'Cairo', sans-serif;
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      line-height: 1.7;
+      background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy-main) 100%);
+      color: var(--white);
+      line-height: 1.75;
       padding: 20px;
+      min-height: 100vh;
     }
 
     .container {
-      max-width: 960px;
+      max-width: 1080px;
       margin: auto;
     }
 
     .login-box {
       max-width: 430px;
-      margin: 60px auto;
-      background: var(--bg-card);
+      margin: 65px auto;
+      background: var(--navy-card);
       border: 1px solid var(--border-gold);
       border-radius: 16px;
       padding: 32px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
     }
 
     .login-box h1 {
-      color: var(--gold);
+      color: var(--gold-light);
       font-size: 1.5rem;
-      margin-bottom: 6px;
       text-align: center;
+      margin-bottom: 6px;
     }
 
     .login-box p {
-      color: var(--text-muted);
+      color: var(--text-soft);
       font-size: 0.92rem;
       text-align: center;
       margin-bottom: 24px;
@@ -75,29 +78,63 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      background: var(--bg-card);
+      background: var(--navy-card);
       border: 1px solid var(--border-gold);
       border-radius: 14px;
       padding: 18px 22px;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
 
     .top-bar h2 {
-      color: var(--gold);
+      color: var(--gold-light);
       font-size: 1.35rem;
     }
 
     .top-bar small {
-      color: var(--text-muted);
+      color: var(--text-soft);
+      display: block;
+    }
+
+    .tabs-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .tab-btn {
+      background: var(--navy-card);
+      color: var(--white);
+      border: 1px solid var(--border-gold);
+      padding: 9px 15px;
+      border-radius: 9px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active,
+    .tab-btn:hover {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      color: var(--navy-dark);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
       display: block;
     }
 
     .panel {
-      background: var(--bg-card);
+      background: var(--navy-card);
       border: 1px solid var(--border-gold);
       border-radius: 14px;
       padding: 24px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     .panel h3 {
@@ -108,78 +145,105 @@
       border-bottom: 1px solid var(--border-gold);
     }
 
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
     .form-group {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     label {
       display: block;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 6px;
+      color: var(--white);
+      margin-bottom: 5px;
     }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%;
-      background: var(--bg-input);
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: var(--navy-input);
+      border: 1px solid rgba(216, 178, 76, 0.35);
       border-radius: 8px;
-      padding: 11px 14px;
-      color: var(--text-main);
+      padding: 10px 13px;
+      color: var(--white);
       font-family: 'Cairo', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
     }
 
-    input:focus, textarea:focus {
+    input:focus, textarea:focus, select:focus {
       outline: none;
-      border-color: var(--gold);
+      border-color: var(--gold-light);
     }
 
     textarea {
-      min-height: 90px;
+      min-height: 82px;
       resize: vertical;
     }
 
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: auto;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
     .btn-gold {
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: #0a0a0c;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      color: var(--navy-dark);
       border: none;
       border-radius: 8px;
-      padding: 11px 22px;
+      padding: 10px 20px;
       font-family: 'Cairo', sans-serif;
       font-weight: 800;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       cursor: pointer;
     }
 
     .btn-outline {
       background: transparent;
-      color: var(--gold);
+      color: var(--gold-light);
       border: 1px solid var(--gold);
       border-radius: 8px;
       padding: 9px 16px;
       font-family: 'Cairo', sans-serif;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
     }
 
     .btn-danger {
-      background: rgba(224, 82, 82, 0.15);
-      color: #ff8a8a;
-      border: 1px solid rgba(224, 82, 82, 0.5);
+      background: rgba(255, 107, 107, 0.16);
+      color: #ff9d9d;
+      border: 1px solid rgba(255, 107, 107, 0.5);
       border-radius: 7px;
       padding: 6px 12px;
       font-family: 'Cairo', sans-serif;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       cursor: pointer;
     }
 
     .status-msg {
-      margin-top: 12px;
-      font-size: 0.92rem;
+      margin-top: 10px;
+      font-size: 0.9rem;
       font-weight: 700;
     }
 
@@ -192,14 +256,14 @@
     }
 
     .list-box {
-      margin-top: 18px;
+      margin-top: 16px;
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .list-item {
-      background: var(--bg-input);
-      border: 1px solid rgba(212, 175, 55, 0.2);
+      background: var(--navy-input);
+      border: 1px solid rgba(216, 178, 76, 0.25);
       border-radius: 10px;
       padding: 14px;
       display: flex;
@@ -215,25 +279,67 @@
     }
 
     .list-item span {
-      color: var(--text-muted);
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      display: block;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .media-card {
+      background: var(--navy-input);
+      border: 1px solid var(--border-gold);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .media-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .media-card small {
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      word-break: break-all;
+    }
+
+    .preview-box {
+      margin-top: 16px;
+      background: var(--navy-input);
+      border: 1px dashed var(--gold);
+      border-radius: 10px;
+      padding: 16px;
+      color: var(--text-soft);
+      white-space: pre-wrap;
       font-size: 0.88rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Login Screen (Empty inputs by design) -->
+  <!-- Login Screen (Strictly Empty Inputs) -->
   <div class="login-box" id="login-screen">
-    <h1>تسجيل دخول الإدارة</h1>
+    <h1>تسجيل دخول لوحة الإدارة</h1>
     <p>Eng. Rana El Mashad | أكاديمية القمة ماث</p>
     <form id="login-form" autocomplete="off">
       <div class="form-group">
         <label for="admin-email">البريد الإلكتروني</label>
-        <input type="email" id="admin-email" name="admin_email_field" autocomplete="off" required />
+        <input type="email" id="admin-email" name="admin_email_input" autocomplete="off" required />
       </div>
       <div class="form-group">
         <label for="admin-password">كلمة المرور</label>
-        <input type="password" id="admin-password" name="admin_password_field" autocomplete="new-password" required />
+        <input type="password" id="admin-password" name="admin_password_input" autocomplete="new-password" required />
       </div>
       <button type="submit" class="btn-gold" style="width: 100%;">دخول إلى لوحة التحكم</button>
       <div id="login-status" class="status-msg"></div>
@@ -244,134 +350,343 @@
   <div class="container dashboard" id="admin-dashboard">
     <div class="top-bar">
       <div>
-        <h2>لوحة تحكم الموقع الرسمي</h2>
+        <h2>لوحة التحكم المتكاملة للموقع الرسمي</h2>
         <small id="logged-user-info"></small>
       </div>
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <a href="./index.html" class="btn-outline" style="text-decoration: none;">عرض الموقع</a>
-        <button id="logout-btn" class="btn-danger">تسجيل خروج</button>
+      <div class="btn-row">
+        <a href="./index.html" target="_blank" rel="noopener noreferrer" class="btn-outline">معاينة الموقع المباشر</a>
+        <button type="button" id="logout-btn" class="btn-danger">تسجيل خروج</button>
       </div>
     </div>
 
-    <!-- Profile & About -->
-    <div class="panel">
-      <h3>النبذة التعريفية والرسالة</h3>
-      <div class="form-group">
-        <label for="name-ar">الاسم بالعربية</label>
-        <input type="text" id="name-ar" />
-      </div>
-      <div class="form-group">
-        <label for="name-en">الاسم بالإنجليزية</label>
-        <input type="text" id="name-en" />
-      </div>
-      <div class="form-group">
-        <label for="hero-title">اللقب والمسمى الوظيفي</label>
-        <input type="text" id="hero-title" />
-      </div>
-      <div class="form-group">
-        <label for="short-desc">مقدمة مختصرة في الواجهة</label>
-        <textarea id="short-desc"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="photo-url">رابط الصورة الشخصية (HTTPS)</label>
-        <input type="url" id="photo-url" placeholder="https://..." />
-      </div>
-      <div class="form-group">
-        <label for="about-p1">الفقرة الأولى من النبذة</label>
-        <textarea id="about-p1"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="about-p2">الفقرة الثانية من النبذة</label>
-        <textarea id="about-p2"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="about-p3">الفقرة الثالثة (الاعتمادات والبطولات)</label>
-        <textarea id="about-p3"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="mission-text">الرسالة</label>
-        <input type="text" id="mission-text" />
-      </div>
-      <div class="form-group">
-        <label for="slogan-text">الشعار</label>
-        <input type="text" id="slogan-text" />
-      </div>
-      <button id="save-profile-btn" class="btn-gold">حفظ النبذة والبيانات</button>
-      <div id="profile-status" class="status-msg"></div>
+    <div class="tabs-bar" role="tablist">
+      <button type="button" class="tab-btn active" data-tab="tab-profile">الرئيسية والسيرة والاعتمادات</button>
+      <button type="button" class="tab-btn" data-tab="tab-gallery">البطولات والإنجازات والفيديوهات</button>
+      <button type="button" class="tab-btn" data-tab="tab-media">مكتبة الوسائط والصور</button>
+      <button type="button" class="tab-btn" data-tab="tab-schedules">المواعيد والدورات</button>
+      <button type="button" class="tab-btn" data-tab="tab-stats-links">الإحصائيات والروابط</button>
+      <button type="button" class="tab-btn" data-tab="tab-layout-backup">الأقسام والمعاينة والنسخ الاحتياطي</button>
     </div>
 
-    <!-- Social & Contact Links -->
-    <div class="panel">
-      <h3>روابط التواصل والصفحات الرسمية</h3>
-      <div class="form-group">
-        <label for="wa-number">رقم واتساب العمل</label>
-        <input type="text" id="wa-number" />
+    <!-- TAB 1: Profile, Bio, Credentials & Highlights -->
+    <div class="tab-panel active" id="tab-profile">
+      <div class="panel">
+        <h3>الواجهة الرئيسية والسيرة الذاتية</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="name-ar">الاسم بالعربية</label>
+            <input type="text" id="name-ar" />
+          </div>
+          <div class="form-group">
+            <label for="name-en">الاسم بالإنجليزية</label>
+            <input type="text" id="name-en" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hero-title">اللقب والمسمى الوظيفي</label>
+          <input type="text" id="hero-title" />
+        </div>
+        <div class="form-group">
+          <label for="short-desc">مقدمة مختصرة في الصفحة الرئيسية</label>
+          <textarea id="short-desc"></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="photo-url">رابط الصورة الشخصية الرئيسية (HTTPS)</label>
+            <input type="url" id="photo-url" placeholder="https://..." />
+          </div>
+          <div class="form-group">
+            <label for="photo-alt">النص البديل للصورة الشخصية (Alt)</label>
+            <input type="text" id="photo-alt" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="about-p1">السيرة الذاتية — الفقرة الأولى</label>
+          <textarea id="about-p1"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="about-p2">السيرة الذاتية — الفقرة الثانية</label>
+          <textarea id="about-p2"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="about-p3">السيرة الذاتية — الفقرة الثالثة (الاعتمادات والبطولات)</label>
+          <textarea id="about-p3"></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="mission-text">الرسالة</label>
+            <input type="text" id="mission-text" />
+          </div>
+          <div class="form-group">
+            <label for="slogan-text">الشعار</label>
+            <input type="text" id="slogan-text" />
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" id="preview-profile-btn" class="btn-outline">معاينة التعديلات</button>
+          <button type="button" id="save-profile-btn" class="btn-gold">حفظ ونشر البيانات</button>
+        </div>
+        <div id="profile-status" class="status-msg"></div>
+        <div id="profile-preview" class="preview-box" style="display: none;"></div>
       </div>
-      <div class="form-group">
-        <label for="fb-link">رابط فيسبوك</label>
-        <input type="url" id="fb-link" />
+
+      <div class="panel">
+        <h3>أبرز الإنجازات والاعتمادات</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="item-target-type">القسم المستهدف</label>
+            <select id="item-target-type">
+              <option value="highlights">أبرز الإنجازات</option>
+              <option value="credentials">الاعتمادات والبرامج</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="hc-title">العنوان</label>
+            <input type="text" id="hc-title" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hc-desc">الوصف المختصر</label>
+          <textarea id="hc-desc"></textarea>
+        </div>
+        <button type="button" id="add-hc-btn" class="btn-gold">إضافة عنصر</button>
+        <div id="hc-status" class="status-msg"></div>
+
+        <h4 style="color: var(--gold-light); margin-top: 18px;">أبرز الإنجازات الحالية</h4>
+        <div class="list-box" id="highlights-list"></div>
+
+        <h4 style="color: var(--gold-light); margin-top: 18px;">الاعتمادات والبرامج الحالية</h4>
+        <div class="list-box" id="credentials-list"></div>
       </div>
-      <div class="form-group">
-        <label for="tt-link">رابط تيك توك</label>
-        <input type="url" id="tt-link" />
-      </div>
-      <div class="form-group">
-        <label for="ig-link">رابط إنستجرام</label>
-        <input type="url" id="ig-link" />
-      </div>
-      <button id="save-links-btn" class="btn-gold">حفظ الروابط</button>
-      <div id="links-status" class="status-msg"></div>
     </div>
 
-    <!-- Schedules -->
-    <div class="panel">
-      <h3>إضافة موعد أو نشاط</h3>
-      <div class="form-group">
-        <label for="sched-tag">التصنيف (مثال: مجموعات الأطفال / TOT)</label>
-        <input type="text" id="sched-tag" />
+    <!-- TAB 2: Gallery, Championships, Certificates, Awards & Videos -->
+    <div class="tab-panel" id="tab-gallery">
+      <div class="panel">
+        <h3 id="gal-form-heading">إضافة إنجاز / بطولة / شهادة / فيديو للمعرض</h3>
+        <input type="hidden" id="gal-edit-id" />
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="gal-title">عنوان الإنجاز أو البطولة</label>
+            <input type="text" id="gal-title" required />
+          </div>
+          <div class="form-group">
+            <label for="gal-activity-type">نوع النشاط</label>
+            <select id="gal-activity-type">
+              <option value="بطولات وتكريمات">بطولات وتكريمات</option>
+              <option value="شهادات ودروع وميداليات">شهادات ودروع وميداليات</option>
+              <option value="فيديوهات">فيديوهات</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="gal-category">اسم البطولة أو التصنيف (يمكن كتابة تصنيف جديد)</label>
+            <input type="text" id="gal-category" list="categories-datalist" placeholder="مثال: بطولة الحساب الذهني" />
+            <datalist id="categories-datalist"></datalist>
+          </div>
+          <div class="form-group">
+            <label for="gal-year">السنة</label>
+            <input type="text" id="gal-year" placeholder="مثال: 2026" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="gal-desc">وصف مختصر للإنجاز أو التكريم</label>
+          <textarea id="gal-desc"></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="gal-img">رابط الصورة (HTTPS)</label>
+            <input type="url" id="gal-img" placeholder="https://..." />
+          </div>
+          <div class="form-group">
+            <label for="gal-alt">النص البديل للصورة (Alt)</label>
+            <input type="text" id="gal-alt" />
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="gal-video">رابط الفيديو (يوتيوب / فيسبوك / تيك توك - اختياري)</label>
+            <input type="url" id="gal-video" placeholder="https://..." />
+          </div>
+          <div class="form-group">
+            <label for="gal-order">رقم الترتيب (الأقل يظهر أولاً بعد المميزين)</label>
+            <input type="number" id="gal-order" placeholder="1" />
+          </div>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="gal-featured" />
+          <label for="gal-featured" style="margin: 0; color: var(--gold-light);">تمييز هذا الإنجاز ليظهر في مقدمة المعرض</label>
+        </div>
+        <div class="btn-row">
+          <button type="button" id="save-gallery-btn" class="btn-gold">حفظ العنصر في المعرض</button>
+          <button type="button" id="cancel-gal-edit-btn" class="btn-outline" style="display: none;">إلغاء التعديل</button>
+        </div>
+        <div id="gallery-status" class="status-msg"></div>
       </div>
-      <div class="form-group">
-        <label for="sched-title">عنوان الموعد أو النشاط</label>
-        <input type="text" id="sched-title" />
+
+      <div class="panel">
+        <h3>إدارة عناصر المعرض والترتيب والحذف والتعديل</h3>
+        <div class="list-box" id="admin-gallery-list"></div>
       </div>
-      <div class="form-group">
-        <label for="sched-details">تفاصيل المواعيد</label>
-        <textarea id="sched-details"></textarea>
-      </div>
-      <button id="add-schedule-btn" class="btn-gold">إضافة الموعد</button>
-      <div id="schedule-status" class="status-msg"></div>
-      <div class="list-box" id="schedules-list"></div>
     </div>
 
-    <!-- Gallery / Championships -->
-    <div class="panel">
-      <h3>إضافة عنصر لمعرض البطولات (صورة / فيديو)</h3>
-      <div class="form-group">
-        <label for="gal-title">عنوان البطولة أو الفعالية</label>
-        <input type="text" id="gal-title" />
+    <!-- TAB 3: Media Library (Multi-upload, Compress, Thumbnail, Alt, Search/Filter) -->
+    <div class="tab-panel" id="tab-media">
+      <div class="panel">
+        <h3>رفع صور متعددة وضغطها وتصغيرها تلقائياً</h3>
+        <p style="color: var(--text-soft); font-size: 0.9rem; margin-bottom: 14px;">
+          يتم ضغط الصور في المتصفح مع الحفاظ على جودتها وتوليد صورة مصغرة وحفظها في مكتبة الوسائط مع نص بديل.
+        </p>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="media-files-input">اختر صورة أو عدة صور دفعة واحدة</label>
+            <input type="file" id="media-files-input" accept="image/*" multiple />
+          </div>
+          <div class="form-group">
+            <label for="media-default-alt">نص بديل افتراضي للصور المرفوعة</label>
+            <input type="text" id="media-default-alt" placeholder="مثال: تكريم أبطال أكاديمية القمة ماث" />
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="media-format">صيغة الضغط</label>
+            <select id="media-format">
+              <option value="image/webp">WebP (عصري وخفيف)</option>
+              <option value="image/jpeg">JPEG (توافق واسع)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="media-max-width">أقصى عرض للصورة (بكسل)</label>
+            <input type="number" id="media-max-width" value="1280" min="400" max="2500" />
+          </div>
+        </div>
+        <button type="button" id="process-media-btn" class="btn-gold">ضغط وإضافة إلى مكتبة الوسائط</button>
+        <div id="media-status" class="status-msg"></div>
       </div>
-      <div class="form-group">
-        <label for="gal-desc">وصف مختصر</label>
-        <textarea id="gal-desc"></textarea>
+
+      <div class="panel">
+        <h3>مكتبة الوسائط (بحث وتصفية ونسخ الرابط)</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="media-search">بحث بالاسم أو النص البديل</label>
+            <input type="text" id="media-search" placeholder="ابحث..." />
+          </div>
+          <div class="form-group">
+            <label for="media-filter-type">تصفية حسب الصيغة</label>
+            <select id="media-filter-type">
+              <option value="">الكل</option>
+              <option value="image/webp">WebP</option>
+              <option value="image/jpeg">JPEG</option>
+            </select>
+          </div>
+        </div>
+        <div class="media-grid" id="media-library-grid"></div>
       </div>
-      <div class="form-group">
-        <label for="gal-img">رابط الصورة (HTTPS)</label>
-        <input type="url" id="gal-img" placeholder="https://..." />
+    </div>
+
+    <!-- TAB 4: Schedules & Courses -->
+    <div class="tab-panel" id="tab-schedules">
+      <div class="panel">
+        <h3>إدارة المواعيد والدورات التدريبية</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="sched-tag">التصنيف (مثال: مجموعات الأطفال / TOT)</label>
+            <input type="text" id="sched-tag" />
+          </div>
+          <div class="form-group">
+            <label for="sched-title">عنوان الموعد أو الدورة</label>
+            <input type="text" id="sched-title" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sched-details">تفاصيل المواعيد والأيام</label>
+          <textarea id="sched-details"></textarea>
+        </div>
+        <button type="button" id="add-schedule-btn" class="btn-gold">إضافة الموعد / الدورة</button>
+        <div id="schedule-status" class="status-msg"></div>
+        <div class="list-box" id="schedules-list"></div>
       </div>
-      <div class="form-group">
-        <label for="gal-video">رابط الفيديو (يوتيوب / تيك توك / فيسبوك - اختياري)</label>
-        <input type="url" id="gal-video" placeholder="https://..." />
+    </div>
+
+    <!-- TAB 5: Stats & Links -->
+    <div class="tab-panel" id="tab-stats-links">
+      <div class="panel">
+        <h3>التحكم في الإحصائيات والأرقام</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="stat-championships">عدد البطولات والمسابقات</label>
+            <input type="text" id="stat-championships" placeholder="+25" />
+          </div>
+          <div class="form-group">
+            <label for="stat-trainers">عدد المدربين المؤهلين (TOT)</label>
+            <input type="text" id="stat-trainers" placeholder="+120" />
+          </div>
+          <div class="form-group">
+            <label for="stat-champions">عدد الأبطال والمتدربين</label>
+            <input type="text" id="stat-champions" placeholder="+500" />
+          </div>
+          <div class="form-group">
+            <label for="stat-experience">سنوات الخبرة والاعتماد</label>
+            <input type="text" id="stat-experience" placeholder="+8" />
+          </div>
+        </div>
+        <button type="button" id="save-stats-btn" class="btn-gold">حفظ الإحصائيات</button>
+        <div id="stats-status" class="status-msg"></div>
       </div>
-      <button id="add-gallery-btn" class="btn-gold">إضافة للمعرض</button>
-      <div id="gallery-status" class="status-msg"></div>
-      <div class="list-box" id="gallery-list"></div>
+
+      <div class="panel">
+        <h3>روابط التواصل الاجتماعي وواتساب العمل</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="wa-number">رقم واتساب العمل</label>
+            <input type="text" id="wa-number" />
+          </div>
+          <div class="form-group">
+            <label for="fb-link">رابط فيسبوك</label>
+            <input type="url" id="fb-link" />
+          </div>
+          <div class="form-group">
+            <label for="tt-link">رابط تيك توك</label>
+            <input type="url" id="tt-link" />
+          </div>
+          <div class="form-group">
+            <label for="ig-link">رابط إنستجرام</label>
+            <input type="url" id="ig-link" />
+          </div>
+        </div>
+        <button type="button" id="save-links-btn" class="btn-gold">حفظ الروابط</button>
+        <div id="links-status" class="status-msg"></div>
+      </div>
+    </div>
+
+    <!-- TAB 6: Sections Visibility/Order, Preview & Backup -->
+    <div class="tab-panel" id="tab-layout-backup">
+      <div class="panel">
+        <h3>إظهار وإخفاء وترتيب أقسام الصفحة الرئيسية</h3>
+        <div id="sections-order-list" class="list-box"></div>
+        <button type="button" id="save-sections-btn" class="btn-gold" style="margin-top: 14px;">حفظ إعدادات الأقسام</button>
+        <div id="sections-status" class="status-msg"></div>
+      </div>
+
+      <div class="panel">
+        <h3>النسخ الاحتياطي واستعادة البيانات (JSON)</h3>
+        <div class="btn-row">
+          <button type="button" id="export-backup-btn" class="btn-gold">تحميل نسخة احتياطية</button>
+          <label class="btn-outline" style="cursor: pointer;">
+            استعادة نسخة احتياطية
+            <input type="file" id="import-backup-file" accept=".json,application/json" style="display: none;" />
+          </label>
+        </div>
+        <div id="backup-status" class="status-msg"></div>
+      </div>
     </div>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getDatabase, ref, set, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getDatabase, ref, set, push, remove, update, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAy-ob2Kqh3coQManWKyxZy6juJWyH1Nv0",
@@ -387,10 +702,19 @@
     const auth = getAuth(app);
     const db = getDatabase(app);
 
-    const loginScreen = document.getElementById("login-screen");
-    const adminDashboard = document.getElementById("admin-dashboard");
-    const loginForm = document.getElementById("login-form");
-    const loginStatus = document.getElementById("login-status");
+    const DEFAULT_SECTIONS = [
+      { key: "hero", label: "الواجهة الرئيسية والتعريف", order: 1, visible: true },
+      { key: "stats", label: "إحصائيات الإنجازات والأكاديمية", order: 2, visible: true },
+      { key: "about", label: "السيرة الذاتية والرسالة", order: 3, visible: true },
+      { key: "highlights", label: "أبرز الإنجازات", order: 4, visible: true },
+      { key: "academy", label: "أكاديمية القمة ماث والاعتمادات", order: 5, visible: true },
+      { key: "gallery", label: "معرض البطولات والإنجازات والوسائط", order: 6, visible: true },
+      { key: "schedules", label: "المواعيد والدورات التدريبية", order: 7, visible: true },
+      { key: "contact", label: "التواصل والروابط الرسمية", order: 8, visible: true }
+    ];
+
+    let latestSiteData = {};
+    let mediaLibraryList = [];
 
     function cleanText(val) {
       return typeof val === "string" ? val.trim() : "";
@@ -412,10 +736,24 @@
       el.className = "status-msg " + (isOk ? "status-ok" : "status-err");
     }
 
+    // Tabs switching
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+        document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
+        btn.classList.add("active");
+        const target = document.getElementById(btn.getAttribute("data-tab"));
+        if (target) target.classList.add("active");
+      });
+    });
+
+    // Auth
+    const loginForm = document.getElementById("login-form");
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = cleanText(document.getElementById("admin-email").value);
       const password = document.getElementById("admin-password").value;
+      const loginStatus = document.getElementById("login-status");
       setStatus(loginStatus, "جاري التحقق...", true);
       try {
         await signInWithEmailAndPassword(auth, email, password);
@@ -433,19 +771,122 @@
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        loginScreen.style.display = "none";
-        adminDashboard.style.display = "block";
+        document.getElementById("login-screen").style.display = "none";
+        document.getElementById("admin-dashboard").style.display = "block";
         document.getElementById("logged-user-info").textContent = "مسجل دخول كـ: " + (user.email || "");
-        loadExistingData();
+        subscribeToData();
       } else {
-        loginScreen.style.display = "block";
-        adminDashboard.style.display = "none";
+        document.getElementById("login-screen").style.display = "block";
+        document.getElementById("admin-dashboard").style.display = "none";
       }
     });
 
-    function loadExistingData() {
+    function renderSectionsEditor(sectionsConfig) {
+      const listEl = document.getElementById("sections-order-list");
+      listEl.replaceChildren();
+
+      const merged = DEFAULT_SECTIONS.map((def) => {
+        const saved = sectionsConfig && sectionsConfig[def.key] ? sectionsConfig[def.key] : {};
+        return {
+          key: def.key,
+          label: def.label,
+          order: saved.order !== undefined ? Number(saved.order) : def.order,
+          visible: saved.visible !== undefined ? Boolean(saved.visible) : def.visible
+        };
+      }).sort((a, b) => a.order - b.order);
+
+      merged.forEach((sec) => {
+        const row = document.createElement("div");
+        row.className = "list-item";
+        row.dataset.secKey = sec.key;
+
+        const titleWrap = document.createElement("div");
+        const strong = document.createElement("strong");
+        strong.textContent = sec.label;
+        titleWrap.appendChild(strong);
+
+        const controlsWrap = document.createElement("div");
+        controlsWrap.className = "btn-row";
+
+        const orderInput = document.createElement("input");
+        orderInput.type = "number";
+        orderInput.value = String(sec.order);
+        orderInput.style.width = "76px";
+        orderInput.className = "sec-order-input";
+        orderInput.setAttribute("aria-label", "ترتيب القسم");
+
+        const visLabel = document.createElement("label");
+        visLabel.style.margin = "0";
+        visLabel.style.display = "inline-flex";
+        visLabel.style.alignItems = "center";
+        visLabel.style.gap = "6px";
+
+        const visCheck = document.createElement("input");
+        visCheck.type = "checkbox";
+        visCheck.checked = sec.visible;
+        visCheck.className = "sec-vis-checkbox";
+
+        const visText = document.createTextNode("ظاهر");
+        visLabel.append(visCheck, visText);
+
+        controlsWrap.append(orderInput, visLabel);
+        row.append(titleWrap, controlsWrap);
+        listEl.appendChild(row);
+      });
+    }
+
+    function renderMediaLibrary() {
+      const grid = document.getElementById("media-library-grid");
+      const searchQ = cleanText(document.getElementById("media-search").value).toLowerCase();
+      const filterFmt = document.getElementById("media-filter-type").value;
+
+      grid.replaceChildren();
+      const filtered = mediaLibraryList.filter((m) => {
+        if (filterFmt && m.mimeType !== filterFmt) return false;
+        if (!searchQ) return true;
+        const hay = `${m.name || ""} ${m.altText || ""}`.toLowerCase();
+        return hay.includes(searchQ);
+      });
+
+      filtered.forEach((m) => {
+        const card = document.createElement("div");
+        card.className = "media-card";
+
+        const img = document.createElement("img");
+        img.src = m.thumbDataUrl || m.dataUrl || "";
+        img.alt = m.altText || m.name || "صورة";
+
+        const nameEl = document.createElement("small");
+        nameEl.textContent = `${m.name || "صورة"} (${m.mimeType || "image"})`;
+
+        const altEl = document.createElement("small");
+        altEl.textContent = "Alt: " + (m.altText || "-");
+
+        const copyBtn = document.createElement("button");
+        copyBtn.type = "button";
+        copyBtn.className = "btn-outline";
+        copyBtn.textContent = "استخدام في المعرض";
+        copyBtn.addEventListener("click", () => {
+          document.getElementById("gal-img").value = m.dataUrl || "";
+          document.getElementById("gal-alt").value = m.altText || "";
+          document.querySelector('[data-tab="tab-gallery"]').click();
+        });
+
+        const delBtn = document.createElement("button");
+        delBtn.type = "button";
+        delBtn.className = "btn-danger";
+        delBtn.textContent = "حذف";
+        delBtn.addEventListener("click", () => remove(ref(db, `siteContent/mediaLibrary/${m.id}`)));
+
+        card.append(img, nameEl, altEl, copyBtn, delBtn);
+        grid.appendChild(card);
+      });
+    }
+
+    function subscribeToData() {
       onValue(ref(db, "siteContent"), (snap) => {
         const data = snap.val() || {};
+        latestSiteData = data;
 
         if (data.profile) {
           document.getElementById("name-ar").value = data.profile.nameAr || "";
@@ -453,11 +894,19 @@
           document.getElementById("hero-title").value = data.profile.title || "";
           document.getElementById("short-desc").value = data.profile.shortDesc || "";
           document.getElementById("photo-url").value = data.profile.photoUrl || "";
+          document.getElementById("photo-alt").value = data.profile.photoAlt || "";
           document.getElementById("about-p1").value = data.profile.aboutP1 || "";
           document.getElementById("about-p2").value = data.profile.aboutP2 || "";
           document.getElementById("about-p3").value = data.profile.aboutP3 || "";
           document.getElementById("mission-text").value = data.profile.mission || "";
           document.getElementById("slogan-text").value = data.profile.slogan || "";
+        }
+
+        if (data.stats) {
+          document.getElementById("stat-championships").value = data.stats.championships || "";
+          document.getElementById("stat-trainers").value = data.stats.trainers || "";
+          document.getElementById("stat-champions").value = data.stats.champions || "";
+          document.getElementById("stat-experience").value = data.stats.experience || "";
         }
 
         if (data.links) {
@@ -467,61 +916,168 @@
           document.getElementById("ig-link").value = data.links.instagram || "";
         }
 
+        // Highlights & Credentials
+        const hList = document.getElementById("highlights-list");
+        hList.replaceChildren();
+        const highlightsArr = Array.isArray(data.highlights) ? data.highlights : [];
+        highlightsArr.forEach((h, idx) => {
+          const row = document.createElement("div");
+          row.className = "list-item";
+          const info = document.createElement("div");
+          const st = document.createElement("strong");
+          st.textContent = h.title || "";
+          const sp = document.createElement("span");
+          sp.textContent = h.description || "";
+          info.append(st, sp);
+          const del = document.createElement("button");
+          del.type = "button";
+          del.className = "btn-danger";
+          del.textContent = "حذف";
+          del.addEventListener("click", async () => {
+            const next = highlightsArr.filter((_, i) => i !== idx);
+            await set(ref(db, "siteContent/highlights"), next);
+          });
+          row.append(info, del);
+          hList.appendChild(row);
+        });
+
+        const cList = document.getElementById("credentials-list");
+        cList.replaceChildren();
+        const credsArr = Array.isArray(data.credentials) ? data.credentials : [];
+        credsArr.forEach((c, idx) => {
+          const row = document.createElement("div");
+          row.className = "list-item";
+          const info = document.createElement("div");
+          const st = document.createElement("strong");
+          st.textContent = c.title || "";
+          const sp = document.createElement("span");
+          sp.textContent = c.description || "";
+          info.append(st, sp);
+          const del = document.createElement("button");
+          del.type = "button";
+          del.className = "btn-danger";
+          del.textContent = "حذف";
+          del.addEventListener("click", async () => {
+            const next = credsArr.filter((_, i) => i !== idx);
+            await set(ref(db, "siteContent/credentials"), next);
+          });
+          row.append(info, del);
+          cList.appendChild(row);
+        });
+
+        // Schedules
         const schedList = document.getElementById("schedules-list");
         schedList.replaceChildren();
         if (data.schedules && typeof data.schedules === "object") {
           Object.entries(data.schedules).forEach(([key, item]) => {
             const row = document.createElement("div");
             row.className = "list-item";
-
             const info = document.createElement("div");
-            const strong = document.createElement("strong");
-            strong.textContent = (item.tag ? `[${item.tag}] ` : "") + (item.title || "");
-            const span = document.createElement("span");
-            span.textContent = item.details || "";
-            info.append(strong, span);
-
-            const delBtn = document.createElement("button");
-            delBtn.className = "btn-danger";
-            delBtn.textContent = "حذف";
-            delBtn.addEventListener("click", () => remove(ref(db, `siteContent/schedules/${key}`)));
-
-            row.append(info, delBtn);
+            const st = document.createElement("strong");
+            st.textContent = (item.tag ? `[${item.tag}] ` : "") + (item.title || "");
+            const sp = document.createElement("span");
+            sp.textContent = item.details || "";
+            info.append(st, sp);
+            const del = document.createElement("button");
+            del.type = "button";
+            del.className = "btn-danger";
+            del.textContent = "حذف";
+            del.addEventListener("click", () => remove(ref(db, `siteContent/schedules/${key}`)));
+            row.append(info, del);
             schedList.appendChild(row);
           });
         }
 
-        const galList = document.getElementById("gallery-list");
+        // Gallery & Categories Datalist
+        const galList = document.getElementById("admin-gallery-list");
         galList.replaceChildren();
+        const catDatalist = document.getElementById("categories-datalist");
+        catDatalist.replaceChildren();
+
         if (data.gallery && typeof data.gallery === "object") {
-          Object.entries(data.gallery).forEach(([key, item]) => {
+          const entries = Object.entries(data.gallery);
+          const cats = [...new Set(entries.map(([, v]) => cleanText(v.category)).filter(Boolean))];
+          cats.forEach((c) => {
+            const opt = document.createElement("option");
+            opt.value = c;
+            catDatalist.appendChild(opt);
+          });
+
+          entries.forEach(([id, item]) => {
             const row = document.createElement("div");
             row.className = "list-item";
 
             const info = document.createElement("div");
-            const strong = document.createElement("strong");
-            strong.textContent = item.title || "";
-            const span = document.createElement("span");
-            span.textContent = item.description || "";
-            info.append(strong, span);
+            const st = document.createElement("strong");
+            st.textContent = `${item.featured ? "★ " : ""}${item.title || ""}`;
+            const sp = document.createElement("span");
+            sp.textContent = `${item.activityType || ""} | ${item.category || ""} | ${item.year || ""} | ترتيب: ${item.order ?? "-"}`;
+            info.append(st, sp);
+
+            const actions = document.createElement("div");
+            actions.className = "btn-row";
+
+            const editBtn = document.createElement("button");
+            editBtn.type = "button";
+            editBtn.className = "btn-outline";
+            editBtn.textContent = "تعديل";
+            editBtn.addEventListener("click", () => {
+              document.getElementById("gal-edit-id").value = id;
+              document.getElementById("gal-title").value = item.title || "";
+              document.getElementById("gal-activity-type").value = item.activityType || "بطولات وتكريمات";
+              document.getElementById("gal-category").value = item.category || "";
+              document.getElementById("gal-year").value = item.year || "";
+              document.getElementById("gal-desc").value = item.description || "";
+              document.getElementById("gal-img").value = item.imageUrl || "";
+              document.getElementById("gal-alt").value = item.altText || "";
+              document.getElementById("gal-video").value = item.videoUrl || "";
+              document.getElementById("gal-order").value = item.order ?? "";
+              document.getElementById("gal-featured").checked = Boolean(item.featured);
+              document.getElementById("gal-form-heading").textContent = "تعديل عنصر في المعرض";
+              document.getElementById("cancel-gal-edit-btn").style.display = "inline-flex";
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            });
 
             const delBtn = document.createElement("button");
+            delBtn.type = "button";
             delBtn.className = "btn-danger";
             delBtn.textContent = "حذف";
-            delBtn.addEventListener("click", () => remove(ref(db, `siteContent/gallery/${key}`)));
+            delBtn.addEventListener("click", () => remove(ref(db, `siteContent/gallery/${id}`)));
 
-            row.append(info, delBtn);
+            actions.append(editBtn, delBtn);
+            row.append(info, actions);
             galList.appendChild(row);
           });
         }
+
+        // Media Library
+        mediaLibraryList = data.mediaLibrary && typeof data.mediaLibrary === "object"
+          ? Object.entries(data.mediaLibrary).map(([id, val]) => ({ id, ...val })).reverse()
+          : [];
+        renderMediaLibrary();
+
+        // Sections order/visibility
+        renderSectionsEditor(data.sectionsConfig);
       });
     }
+
+    // Profile Preview & Save
+    document.getElementById("preview-profile-btn").addEventListener("click", () => {
+      const box = document.getElementById("profile-preview");
+      box.style.display = "block";
+      box.textContent = [
+        "الاسم: " + cleanText(document.getElementById("name-ar").value),
+        "اللقب: " + cleanText(document.getElementById("hero-title").value),
+        "الرسالة: " + cleanText(document.getElementById("mission-text").value),
+        "الشعار: " + cleanText(document.getElementById("slogan-text").value)
+      ].join("\n");
+    });
 
     document.getElementById("save-profile-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("profile-status");
       const photoUrl = cleanText(document.getElementById("photo-url").value);
       if (!isSafeOptionalUrl(photoUrl)) {
-        setStatus(statusEl, "رابط الصورة يجب أن يبدأ بـ https:// أو http://", false);
+        setStatus(statusEl, "رابط الصورة الشخصية يجب أن يبدأ بـ https:// أو http://", false);
         return;
       }
       try {
@@ -531,47 +1087,184 @@
           title: cleanText(document.getElementById("hero-title").value),
           shortDesc: cleanText(document.getElementById("short-desc").value),
           photoUrl,
+          photoAlt: cleanText(document.getElementById("photo-alt").value),
           aboutP1: cleanText(document.getElementById("about-p1").value),
           aboutP2: cleanText(document.getElementById("about-p2").value),
           aboutP3: cleanText(document.getElementById("about-p3").value),
           mission: cleanText(document.getElementById("mission-text").value),
           slogan: cleanText(document.getElementById("slogan-text").value)
         });
-        setStatus(statusEl, "تم حفظ النبذة والبيانات بنجاح.", true);
+        setStatus(statusEl, "تم حفظ النبذة والبيانات ونشرها بنجاح.", true);
       } catch {
-        setStatus(statusEl, "تعذر الحفظ، تأكد من تسجيل الدخول وصلاحيات القاعدة.", false);
+        setStatus(statusEl, "تعذر الحفظ، تحقق من تسجيل الدخول والصلاحيات.", false);
       }
     });
 
-    document.getElementById("save-links-btn").addEventListener("click", async () => {
-      const statusEl = document.getElementById("links-status");
-      const fb = cleanText(document.getElementById("fb-link").value);
-      const tt = cleanText(document.getElementById("tt-link").value);
-      const ig = cleanText(document.getElementById("ig-link").value);
+    // Add Highlights / Credentials
+    document.getElementById("add-hc-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("hc-status");
+      const target = document.getElementById("item-target-type").value;
+      const title = cleanText(document.getElementById("hc-title").value);
+      const description = cleanText(document.getElementById("hc-desc").value);
+      if (!title) {
+        setStatus(statusEl, "اكتب العنوان أولاً.", false);
+        return;
+      }
+      const existing = Array.isArray(latestSiteData[target]) ? latestSiteData[target] : [];
+      try {
+        await set(ref(db, `siteContent/${target}`), [...existing, { title, description }]);
+        document.getElementById("hc-title").value = "";
+        document.getElementById("hc-desc").value = "";
+        setStatus(statusEl, "تمت الإضافة بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر الإضافة.", false);
+      }
+    });
 
-      if (!isSafeOptionalUrl(fb) || !isSafeOptionalUrl(tt) || !isSafeOptionalUrl(ig)) {
-        setStatus(statusEl, "تأكد أن الروابط تبدأ بـ https:// أو http://", false);
+    // Gallery Add / Edit
+    function resetGalleryForm() {
+      document.getElementById("gal-edit-id").value = "";
+      document.getElementById("gal-title").value = "";
+      document.getElementById("gal-category").value = "";
+      document.getElementById("gal-year").value = "";
+      document.getElementById("gal-desc").value = "";
+      document.getElementById("gal-img").value = "";
+      document.getElementById("gal-alt").value = "";
+      document.getElementById("gal-video").value = "";
+      document.getElementById("gal-order").value = "";
+      document.getElementById("gal-featured").checked = false;
+      document.getElementById("gal-form-heading").textContent = "إضافة إنجاز / بطولة / شهادة / فيديو للمعرض";
+      document.getElementById("cancel-gal-edit-btn").style.display = "none";
+    }
+
+    document.getElementById("cancel-gal-edit-btn").addEventListener("click", resetGalleryForm);
+
+    document.getElementById("save-gallery-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("gallery-status");
+      const editId = cleanText(document.getElementById("gal-edit-id").value);
+      const title = cleanText(document.getElementById("gal-title").value);
+      const imageUrl = cleanText(document.getElementById("gal-img").value);
+      const videoUrl = cleanText(document.getElementById("gal-video").value);
+
+      if (!title) {
+        setStatus(statusEl, "اكتب عنوان الإنجاز أو البطولة أولاً.", false);
+        return;
+      }
+      if (!isSafeOptionalUrl(imageUrl) || !isSafeOptionalUrl(videoUrl)) {
+        setStatus(statusEl, "تأكد أن روابط الصورة والفيديو تبدأ بـ https:// أو http://", false);
         return;
       }
 
+      const orderRaw = document.getElementById("gal-order").value;
+      const payload = {
+        title,
+        activityType: document.getElementById("gal-activity-type").value,
+        category: cleanText(document.getElementById("gal-category").value),
+        year: cleanText(document.getElementById("gal-year").value),
+        description: cleanText(document.getElementById("gal-desc").value),
+        imageUrl,
+        altText: cleanText(document.getElementById("gal-alt").value),
+        videoUrl,
+        order: orderRaw !== "" ? Number(orderRaw) : 99,
+        featured: document.getElementById("gal-featured").checked,
+        updatedAt: Date.now()
+      };
+
       try {
-        await set(ref(db, "siteContent/links"), {
-          whatsappNumber: cleanText(document.getElementById("wa-number").value),
-          facebook: fb,
-          tiktok: tt,
-          instagram: ig
-        });
-        setStatus(statusEl, "تم حفظ الروابط بنجاح.", true);
+        if (editId) {
+          await update(ref(db, `siteContent/gallery/${editId}`), payload);
+          setStatus(statusEl, "تم تحديث العنصر في المعرض بنجاح.", true);
+        } else {
+          await push(ref(db, "siteContent/gallery"), payload);
+          setStatus(statusEl, "تمت إضافة العنصر للمعرض بنجاح.", true);
+        }
+        resetGalleryForm();
       } catch {
-        setStatus(statusEl, "تعذر حفظ الروابط.", false);
+        setStatus(statusEl, "تعذر حفظ العنصر في المعرض.", false);
       }
     });
 
+    // Image Compression + Thumbnail Generator in Browser
+    function compressImageFile(file, maxWidth, mimeType, quality) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const img = new Image();
+          img.onload = () => {
+            const scale = img.width > maxWidth ? maxWidth / img.width : 1;
+            const targetW = Math.round(img.width * scale);
+            const targetH = Math.round(img.height * scale);
+
+            const canvas = document.createElement("canvas");
+            canvas.width = targetW;
+            canvas.height = targetH;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, targetW, targetH);
+
+            const thumbScale = targetW > 320 ? 320 / targetW : 1;
+            const thumbCanvas = document.createElement("canvas");
+            thumbCanvas.width = Math.round(targetW * thumbScale);
+            thumbCanvas.height = Math.round(targetH * thumbScale);
+            const tCtx = thumbCanvas.getContext("2d");
+            tCtx.drawImage(canvas, 0, 0, thumbCanvas.width, thumbCanvas.height);
+
+            resolve({
+              dataUrl: canvas.toDataURL(mimeType, quality),
+              thumbDataUrl: thumbCanvas.toDataURL(mimeType, 0.72),
+              mimeType
+            });
+          };
+          img.onerror = reject;
+          img.src = ev.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    document.getElementById("process-media-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("media-status");
+      const filesInput = document.getElementById("media-files-input");
+      const files = [...(filesInput.files || [])];
+      if (!files.length) {
+        setStatus(statusEl, "اختر صورة واحدة أو أكثر أولاً.", false);
+        return;
+      }
+
+      const maxWidth = Number(document.getElementById("media-max-width").value) || 1280;
+      const mimeType = document.getElementById("media-format").value || "image/webp";
+      const defaultAlt = cleanText(document.getElementById("media-default-alt").value);
+
+      setStatus(statusEl, "جاري ضغط وتجهيز الصور...", true);
+      try {
+        for (const file of files) {
+          if (!file.type.startsWith("image/")) continue;
+          const processed = await compressImageFile(file, maxWidth, mimeType, 0.82);
+          await push(ref(db, "siteContent/mediaLibrary"), {
+            name: file.name,
+            altText: defaultAlt || file.name,
+            mimeType: processed.mimeType,
+            dataUrl: processed.dataUrl,
+            thumbDataUrl: processed.thumbDataUrl,
+            createdAt: Date.now()
+          });
+        }
+        filesInput.value = "";
+        setStatus(statusEl, "تم ضغط الصور وإضافتها إلى مكتبة الوسائط بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر معالجة بعض الصور، تأكد من حجمها وصيغتها.", false);
+      }
+    });
+
+    document.getElementById("media-search").addEventListener("input", renderMediaLibrary);
+    document.getElementById("media-filter-type").addEventListener("change", renderMediaLibrary);
+
+    // Schedules
     document.getElementById("add-schedule-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("schedule-status");
       const title = cleanText(document.getElementById("sched-title").value);
       if (!title) {
-        setStatus(statusEl, "اكتب عنوان الموعد أو النشاط أولاً.", false);
+        setStatus(statusEl, "اكتب عنوان الموعد أو الدورة أولاً.", false);
         return;
       }
       try {
@@ -589,35 +1282,92 @@
       }
     });
 
-    document.getElementById("add-gallery-btn").addEventListener("click", async () => {
-      const statusEl = document.getElementById("gallery-status");
-      const title = cleanText(document.getElementById("gal-title").value);
-      const imgUrl = cleanText(document.getElementById("gal-img").value);
-      const vidUrl = cleanText(document.getElementById("gal-video").value);
-
-      if (!title) {
-        setStatus(statusEl, "اكتب عنوان البطولة أو الفعالية أولاً.", false);
-        return;
-      }
-      if (!isSafeOptionalUrl(imgUrl) || !isSafeOptionalUrl(vidUrl)) {
-        setStatus(statusEl, "تأكد أن روابط الصور والفيديو تبدأ بـ https:// أو http://", false);
-        return;
-      }
-
+    // Stats
+    document.getElementById("save-stats-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("stats-status");
       try {
-        await push(ref(db, "siteContent/gallery"), {
-          title,
-          description: cleanText(document.getElementById("gal-desc").value),
-          imageUrl: imgUrl,
-          videoUrl: vidUrl
+        await set(ref(db, "siteContent/stats"), {
+          championships: cleanText(document.getElementById("stat-championships").value),
+          trainers: cleanText(document.getElementById("stat-trainers").value),
+          champions: cleanText(document.getElementById("stat-champions").value),
+          experience: cleanText(document.getElementById("stat-experience").value)
         });
-        document.getElementById("gal-title").value = "";
-        document.getElementById("gal-desc").value = "";
-        document.getElementById("gal-img").value = "";
-        document.getElementById("gal-video").value = "";
-        setStatus(statusEl, "تمت الإضافة للمعرض بنجاح.", true);
+        setStatus(statusEl, "تم حفظ الإحصائيات بنجاح.", true);
       } catch {
-        setStatus(statusEl, "تعذر الإضافة للمعرض.", false);
+        setStatus(statusEl, "تعذر حفظ الإحصائيات.", false);
+      }
+    });
+
+    // Links
+    document.getElementById("save-links-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("links-status");
+      const fb = cleanText(document.getElementById("fb-link").value);
+      const tt = cleanText(document.getElementById("tt-link").value);
+      const ig = cleanText(document.getElementById("ig-link").value);
+      if (!isSafeOptionalUrl(fb) || !isSafeOptionalUrl(tt) || !isSafeOptionalUrl(ig)) {
+        setStatus(statusEl, "تأكد أن الروابط تبدأ بـ https:// أو http://", false);
+        return;
+      }
+      try {
+        await set(ref(db, "siteContent/links"), {
+          whatsappNumber: cleanText(document.getElementById("wa-number").value),
+          facebook: fb,
+          tiktok: tt,
+          instagram: ig
+        });
+        setStatus(statusEl, "تم حفظ الروابط بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر حفظ الروابط.", false);
+      }
+    });
+
+    // Sections Config Save
+    document.getElementById("save-sections-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("sections-status");
+      const config = {};
+      document.querySelectorAll("#sections-order-list .list-item").forEach((row) => {
+        const key = row.dataset.secKey;
+        const order = Number(row.querySelector(".sec-order-input").value) || 99;
+        const visible = row.querySelector(".sec-vis-checkbox").checked;
+        config[key] = { order, visible };
+      });
+      try {
+        await set(ref(db, "siteContent/sectionsConfig"), config);
+        setStatus(statusEl, "تم حفظ ترتيب وإظهار الأقسام بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر حفظ إعدادات الأقسام.", false);
+      }
+    });
+
+    // Backup Export & Import
+    document.getElementById("export-backup-btn").addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify(latestSiteData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "rana-elmashad-backup.json";
+      a.click();
+      URL.revokeObjectURL(url);
+      setStatus(document.getElementById("backup-status"), "تم تحميل ملف النسخة الاحتياطية بنجاح.", true);
+    });
+
+    document.getElementById("import-backup-file").addEventListener("change", async (e) => {
+      const statusEl = document.getElementById("backup-status");
+      const file = e.target.files?.[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        const parsed = JSON.parse(text);
+        if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+          setStatus(statusEl, "ملف النسخة الاحتياطية غير صالح.", false);
+          return;
+        }
+        await set(ref(db, "siteContent"), parsed);
+        setStatus(statusEl, "تمت استعادة النسخة الاحتياطية بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر قراءة أو استعادة ملف النسخة الاحتياطية.", false);
+      } finally {
+        e.target.value = "";
       }
     });
   </script>
