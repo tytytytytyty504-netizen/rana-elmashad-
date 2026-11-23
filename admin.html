@@ -33,8 +33,9 @@
       background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-main) 100%);
       color: var(--white);
       line-height: 1.75;
-      padding: 18px;
+      padding: 16px;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .container {
@@ -78,43 +79,140 @@
       background: var(--bg-card);
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 16px 20px;
-      margin-bottom: 16px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+    }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sections-menu-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--bg-dark);
+      border: none;
+      border-radius: 9px;
+      padding: 9px 14px;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
     }
 
     .top-bar h2 {
       color: var(--gold-light);
-      font-size: 1.25rem;
+      font-size: 1.15rem;
     }
 
     .top-bar small {
       color: var(--text-soft);
       display: block;
+      font-size: 0.82rem;
     }
 
-    .tabs-bar {
+    /* Slide-out Sections Sidebar */
+    .admin-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(3, 8, 16, 0.72);
+    }
+
+    .admin-backdrop.open {
+      display: block;
+    }
+
+    .admin-sidebar {
+      position: fixed;
+      top: 0;
+      right: -310px;
+      width: 295px;
+      max-width: 85vw;
+      height: 100vh;
+      z-index: 600;
+      background: var(--bg-dark);
+      border-left: 1px solid var(--line);
+      padding: 20px 16px;
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      transition: right 0.24s ease;
     }
 
-    .tab-btn {
+    .admin-sidebar.open {
+      right: 0;
+    }
+
+    .sidebar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-head strong {
+      color: var(--gold-light);
+      font-size: 1rem;
+    }
+
+    .sidebar-close {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
       background: var(--bg-card);
       color: var(--white);
-      border: 1px solid var(--line);
-      padding: 8px 14px;
-      border-radius: 9px;
-      font-family: inherit;
-      font-weight: 600;
-      font-size: 0.86rem;
+      font-size: 1rem;
       cursor: pointer;
     }
 
-    .tab-btn.active,
-    .tab-btn:hover {
-      background: var(--gold);
-      color: var(--bg-dark);
+    .side-nav-btn {
+      width: 100%;
+      text-align: right;
+      background: transparent;
+      color: var(--text-soft);
+      border: 1px solid transparent;
+      padding: 10px 12px;
+      border-radius: 9px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .side-nav-btn.active,
+    .side-nav-btn:hover {
+      background: var(--bg-card);
+      color: var(--gold-light);
+      border-color: var(--line);
+    }
+
+    .active-section-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(17, 37, 71, 0.75);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 16px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+    }
+
+    .active-section-banner span {
+      color: var(--gold-light);
+      font-weight: 700;
     }
 
     .tab-panel {
@@ -203,6 +301,7 @@
       font-weight: 700;
       border: 1px solid rgba(255, 255, 255, 0.18);
       cursor: pointer;
+      white-space: pre-line;
     }
 
     .form-group {
@@ -422,26 +521,40 @@
   <!-- Admin Dashboard -->
   <div class="container dashboard" id="admin-dashboard">
     <div class="top-bar">
-      <div>
-        <h2>لوحة التحكم المتكاملة للموقع الرسمي</h2>
-        <small id="logged-user-info"></small>
+      <div class="top-bar-left">
+        <button type="button" class="sections-menu-btn" id="open-admin-sidebar">☰ الأقسام</button>
+        <div>
+          <h2>لوحة التحكم المتكاملة</h2>
+          <small id="logged-user-info"></small>
+        </div>
       </div>
       <div class="btn-row">
-        <a href="./index.html" target="_blank" rel="noopener noreferrer" class="btn-outline">معاينة الموقع المباشر</a>
-        <button type="button" id="logout-btn" class="btn-danger">تسجيل خروج</button>
+        <a href="./index.html" target="_blank" rel="noopener noreferrer" class="btn-outline">معاينة الموقع</a>
+        <button type="button" id="logout-btn" class="btn-danger">خروج</button>
       </div>
     </div>
 
-    <div class="tabs-bar" role="tablist">
-      <button type="button" class="tab-btn active" data-tab="tab-profile">الرئيسية واللوجو والسيرة</button>
-      <button type="button" class="tab-btn" data-tab="tab-gallery">البطولات والإنجازات والفيديوهات</button>
-      <button type="button" class="tab-btn" data-tab="tab-media">مكتبة الوسائط والصور</button>
-      <button type="button" class="tab-btn" data-tab="tab-schedules">المواعيد والدورات</button>
-      <button type="button" class="tab-btn" data-tab="tab-stats-links">الإحصائيات والروابط</button>
-      <button type="button" class="tab-btn" data-tab="tab-theme-layout">الألوان وتدرجاتها والأقسام</button>
+    <div class="active-section-banner">
+      <div>القسم الحالي: <span id="current-section-label">الرئيسية واللوجو والسيرة</span></div>
+      <button type="button" class="btn-outline" id="quick-switch-btn">تبديل القسم</button>
     </div>
 
-    <!-- TAB 1 -->
+    <div class="admin-backdrop" id="admin-backdrop"></div>
+    <aside class="admin-sidebar" id="admin-sidebar" aria-label="أقسام لوحة التحكم">
+      <div class="sidebar-head">
+        <strong>أقسام الإدارة</strong>
+        <button type="button" class="sidebar-close" id="close-admin-sidebar" aria-label="إغلاق">✕</button>
+      </div>
+      <button type="button" class="side-nav-btn active" data-tab="tab-profile" data-title="الرئيسية واللوجو والسيرة">1. الرئيسية واللوجو والسيرة</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-announcements" data-title="الإعلانات العائمة">2. الإعلانات العائمة</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-gallery" data-title="البطولات والإنجازات والفيديوهات">3. البطولات والإنجازات والفيديوهات</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-media" data-title="مكتبة الوسائط والصور">4. مكتبة الوسائط والصور</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-schedules" data-title="المواعيد والدورات">5. المواعيد والدورات</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-stats-links" data-title="الإحصائيات والروابط">6. الإحصائيات والروابط</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-theme-layout" data-title="الألوان وتدرجاتها والأقسام">7. الألوان وتدرجاتها والأقسام</button>
+    </aside>
+
+    <!-- 1. Profile & Logo -->
     <div class="tab-panel active" id="tab-profile">
       <div class="panel">
         <h3>الهوية واللوجو والواجهة الرئيسية</h3>
@@ -466,7 +579,6 @@
           </div>
         </div>
 
-        <!-- Logo Upload -->
         <div class="upload-box">
           <img id="logo-mini-preview" class="mini-logo-preview" src="" alt="معاينة اللوجو" style="display: none;" />
           <div style="flex: 1; min-width: 210px;">
@@ -476,7 +588,6 @@
           </div>
         </div>
 
-        <!-- Hero Photo Upload -->
         <div class="upload-box">
           <img id="hero-mini-preview" class="mini-preview" src="" alt="معاينة الصورة الرئيسية" style="display: none;" />
           <div style="flex: 1; min-width: 210px;">
@@ -554,7 +665,60 @@
       </div>
     </div>
 
-    <!-- TAB 2 -->
+    <!-- 2. Floating Announcements -->
+    <div class="tab-panel" id="tab-announcements">
+      <div class="panel">
+        <h3 id="ad-form-heading">إضافة إعلان عائم جديد</h3>
+        <input type="hidden" id="ad-edit-id" />
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="ad-title">عنوان الإعلان</label>
+            <input type="text" id="ad-title" />
+          </div>
+          <div class="form-group">
+            <label for="ad-badge">شارة صغيرة (مثل: جديد / عرض / بطولة)</label>
+            <input type="text" id="ad-badge" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ad-body">نص الإعلان أو التفاصيل</label>
+          <textarea id="ad-body"></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="ad-img-file">صورة الإعلان (اختياري)</label>
+            <input type="file" id="ad-img-file" accept="image/*" style="margin-bottom: 8px;" />
+            <input type="text" id="ad-img-url" placeholder="رابط الصورة أو يتم رفعه تلقائياً" />
+          </div>
+          <div class="form-group">
+            <label for="ad-link-url">رابط زر الإجراء (اختياري)</label>
+            <input type="url" id="ad-link-url" />
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="ad-link-text">نص زر الإجراء</label>
+            <input type="text" id="ad-link-text" placeholder="التفاصيل والتسجيل" />
+          </div>
+          <div class="checkbox-row" style="margin-top: 26px;">
+            <input type="checkbox" id="ad-active" checked />
+            <label for="ad-active" style="margin: 0; color: var(--gold-light);">إظهار الإعلان للزوار في الزر العائم</label>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" id="save-ad-btn" class="btn-gold">حفظ الإعلان</button>
+          <button type="button" id="cancel-ad-edit-btn" class="btn-outline" style="display: none;">إلغاء التعديل</button>
+        </div>
+        <div id="ad-status" class="status-msg"></div>
+      </div>
+
+      <div class="panel">
+        <h3>الإعلانات العائمة الحالية</h3>
+        <div class="list-box" id="admin-ads-list"></div>
+      </div>
+    </div>
+
+    <!-- 3. Gallery -->
     <div class="tab-panel" id="tab-gallery">
       <div class="panel">
         <h3 id="gal-form-heading">إضافة إنجاز / بطولة / شهادة / فيديو للمعرض</h3>
@@ -626,7 +790,7 @@
       </div>
     </div>
 
-    <!-- TAB 3 -->
+    <!-- 4. Media Library -->
     <div class="tab-panel" id="tab-media">
       <div class="panel">
         <h3>رفع صور متعددة وضغطها تلقائياً</h3>
@@ -677,7 +841,7 @@
       </div>
     </div>
 
-    <!-- TAB 4 -->
+    <!-- 5. Schedules -->
     <div class="tab-panel" id="tab-schedules">
       <div class="panel">
         <h3>إدارة المواعيد والدورات التدريبية</h3>
@@ -701,7 +865,7 @@
       </div>
     </div>
 
-    <!-- TAB 5 -->
+    <!-- 6. Stats & Links -->
     <div class="tab-panel" id="tab-stats-links">
       <div class="panel">
         <h3>التحكم في الإحصائيات والأرقام</h3>
@@ -752,7 +916,7 @@
       </div>
     </div>
 
-    <!-- TAB 6: Full Color Control + Gradients + Sections + Backup -->
+    <!-- 7. Colors + Gradients + Sections + Backup -->
     <div class="tab-panel" id="tab-theme-layout">
       <div class="panel">
         <h3>تحكم كامل في الألوان وتدرجاتها</h3>
@@ -789,7 +953,7 @@
 
         <div class="gradient-bar-preview">
           <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
-            <strong style="color: var(--gold-light); font-size: 0.92rem;">معاينة التدرج اللوني للون التمييز المختار</strong>
+            <strong style="color: var(--gold-light); font-size: 0.92rem;">معاينة التدرج اللوني (اضغط على أي درجة لتطبيقها)</strong>
             <select id="shade-target-select" style="width: auto; padding: 6px 10px; font-size: 0.82rem;">
               <option value="col-accent">تطبيق الدرجة على: لون التمييز</option>
               <option value="col-bg-primary">تطبيق الدرجة على: الخلفية الأساسية</option>
@@ -875,6 +1039,35 @@
     let mediaLibraryList = [];
     let isInitialLoadDone = false;
 
+    // Admin Sidebar Drawer Controls
+    const adminSidebar = document.getElementById("admin-sidebar");
+    const adminBackdrop = document.getElementById("admin-backdrop");
+
+    function setAdminSidebarOpen(open) {
+      adminSidebar.classList.toggle("open", open);
+      adminBackdrop.classList.toggle("open", open);
+    }
+
+    document.getElementById("open-admin-sidebar").addEventListener("click", () => setAdminSidebarOpen(true));
+    document.getElementById("quick-switch-btn").addEventListener("click", () => setAdminSidebarOpen(true));
+    document.getElementById("close-admin-sidebar").addEventListener("click", () => setAdminSidebarOpen(false));
+    adminBackdrop.addEventListener("click", () => setAdminSidebarOpen(false));
+
+    document.querySelectorAll(".side-nav-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tabId = btn.getAttribute("data-tab");
+        const title = btn.getAttribute("data-title") || btn.textContent;
+        document.querySelectorAll(".side-nav-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
+        const panel = document.getElementById(tabId);
+        if (panel) panel.classList.add("active");
+        document.getElementById("current-section-label").textContent = title;
+        setAdminSidebarOpen(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
     function cleanText(val) {
       return typeof val === "string" ? val.trim() : "";
     }
@@ -949,16 +1142,6 @@
     ["col-bg-primary", "col-bg-header", "col-bg-card", "col-bg-light", "col-accent", "col-text-light", "col-text-dark", "shade-target-select"].forEach((id) => {
       document.getElementById(id).addEventListener("input", updateGradientPreview);
       document.getElementById(id).addEventListener("change", updateGradientPreview);
-    });
-
-    document.querySelectorAll(".tab-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
-        document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
-        btn.classList.add("active");
-        const target = document.getElementById(btn.getAttribute("data-tab"));
-        if (target) target.classList.add("active");
-      });
     });
 
     const loginForm = document.getElementById("login-form");
@@ -1040,7 +1223,6 @@
       });
     }
 
-    // Logo Upload -> immediately saved to Firebase so refresh never loses it
     document.getElementById("logo-file-input").addEventListener("change", async (e) => {
       const statusEl = document.getElementById("profile-status");
       const file = e.target.files?.[0];
@@ -1057,13 +1239,12 @@
         setMiniImage("logo-mini-preview", processed.dataUrl);
         await update(ref(db, "siteContent/profile"), { logoUrl: processed.dataUrl });
         e.target.value = "";
-        setStatus(statusEl, "تم حفظ اللوجو بنجاح وسيبقى محفوظاً بعد التحديث.", true);
+        setStatus(statusEl, "تم حفظ اللوجو بنجاح.", true);
       } catch {
         setStatus(statusEl, "تعذر رفع اللوجو.", false);
       }
     });
 
-    // Hero Photo Upload -> immediately saved to Firebase so refresh never loses it
     document.getElementById("hero-photo-file").addEventListener("change", async (e) => {
       const statusEl = document.getElementById("profile-status");
       const file = e.target.files?.[0];
@@ -1080,13 +1261,31 @@
         setMiniImage("hero-mini-preview", processed.dataUrl);
         await update(ref(db, "siteContent/profile"), { photoUrl: processed.dataUrl });
         e.target.value = "";
-        setStatus(statusEl, "تم حفظ الصورة الرئيسية بنجاح وستظهر حتى بعد عمل ريفريش.", true);
+        setStatus(statusEl, "تم حفظ الصورة الرئيسية بنجاح.", true);
       } catch {
         setStatus(statusEl, "تعذر معالجة وحفظ الصورة.", false);
       }
     });
 
-    // Gallery Direct File Upload
+    document.getElementById("ad-img-file").addEventListener("change", async (e) => {
+      const statusEl = document.getElementById("ad-status");
+      const file = e.target.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/")) {
+        setStatus(statusEl, "اختر ملف صورة صالح للإعلان.", false);
+        return;
+      }
+      setStatus(statusEl, "جاري تجهيز صورة الإعلان...", true);
+      try {
+        const processed = await compressImageFile(file, 840, "image/jpeg", 0.8);
+        document.getElementById("ad-img-url").value = processed.dataUrl;
+        e.target.value = "";
+        setStatus(statusEl, "تم تجهيز الصورة. اضغط (حفظ الإعلان) لتثبيتها.", true);
+      } catch {
+        setStatus(statusEl, "تعذر معالجة صورة الإعلان.", false);
+      }
+    });
+
     document.getElementById("gal-img-file").addEventListener("change", async (e) => {
       const statusEl = document.getElementById("gallery-status");
       const file = e.target.files?.[0];
@@ -1216,6 +1415,62 @@
       });
     }
 
+    function resetAdForm() {
+      document.getElementById("ad-edit-id").value = "";
+      document.getElementById("ad-title").value = "";
+      document.getElementById("ad-badge").value = "";
+      document.getElementById("ad-body").value = "";
+      document.getElementById("ad-img-url").value = "";
+      document.getElementById("ad-link-url").value = "";
+      document.getElementById("ad-link-text").value = "";
+      document.getElementById("ad-active").checked = true;
+      document.getElementById("ad-form-heading").textContent = "إضافة إعلان عائم جديد";
+      document.getElementById("cancel-ad-edit-btn").style.display = "none";
+    }
+
+    document.getElementById("cancel-ad-edit-btn").addEventListener("click", resetAdForm);
+
+    document.getElementById("save-ad-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("ad-status");
+      const editId = cleanText(document.getElementById("ad-edit-id").value);
+      const title = cleanText(document.getElementById("ad-title").value);
+      const imageUrl = cleanText(document.getElementById("ad-img-url").value);
+      const linkUrl = cleanText(document.getElementById("ad-link-url").value);
+
+      if (!title) {
+        setStatus(statusEl, "اكتب عنوان الإعلان أولاً.", false);
+        return;
+      }
+      if (!isSafeOptionalUrl(imageUrl) || !isSafeOptionalUrl(linkUrl)) {
+        setStatus(statusEl, "الصورة أو الرابط غير صالح.", false);
+        return;
+      }
+
+      const payload = {
+        title,
+        badge: cleanText(document.getElementById("ad-badge").value) || "إعلان",
+        body: cleanText(document.getElementById("ad-body").value),
+        imageUrl,
+        linkUrl,
+        linkText: cleanText(document.getElementById("ad-link-text").value) || "التفاصيل والتسجيل",
+        active: document.getElementById("ad-active").checked,
+        updatedAt: Date.now()
+      };
+
+      try {
+        if (editId) {
+          await update(ref(db, `siteContent/announcements/${editId}`), payload);
+          setStatus(statusEl, "تم تحديث الإعلان بنجاح.", true);
+        } else {
+          await push(ref(db, "siteContent/announcements"), payload);
+          setStatus(statusEl, "تمت إضافة الإعلان العائم بنجاح.", true);
+        }
+        resetAdForm();
+      } catch {
+        setStatus(statusEl, "تعذر حفظ الإعلان.", false);
+      }
+    });
+
     function subscribeToData() {
       onValue(ref(db, "siteContent"), (snap) => {
         const data = snap.val() || {};
@@ -1257,6 +1512,62 @@
         if (data.profile) {
           setMiniImage("hero-mini-preview", data.profile.photoUrl || "");
           setMiniImage("logo-mini-preview", data.profile.logoUrl || "");
+        }
+
+        // Render Announcements List
+        const adsListEl = document.getElementById("admin-ads-list");
+        adsListEl.replaceChildren();
+        if (data.announcements && typeof data.announcements === "object") {
+          Object.entries(data.announcements).forEach(([id, ad]) => {
+            const row = document.createElement("div");
+            row.className = "list-item";
+
+            const info = document.createElement("div");
+            const st = document.createElement("strong");
+            st.textContent = `${ad.active === false ? "[مخفي] " : "[ظاهر] "}${ad.title || ""}`;
+            const sp = document.createElement("span");
+            sp.textContent = ad.body || "";
+            info.append(st, sp);
+
+            const actions = document.createElement("div");
+            actions.className = "btn-row";
+
+            const toggleBtn = document.createElement("button");
+            toggleBtn.type = "button";
+            toggleBtn.className = "btn-outline";
+            toggleBtn.textContent = ad.active === false ? "تفعيل" : "إخفاء";
+            toggleBtn.addEventListener("click", () => {
+              update(ref(db, `siteContent/announcements/${id}`), { active: ad.active === false });
+            });
+
+            const editBtn = document.createElement("button");
+            editBtn.type = "button";
+            editBtn.className = "btn-outline";
+            editBtn.textContent = "تعديل";
+            editBtn.addEventListener("click", () => {
+              document.getElementById("ad-edit-id").value = id;
+              document.getElementById("ad-title").value = ad.title || "";
+              document.getElementById("ad-badge").value = ad.badge || "";
+              document.getElementById("ad-body").value = ad.body || "";
+              document.getElementById("ad-img-url").value = ad.imageUrl || "";
+              document.getElementById("ad-link-url").value = ad.linkUrl || "";
+              document.getElementById("ad-link-text").value = ad.linkText || "";
+              document.getElementById("ad-active").checked = ad.active !== false;
+              document.getElementById("ad-form-heading").textContent = "تعديل إعلان عائم";
+              document.getElementById("cancel-ad-edit-btn").style.display = "inline-flex";
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            const delBtn = document.createElement("button");
+            delBtn.type = "button";
+            delBtn.className = "btn-danger";
+            delBtn.textContent = "حذف";
+            delBtn.addEventListener("click", () => remove(ref(db, `siteContent/announcements/${id}`)));
+
+            actions.append(toggleBtn, editBtn, delBtn);
+            row.append(info, actions);
+            adsListEl.appendChild(row);
+          });
         }
 
         const hList = document.getElementById("highlights-list");
