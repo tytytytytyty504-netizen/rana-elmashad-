@@ -197,6 +197,10 @@
       border-color: var(--line);
     }
 
+    .side-nav-btn.locked-tab {
+      opacity: 0.45;
+    }
+
     .active-section-banner {
       display: flex;
       align-items: center;
@@ -243,6 +247,33 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 14px;
+    }
+
+    .perms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .perm-card {
+      background: var(--bg-input);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .perm-card input[type="checkbox"] {
+      width: auto;
+    }
+
+    .perm-card label {
+      margin: 0;
+      font-size: 0.86rem;
+      cursor: pointer;
     }
 
     .color-grid {
@@ -545,13 +576,14 @@
         <strong>أقسام الإدارة</strong>
         <button type="button" class="sidebar-close" id="close-admin-sidebar" aria-label="إغلاق">✕</button>
       </div>
-      <button type="button" class="side-nav-btn active" data-tab="tab-profile" data-title="الرئيسية واللوجو والسيرة">1. الرئيسية واللوجو والسيرة</button>
-      <button type="button" class="side-nav-btn" data-tab="tab-announcements" data-title="الإعلانات العائمة">2. الإعلانات العائمة</button>
-      <button type="button" class="side-nav-btn" data-tab="tab-gallery" data-title="البطولات والإنجازات والفيديوهات">3. البطولات والإنجازات والفيديوهات</button>
-      <button type="button" class="side-nav-btn" data-tab="tab-media" data-title="مكتبة الوسائط والصور">4. مكتبة الوسائط والصور</button>
-      <button type="button" class="side-nav-btn" data-tab="tab-schedules" data-title="المواعيد والدورات">5. المواعيد والدورات</button>
-      <button type="button" class="side-nav-btn" data-tab="tab-stats-links" data-title="الإحصائيات والروابط">6. الإحصائيات والروابط</button>
-      <button type="button" class="side-nav-btn" data-tab="tab-theme-layout" data-title="الألوان وتدرجاتها والأقسام">7. الألوان وتدرجاتها والأقسام</button>
+      <button type="button" class="side-nav-btn active" data-tab="tab-profile" data-perm="profile" data-title="الرئيسية واللوجو والسيرة">1. الرئيسية واللوجو والسيرة</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-announcements" data-perm="announcements" data-title="الإعلانات العائمة">2. الإعلانات العائمة</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-gallery" data-perm="gallery" data-title="البطولات والإنجازات والفيديوهات">3. البطولات والإنجازات والفيديوهات</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-media" data-perm="media" data-title="مكتبة الوسائط والصور">4. مكتبة الوسائط والصور</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-schedules" data-perm="schedules" data-title="المواعيد والدورات">5. المواعيد والدورات</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-stats-links" data-perm="stats_links" data-title="الإحصائيات والروابط">6. الإحصائيات والروابط</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-theme-layout" data-perm="theme_layout" data-title="الألوان وتدرجاتها والأقسام">7. الألوان وتدرجاتها والأقسام</button>
+      <button type="button" class="side-nav-btn" data-tab="tab-moderators" data-perm="moderators_only" data-title="المشرفون وتغيير كلمة السر">8. المشرفون وتغيير كلمة السر</button>
     </aside>
 
     <!-- 1. Profile & Logo -->
@@ -991,12 +1023,114 @@
         <div id="backup-status" class="status-msg"></div>
       </div>
     </div>
+
+    <!-- 8. Moderators & Change Password -->
+    <div class="tab-panel" id="tab-moderators">
+      <div class="panel">
+        <h3>تغيير كلمة المرور</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="new-password-input">كلمة المرور الجديدة (6 أحرف أو أكثر)</label>
+            <input type="password" id="new-password-input" autocomplete="new-password" />
+          </div>
+          <div class="form-group">
+            <label for="confirm-password-input">تأكيد كلمة المرور الجديدة</label>
+            <input type="password" id="confirm-password-input" autocomplete="new-password" />
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" id="change-password-btn" class="btn-gold">تحديث كلمة المرور</button>
+          <button type="button" id="send-reset-email-btn" class="btn-outline">إرسال رابط تغيير كلمة المرور على الإيميل</button>
+        </div>
+        <div id="password-status" class="status-msg"></div>
+      </div>
+
+      <div class="panel" id="moderators-management-panel">
+        <h3 id="mod-form-heading">إدارة المشرفين وتحديد الصلاحيات</h3>
+        <input type="hidden" id="mod-edit-key" />
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="mod-email">البريد الإلكتروني للمشرف</label>
+            <input type="email" id="mod-email" placeholder="moderator@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="mod-name">اسم المشرف (اختياري)</label>
+            <input type="text" id="mod-name" />
+          </div>
+        </div>
+
+        <label style="color: var(--gold-light); margin-bottom: 8px;">اختر الصلاحيات المسموحة لهذا المشرف:</label>
+        <div class="perms-grid">
+          <div class="perm-card">
+            <input type="checkbox" id="perm-profile" class="mod-perm-cb" value="profile" />
+            <label for="perm-profile">الرئيسية واللوجو والسيرة</label>
+          </div>
+          <div class="perm-card">
+            <input type="checkbox" id="perm-announcements" class="mod-perm-cb" value="announcements" />
+            <label for="perm-announcements">الإعلانات العائمة</label>
+          </div>
+          <div class="perm-card">
+            <input type="checkbox" id="perm-gallery" class="mod-perm-cb" value="gallery" />
+            <label for="perm-gallery">البطولات والإنجازات والفيديوهات</label>
+          </div>
+          <div class="perm-card">
+            <input type="checkbox" id="perm-media" class="mod-perm-cb" value="media" />
+            <label for="perm-media">مكتبة الوسائط والصور</label>
+          </div>
+          <div class="perm-card">
+            <input type="checkbox" id="perm-schedules" class="mod-perm-cb" value="schedules" />
+            <label for="perm-schedules">المواعيد والدورات</label>
+          </div>
+          <div class="perm-card">
+            <input type="checkbox" id="perm-stats_links" class="mod-perm-cb" value="stats_links" />
+            <label for="perm-stats_links">الإحصائيات والروابط</label>
+          </div>
+          <div class="perm-card">
+            <input type="checkbox" id="perm-theme_layout" class="mod-perm-cb" value="theme_layout" />
+            <label for="perm-theme_layout">الألوان والتدرجات والأقسام والنسخ</label>
+          </div>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="mod-active" checked />
+          <label for="mod-active" style="margin: 0; color: var(--gold-light);">تفعيل حساب المشرف</label>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" id="save-mod-btn" class="btn-gold">حفظ المشرف وصلاحياته</button>
+          <button type="button" id="cancel-mod-edit-btn" class="btn-outline" style="display: none;">إلغاء التعديل</button>
+        </div>
+        <div id="mod-status" class="status-msg"></div>
+
+        <h4 style="color: var(--gold-light); margin-top: 18px;">قائمة المشرفين الحاليين</h4>
+        <div class="list-box" id="moderators-list"></div>
+      </div>
+    </div>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged,
+      updatePassword,
+      sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getDatabase, ref, set, push, remove, update, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const SUPER_ADMIN_EMAIL = "ranael659@gmail.com";
+
+    const PERM_LABELS = {
+      profile: "الرئيسية واللوجو والسيرة",
+      announcements: "الإعلانات العائمة",
+      gallery: "البطولات والإنجازات والفيديوهات",
+      media: "مكتبة الوسائط والصور",
+      schedules: "المواعيد والدورات",
+      stats_links: "الإحصائيات والروابط",
+      theme_layout: "الألوان والتدرجات والأقسام والنسخ"
+    };
 
     const firebaseConfig = {
       apiKey: "AIzaSyAy-ob2Kqh3coQManWKyxZy6juJWyH1Nv0",
@@ -1038,6 +1172,8 @@
     let latestSiteData = {};
     let mediaLibraryList = [];
     let isInitialLoadDone = false;
+    let currentUserEmail = "";
+    let currentAllowedPerms = new Set();
 
     // Admin Sidebar Drawer Controls
     const adminSidebar = document.getElementById("admin-sidebar");
@@ -1053,23 +1189,82 @@
     document.getElementById("close-admin-sidebar").addEventListener("click", () => setAdminSidebarOpen(false));
     adminBackdrop.addEventListener("click", () => setAdminSidebarOpen(false));
 
+    function openTabByKey(tabId, title) {
+      const btn = document.querySelector(`.side-nav-btn[data-tab="${tabId}"]`);
+      if (!btn || btn.dataset.locked === "true") return;
+      document.querySelectorAll(".side-nav-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
+      const panel = document.getElementById(tabId);
+      if (panel) panel.classList.add("active");
+      document.getElementById("current-section-label").textContent = title || btn.getAttribute("data-title") || btn.textContent;
+      setAdminSidebarOpen(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     document.querySelectorAll(".side-nav-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        const tabId = btn.getAttribute("data-tab");
-        const title = btn.getAttribute("data-title") || btn.textContent;
-        document.querySelectorAll(".side-nav-btn").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
-        const panel = document.getElementById(tabId);
-        if (panel) panel.classList.add("active");
-        document.getElementById("current-section-label").textContent = title;
-        setAdminSidebarOpen(false);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (btn.dataset.locked === "true") return;
+        openTabByKey(btn.getAttribute("data-tab"), btn.getAttribute("data-title") || btn.textContent);
       });
     });
 
     function cleanText(val) {
       return typeof val === "string" ? val.trim() : "";
+    }
+
+    function isSuperAdmin() {
+      return cleanText(currentUserEmail).toLowerCase() === SUPER_ADMIN_EMAIL.toLowerCase();
+    }
+
+    function applyRolePermissions(modsObj) {
+      const emailLower = cleanText(currentUserEmail).toLowerCase();
+      const superAdmin = isSuperAdmin();
+      const allowed = new Set();
+
+      if (superAdmin) {
+        Object.keys(PERM_LABELS).forEach((k) => allowed.add(k));
+        allowed.add("moderators_only");
+        document.getElementById("moderators-management-panel").style.display = "block";
+      } else {
+        document.getElementById("moderators-management-panel").style.display = "none";
+        if (modsObj && typeof modsObj === "object") {
+          const matchedMod = Object.values(modsObj).find(
+            (m) => m && m.active !== false && cleanText(m.email).toLowerCase() === emailLower
+          );
+          if (matchedMod && matchedMod.permissions && typeof matchedMod.permissions === "object") {
+            Object.entries(matchedMod.permissions).forEach(([k, v]) => {
+              if (v === true) allowed.add(k);
+            });
+          }
+        }
+      }
+
+      currentAllowedPerms = allowed;
+
+      let firstAvailableBtn = null;
+      document.querySelectorAll(".side-nav-btn").forEach((btn) => {
+        const permKey = btn.getAttribute("data-perm");
+        const tabId = btn.getAttribute("data-tab");
+        const canAccess = tabId === "tab-moderators" ? true : allowed.has(permKey);
+
+        btn.dataset.locked = canAccess ? "false" : "true";
+        btn.classList.toggle("locked-tab", !canAccess);
+        btn.title = canAccess ? "" : "غير متاح لصلاحيات هذا المشرف";
+
+        if (canAccess && !firstAvailableBtn && tabId !== "tab-moderators") {
+          firstAvailableBtn = btn;
+        }
+      });
+
+      const activeBtn = document.querySelector(".side-nav-btn.active");
+      if (activeBtn && activeBtn.dataset.locked === "true") {
+        if (firstAvailableBtn) {
+          openTabByKey(firstAvailableBtn.getAttribute("data-tab"), firstAvailableBtn.getAttribute("data-title"));
+        } else {
+          openTabByKey("tab-moderators", "المشرفون وتغيير كلمة السر");
+        }
+      }
     }
 
     function isSafeOptionalUrl(url) {
@@ -1167,15 +1362,180 @@
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        currentUserEmail = user.email || "";
         document.getElementById("login-screen").style.display = "none";
         document.getElementById("admin-dashboard").style.display = "block";
-        document.getElementById("logged-user-info").textContent = "مسجل دخول كـ: " + (user.email || "");
+        const roleLabel = isSuperAdmin() ? "أدمن رئيسي" : "مشرف بصلاحيات محددة";
+        document.getElementById("logged-user-info").textContent = `${currentUserEmail} (${roleLabel})`;
+        applyRolePermissions(latestSiteData.moderators);
         subscribeToData();
       } else {
+        currentUserEmail = "";
+        currentAllowedPerms = new Set();
         document.getElementById("login-screen").style.display = "block";
         document.getElementById("admin-dashboard").style.display = "none";
       }
     });
+
+    // Change Password Handlers
+    document.getElementById("change-password-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("password-status");
+      const newPass = document.getElementById("new-password-input").value;
+      const confirmPass = document.getElementById("confirm-password-input").value;
+
+      if (!newPass || newPass.length < 6) {
+        setStatus(statusEl, "كلمة المرور يجب أن تكون 6 أحرف على الأقل.", false);
+        return;
+      }
+      if (newPass !== confirmPass) {
+        setStatus(statusEl, "كلمة المرور وتأكيدها غير متطابقين.", false);
+        return;
+      }
+      if (!auth.currentUser) {
+        setStatus(statusEl, "سجل الدخول أولاً.", false);
+        return;
+      }
+
+      setStatus(statusEl, "جاري تحديث كلمة المرور...", true);
+      try {
+        await updatePassword(auth.currentUser, newPass);
+        document.getElementById("new-password-input").value = "";
+        document.getElementById("confirm-password-input").value = "";
+        setStatus(statusEl, "تم تغيير كلمة المرور بنجاح.", true);
+      } catch (err) {
+        if (err && err.code === "auth/requires-recent-login") {
+          setStatus(statusEl, "لأسباب الأمان، اخرج وسجل دخول مرة أخرى ثم غيّر الباسورد أو استخدم رابط الإيميل.", false);
+        } else {
+          setStatus(statusEl, "تعذر تغيير كلمة المرور حالياً.", false);
+        }
+      }
+    });
+
+    document.getElementById("send-reset-email-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("password-status");
+      const email = cleanText(auth.currentUser?.email || currentUserEmail);
+      if (!email) {
+        setStatus(statusEl, "لا يوجد بريد إلكتروني مرتبط بالحساب.", false);
+        return;
+      }
+      try {
+        await sendPasswordResetEmail(auth, email);
+        setStatus(statusEl, `تم إرسال رابط تغيير كلمة المرور إلى ${email}.`, true);
+      } catch {
+        setStatus(statusEl, "تعذر إرسال رابط التغيير.", false);
+      }
+    });
+
+    // Moderators Management Handlers
+    function resetModForm() {
+      document.getElementById("mod-edit-key").value = "";
+      document.getElementById("mod-email").value = "";
+      document.getElementById("mod-name").value = "";
+      document.querySelectorAll(".mod-perm-cb").forEach((cb) => {
+        cb.checked = false;
+      });
+      document.getElementById("mod-active").checked = true;
+      document.getElementById("mod-form-heading").textContent = "إدارة المشرفين وتحديد الصلاحيات";
+      document.getElementById("cancel-mod-edit-btn").style.display = "none";
+    }
+
+    document.getElementById("cancel-mod-edit-btn").addEventListener("click", resetModForm);
+
+    document.getElementById("save-mod-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("mod-status");
+      if (!isSuperAdmin()) {
+        setStatus(statusEl, "هذا القسم مخصص للأدمن الأساسي فقط.", false);
+        return;
+      }
+      const email = cleanText(document.getElementById("mod-email").value).toLowerCase();
+      if (!email || !email.includes("@")) {
+        setStatus(statusEl, "اكتب بريد إلكتروني صحيح للمشرف.", false);
+        return;
+      }
+      if (email === SUPER_ADMIN_EMAIL.toLowerCase()) {
+        setStatus(statusEl, "هذا هو حساب الأدمن الأساسي ويمتلك كل الصلاحيات تلقائياً.", false);
+        return;
+      }
+
+      const permissions = {};
+      document.querySelectorAll(".mod-perm-cb").forEach((cb) => {
+        permissions[cb.value] = Boolean(cb.checked);
+      });
+
+      const payload = {
+        email,
+        name: cleanText(document.getElementById("mod-name").value),
+        active: document.getElementById("mod-active").checked,
+        permissions,
+        updatedAt: Date.now()
+      };
+
+      const editKey = cleanText(document.getElementById("mod-edit-key").value);
+      try {
+        if (editKey) {
+          await update(ref(db, `siteContent/moderators/${editKey}`), payload);
+          setStatus(statusEl, "تم تحديث بيانات وصلاحيات المشرف بنجاح.", true);
+        } else {
+          await push(ref(db, "siteContent/moderators"), payload);
+          setStatus(statusEl, "تمت إضافة المشرف وصلاحياته بنجاح.", true);
+        }
+        resetModForm();
+      } catch {
+        setStatus(statusEl, "تعذر حفظ بيانات المشرف.", false);
+      }
+    });
+
+    function renderModeratorsList(modsObj) {
+      const listEl = document.getElementById("moderators-list");
+      listEl.replaceChildren();
+
+      if (!modsObj || typeof modsObj !== "object") return;
+      Object.entries(modsObj).forEach(([key, mod]) => {
+        if (!mod || typeof mod !== "object") return;
+        const row = document.createElement("div");
+        row.className = "list-item";
+
+        const permNames = Object.entries(mod.permissions || {})
+          .filter(([, v]) => v === true)
+          .map(([k]) => PERM_LABELS[k] || k);
+
+        const info = document.createElement("div");
+        const st = document.createElement("strong");
+        st.textContent = `${mod.active === false ? "[معطل] " : "[مفعل] "}${mod.email || ""}${mod.name ? ` — ${mod.name}` : ""}`;
+        const sp = document.createElement("span");
+        sp.textContent = "الصلاحيات: " + (permNames.length ? permNames.join("، ") : "بدون صلاحيات محددة");
+        info.append(st, sp);
+
+        const actions = document.createElement("div");
+        actions.className = "btn-row";
+
+        const editBtn = document.createElement("button");
+        editBtn.type = "button";
+        editBtn.className = "btn-outline";
+        editBtn.textContent = "تعديل الصلاحيات";
+        editBtn.addEventListener("click", () => {
+          document.getElementById("mod-edit-key").value = key;
+          document.getElementById("mod-email").value = mod.email || "";
+          document.getElementById("mod-name").value = mod.name || "";
+          document.getElementById("mod-active").checked = mod.active !== false;
+          document.querySelectorAll(".mod-perm-cb").forEach((cb) => {
+            cb.checked = Boolean(mod.permissions && mod.permissions[cb.value] === true);
+          });
+          document.getElementById("mod-form-heading").textContent = "تعديل صلاحيات المشرف";
+          document.getElementById("cancel-mod-edit-btn").style.display = "inline-flex";
+        });
+
+        const delBtn = document.createElement("button");
+        delBtn.type = "button";
+        delBtn.className = "btn-danger";
+        delBtn.textContent = "حذف";
+        delBtn.addEventListener("click", () => remove(ref(db, `siteContent/moderators/${key}`)));
+
+        actions.append(editBtn, delBtn);
+        row.append(info, actions);
+        listEl.appendChild(row);
+      });
+    }
 
     function setMiniImage(imgId, src) {
       const el = document.getElementById(imgId);
@@ -1475,6 +1835,8 @@
       onValue(ref(db, "siteContent"), (snap) => {
         const data = snap.val() || {};
         latestSiteData = data;
+        applyRolePermissions(data.moderators);
+        renderModeratorsList(data.moderators);
 
         if (!isInitialLoadDone) {
           fillThemeInputs(data.themeConfig);
