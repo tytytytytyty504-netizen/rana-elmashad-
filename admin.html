@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة إدارة الموقع | Eng. Rana El Mashad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-main: #0a0a0c;
+      --bg-card: #131317;
+      --bg-input: #0d0d10;
+      --gold: #d4af37;
+      --gold-light: #f1d37a;
+      --gold-dark: #9e7d1c;
+      --text-main: #f5f5f7;
+      --text-muted: #a8a8b3;
+      --border-gold: rgba(212, 175, 55, 0.28);
+      --danger: #e05252;
+      --success: #38b778;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.7;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+    }
+
+    .login-box {
+      max-width: 430px;
+      margin: 60px auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65);
+    }
+
+    .login-box h1 {
+      color: var(--gold);
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .login-box p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .dashboard {
+      display: none;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+    }
+
+    .top-bar h2 {
+      color: var(--gold);
+      font-size: 1.35rem;
+    }
+
+    .top-bar small {
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .panel h3 {
+      color: var(--gold-light);
+      font-size: 1.15rem;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 8px;
+      padding: 11px 14px;
+      color: var(--text-main);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #0a0a0c;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .btn-danger {
+      background: rgba(224, 82, 82, 0.15);
+      color: #ff8a8a;
+      border: 1px solid rgba(224, 82, 82, 0.5);
+      border-radius: 7px;
+      padding: 6px 12px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .status-msg {
+      margin-top: 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .status-ok {
+      color: var(--success);
+    }
+
+    .status-err {
+      color: var(--danger);
+    }
+
+    .list-box {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .list-item {
+      background: var(--bg-input);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .list-item strong {
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .list-item span {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Screen (Empty inputs by design) -->
+  <div class="login-box" id="login-screen">
+    <h1>تسجيل دخول الإدارة</h1>
+    <p>Eng. Rana El Mashad | أكاديمية القمة ماث</p>
+    <form id="login-form" autocomplete="off">
+      <div class="form-group">
+        <label for="admin-email">البريد الإلكتروني</label>
+        <input type="email" id="admin-email" name="admin_email_field" autocomplete="off" required />
+      </div>
+      <div class="form-group">
+        <label for="admin-password">كلمة المرور</label>
+        <input type="password" id="admin-password" name="admin_password_field" autocomplete="new-password" required />
+      </div>
+      <button type="submit" class="btn-gold" style="width: 100%;">دخول إلى لوحة التحكم</button>
+      <div id="login-status" class="status-msg"></div>
+    </form>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div class="container dashboard" id="admin-dashboard">
+    <div class="top-bar">
+      <div>
+        <h2>لوحة تحكم الموقع الرسمي</h2>
+        <small id="logged-user-info"></small>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="./index.html" class="btn-outline" style="text-decoration: none;">عرض الموقع</a>
+        <button id="logout-btn" class="btn-danger">تسجيل خروج</button>
+      </div>
+    </div>
+
+    <!-- Profile & About -->
+    <div class="panel">
+      <h3>النبذة التعريفية والرسالة</h3>
+      <div class="form-group">
+        <label for="name-ar">الاسم بالعربية</label>
+        <input type="text" id="name-ar" />
+      </div>
+      <div class="form-group">
+        <label for="name-en">الاسم بالإنجليزية</label>
+        <input type="text" id="name-en" />
+      </div>
+      <div class="form-group">
+        <label for="hero-title">اللقب والمسمى الوظيفي</label>
+        <input type="text" id="hero-title" />
+      </div>
+      <div class="form-group">
+        <label for="short-desc">مقدمة مختصرة في الواجهة</label>
+        <textarea id="short-desc"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="photo-url">رابط الصورة الشخصية (HTTPS)</label>
+        <input type="url" id="photo-url" placeholder="https://..." />
+      </div>
+      <div class="form-group">
+        <label for="about-p1">الفقرة الأولى من النبذة</label>
+        <textarea id="about-p1"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="about-p2">الفقرة الثانية من النبذة</label>
+        <textarea id="about-p2"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="about-p3">الفقرة الثالثة (الاعتمادات والبطولات)</label>
+        <textarea id="about-p3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="mission-text">الرسالة</label>
+        <input type="text" id="mission-text" />
+      </div>
+      <div class="form-group">
+        <label for="slogan-text">الشعار</label>
+        <input type="text" id="slogan-text" />
+      </div>
+      <button id="save-profile-btn" class="btn-gold">حفظ النبذة والبيانات</button>
+      <div id="profile-status" class="status-msg"></div>
+    </div>
+
+    <!-- Social & Contact Links -->
+    <div class="panel">
+      <h3>روابط التواصل والصفحات الرسمية</h3>
+      <div class="form-group">
+        <label for="wa-number">رقم واتساب العمل</label>
+        <input type="text" id="wa-number" />
+      </div>
+      <div class="form-group">
+        <label for="fb-link">رابط فيسبوك</label>
+        <input type="url" id="fb-link" />
+      </div>
+      <div class="form-group">
+        <label for="tt-link">رابط تيك توك</label>
+        <input type="url" id="tt-link" />
+      </div>
+      <div class="form-group">
+        <label for="ig-link">رابط إنستجرام</label>
+        <input type="url" id="ig-link" />
+      </div>
+      <button id="save-links-btn" class="btn-gold">حفظ الروابط</button>
+      <div id="links-status" class="status-msg"></div>
+    </div>
+
+    <!-- Schedules -->
+    <div class="panel">
+      <h3>إضافة موعد أو نشاط</h3>
+      <div class="form-group">
+        <label for="sched-tag">التصنيف (مثال: مجموعات الأطفال / TOT)</label>
+        <input type="text" id="sched-tag" />
+      </div>
+      <div class="form-group">
+        <label for="sched-title">عنوان الموعد أو النشاط</label>
+        <input type="text" id="sched-title" />
+      </div>
+      <div class="form-group">
+        <label for="sched-details">تفاصيل المواعيد</label>
+        <textarea id="sched-details"></textarea>
+      </div>
+      <button id="add-schedule-btn" class="btn-gold">إضافة الموعد</button>
+      <div id="schedule-status" class="status-msg"></div>
+      <div class="list-box" id="schedules-list"></div>
+    </div>
+
+    <!-- Gallery / Championships -->
+    <div class="panel">
+      <h3>إضافة عنصر لمعرض البطولات (صورة / فيديو)</h3>
+      <div class="form-group">
+        <label for="gal-title">عنوان البطولة أو الفعالية</label>
+        <input type="text" id="gal-title" />
+      </div>
+      <div class="form-group">
+        <label for="gal-desc">وصف مختصر</label>
+        <textarea id="gal-desc"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="gal-img">رابط الصورة (HTTPS)</label>
+        <input type="url" id="gal-img" placeholder="https://..." />
+      </div>
+      <div class="form-group">
+        <label for="gal-video">رابط الفيديو (يوتيوب / تيك توك / فيسبوك - اختياري)</label>
+        <input type="url" id="gal-video" placeholder="https://..." />
+      </div>
+      <button id="add-gallery-btn" class="btn-gold">إضافة للمعرض</button>
+      <div id="gallery-status" class="status-msg"></div>
+      <div class="list-box" id="gallery-list"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getDatabase, ref, set, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAy-ob2Kqh3coQManWKyxZy6juJWyH1Nv0",
+      authDomain: "rana-elmashad-site.firebaseapp.com",
+      databaseURL: "https://rana-elmashad-site-default-rtdb.firebaseio.com",
+      projectId: "rana-elmashad-site",
+      storageBucket: "rana-elmashad-site.firebasestorage.app",
+      messagingSenderId: "681936082590",
+      appId: "1:681936082590:web:6c679a68eb60d877fd0d8f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    const loginScreen = document.getElementById("login-screen");
+    const adminDashboard = document.getElementById("admin-dashboard");
+    const loginForm = document.getElementById("login-form");
+    const loginStatus = document.getElementById("login-status");
+
+    function cleanText(val) {
+      return typeof val === "string" ? val.trim() : "";
+    }
+
+    function isSafeOptionalUrl(url) {
+      const trimmed = cleanText(url);
+      if (!trimmed) return true;
+      try {
+        const parsed = new URL(trimmed);
+        return parsed.protocol === "https:" || parsed.protocol === "http:";
+      } catch {
+        return false;
+      }
+    }
+
+    function setStatus(el, msg, isOk) {
+      el.textContent = msg;
+      el.className = "status-msg " + (isOk ? "status-ok" : "status-err");
+    }
+
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = cleanText(document.getElementById("admin-email").value);
+      const password = document.getElementById("admin-password").value;
+      setStatus(loginStatus, "جاري التحقق...", true);
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        document.getElementById("admin-email").value = "";
+        document.getElementById("admin-password").value = "";
+        loginStatus.textContent = "";
+      } catch {
+        setStatus(loginStatus, "بيانات الدخول غير صحيحة أو الحساب غير مفعل.", false);
+      }
+    });
+
+    document.getElementById("logout-btn").addEventListener("click", async () => {
+      await signOut(auth);
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        loginScreen.style.display = "none";
+        adminDashboard.style.display = "block";
+        document.getElementById("logged-user-info").textContent = "مسجل دخول كـ: " + (user.email || "");
+        loadExistingData();
+      } else {
+        loginScreen.style.display = "block";
+        adminDashboard.style.display = "none";
+      }
+    });
+
+    function loadExistingData() {
+      onValue(ref(db, "siteContent"), (snap) => {
+        const data = snap.val() || {};
+
+        if (data.profile) {
+          document.getElementById("name-ar").value = data.profile.nameAr || "";
+          document.getElementById("name-en").value = data.profile.nameEn || "";
+          document.getElementById("hero-title").value = data.profile.title || "";
+          document.getElementById("short-desc").value = data.profile.shortDesc || "";
+          document.getElementById("photo-url").value = data.profile.photoUrl || "";
+          document.getElementById("about-p1").value = data.profile.aboutP1 || "";
+          document.getElementById("about-p2").value = data.profile.aboutP2 || "";
+          document.getElementById("about-p3").value = data.profile.aboutP3 || "";
+          document.getElementById("mission-text").value = data.profile.mission || "";
+          document.getElementById("slogan-text").value = data.profile.slogan || "";
+        }
+
+        if (data.links) {
+          document.getElementById("wa-number").value = data.links.whatsappNumber || "";
+          document.getElementById("fb-link").value = data.links.facebook || "";
+          document.getElementById("tt-link").value = data.links.tiktok || "";
+          document.getElementById("ig-link").value = data.links.instagram || "";
+        }
+
+        const schedList = document.getElementById("schedules-list");
+        schedList.replaceChildren();
+        if (data.schedules && typeof data.schedules === "object") {
+          Object.entries(data.schedules).forEach(([key, item]) => {
+            const row = document.createElement("div");
+            row.className = "list-item";
+
+            const info = document.createElement("div");
+            const strong = document.createElement("strong");
+            strong.textContent = (item.tag ? `[${item.tag}] ` : "") + (item.title || "");
+            const span = document.createElement("span");
+            span.textContent = item.details || "";
+            info.append(strong, span);
+
+            const delBtn = document.createElement("button");
+            delBtn.className = "btn-danger";
+            delBtn.textContent = "حذف";
+            delBtn.addEventListener("click", () => remove(ref(db, `siteContent/schedules/${key}`)));
+
+            row.append(info, delBtn);
+            schedList.appendChild(row);
+          });
+        }
+
+        const galList = document.getElementById("gallery-list");
+        galList.replaceChildren();
+        if (data.gallery && typeof data.gallery === "object") {
+          Object.entries(data.gallery).forEach(([key, item]) => {
+            const row = document.createElement("div");
+            row.className = "list-item";
+
+            const info = document.createElement("div");
+            const strong = document.createElement("strong");
+            strong.textContent = item.title || "";
+            const span = document.createElement("span");
+            span.textContent = item.description || "";
+            info.append(strong, span);
+
+            const delBtn = document.createElement("button");
+            delBtn.className = "btn-danger";
+            delBtn.textContent = "حذف";
+            delBtn.addEventListener("click", () => remove(ref(db, `siteContent/gallery/${key}`)));
+
+            row.append(info, delBtn);
+            galList.appendChild(row);
+          });
+        }
+      });
+    }
+
+    document.getElementById("save-profile-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("profile-status");
+      const photoUrl = cleanText(document.getElementById("photo-url").value);
+      if (!isSafeOptionalUrl(photoUrl)) {
+        setStatus(statusEl, "رابط الصورة يجب أن يبدأ بـ https:// أو http://", false);
+        return;
+      }
+      try {
+        await set(ref(db, "siteContent/profile"), {
+          nameAr: cleanText(document.getElementById("name-ar").value),
+          nameEn: cleanText(document.getElementById("name-en").value),
+          title: cleanText(document.getElementById("hero-title").value),
+          shortDesc: cleanText(document.getElementById("short-desc").value),
+          photoUrl,
+          aboutP1: cleanText(document.getElementById("about-p1").value),
+          aboutP2: cleanText(document.getElementById("about-p2").value),
+          aboutP3: cleanText(document.getElementById("about-p3").value),
+          mission: cleanText(document.getElementById("mission-text").value),
+          slogan: cleanText(document.getElementById("slogan-text").value)
+        });
+        setStatus(statusEl, "تم حفظ النبذة والبيانات بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر الحفظ، تأكد من تسجيل الدخول وصلاحيات القاعدة.", false);
+      }
+    });
+
+    document.getElementById("save-links-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("links-status");
+      const fb = cleanText(document.getElementById("fb-link").value);
+      const tt = cleanText(document.getElementById("tt-link").value);
+      const ig = cleanText(document.getElementById("ig-link").value);
+
+      if (!isSafeOptionalUrl(fb) || !isSafeOptionalUrl(tt) || !isSafeOptionalUrl(ig)) {
+        setStatus(statusEl, "تأكد أن الروابط تبدأ بـ https:// أو http://", false);
+        return;
+      }
+
+      try {
+        await set(ref(db, "siteContent/links"), {
+          whatsappNumber: cleanText(document.getElementById("wa-number").value),
+          facebook: fb,
+          tiktok: tt,
+          instagram: ig
+        });
+        setStatus(statusEl, "تم حفظ الروابط بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر حفظ الروابط.", false);
+      }
+    });
+
+    document.getElementById("add-schedule-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("schedule-status");
+      const title = cleanText(document.getElementById("sched-title").value);
+      if (!title) {
+        setStatus(statusEl, "اكتب عنوان الموعد أو النشاط أولاً.", false);
+        return;
+      }
+      try {
+        await push(ref(db, "siteContent/schedules"), {
+          tag: cleanText(document.getElementById("sched-tag").value),
+          title,
+          details: cleanText(document.getElementById("sched-details").value)
+        });
+        document.getElementById("sched-tag").value = "";
+        document.getElementById("sched-title").value = "";
+        document.getElementById("sched-details").value = "";
+        setStatus(statusEl, "تمت إضافة الموعد بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر إضافة الموعد.", false);
+      }
+    });
+
+    document.getElementById("add-gallery-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("gallery-status");
+      const title = cleanText(document.getElementById("gal-title").value);
+      const imgUrl = cleanText(document.getElementById("gal-img").value);
+      const vidUrl = cleanText(document.getElementById("gal-video").value);
+
+      if (!title) {
+        setStatus(statusEl, "اكتب عنوان البطولة أو الفعالية أولاً.", false);
+        return;
+      }
+      if (!isSafeOptionalUrl(imgUrl) || !isSafeOptionalUrl(vidUrl)) {
+        setStatus(statusEl, "تأكد أن روابط الصور والفيديو تبدأ بـ https:// أو http://", false);
+        return;
+      }
+
+      try {
+        await push(ref(db, "siteContent/gallery"), {
+          title,
+          description: cleanText(document.getElementById("gal-desc").value),
+          imageUrl: imgUrl,
+          videoUrl: vidUrl
+        });
+        document.getElementById("gal-title").value = "";
+        document.getElementById("gal-desc").value = "";
+        document.getElementById("gal-img").value = "";
+        document.getElementById("gal-video").value = "";
+        setStatus(statusEl, "تمت الإضافة للمعرض بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر الإضافة للمعرض.", false);
+      }
+    });
+  </script>
+</body>
+</html>
