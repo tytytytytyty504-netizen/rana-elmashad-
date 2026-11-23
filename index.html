@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eng. Rana El Mashad | Official Website - المهندسة رنا رأفت المشد</title>
+  <meta name="description" content="الموقع الرسمي للمهندسة رنا رأفت المشد - رئيس مجلس إدارة ومؤسسة أكاديمية القمة ماث، مدربة دولية معتمدة في الحساب الذهني والفيدك ماث وألعاب الذكاء." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-main: #0a0a0c;
+      --bg-card: #131317;
+      --bg-card-hover: #19191f;
+      --gold: #d4af37;
+      --gold-light: #f1d37a;
+      --gold-dark: #9e7d1c;
+      --text-main: #f5f5f7;
+      --text-muted: #b0b0ba;
+      --border-gold: rgba(212, 175, 55, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 12, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .nav-container {
+      max-width: 1150px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-en {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.15rem;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+    }
+
+    .brand-ar {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.25s;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    section {
+      max-width: 1150px;
+      margin: auto;
+      padding: 65px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .gold-line {
+      width: 70px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 10px auto 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      padding-top: 50px;
+      padding-bottom: 70px;
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border: 1px solid var(--gold);
+      border-radius: 30px;
+      color: var(--gold-light);
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .hero-en-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--gold-light);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #0a0a0c;
+      padding: 12px 26px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background 0.25s;
+    }
+
+    .btn-outline:hover {
+      background: rgba(212, 175, 55, 0.12);
+    }
+
+    .hero-image-box {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-frame {
+      width: 310px;
+      height: 360px;
+      border-radius: 18px;
+      border: 2px solid var(--gold);
+      padding: 10px;
+      background: var(--bg-card);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .hero-placeholder {
+      text-align: center;
+      color: var(--gold-light);
+      padding: 20px;
+    }
+
+    .about-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 16px;
+      padding: 35px;
+    }
+
+    .about-card p {
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    .mission-box {
+      margin-top: 25px;
+      padding: 22px;
+      border-right: 4px solid var(--gold);
+      background: rgba(212, 175, 55, 0.06);
+      border-radius: 8px;
+    }
+
+    .mission-box strong {
+      color: var(--gold);
+      display: block;
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+    }
+
+    .slogan-banner {
+      margin-top: 24px;
+      text-align: center;
+      padding: 16px;
+      border: 1px dashed var(--gold);
+      border-radius: 10px;
+      color: var(--gold-light);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      padding: 24px;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+    }
+
+    .card h3 {
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    .media-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .media-item img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .media-body {
+      padding: 18px;
+    }
+
+    .media-body h4 {
+      color: var(--gold-light);
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+
+    .media-body p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 12px;
+    }
+
+    .video-link {
+      display: inline-block;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .schedule-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .schedule-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .schedule-tag {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--gold-light);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .social-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 700;
+      transition: all 0.25s;
+    }
+
+    .social-card:hover {
+      border-color: var(--gold);
+      background: var(--bg-card-hover);
+      color: var(--gold-light);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border-gold);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <div class="brand">
+        <span class="brand-en">ENG. RANA EL MASHAD</span>
+        <span class="brand-ar">المهندسة رنا رأفت المشد | أكاديمية القمة ماث</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">من أنا</a></li>
+          <li><a href="#academy">الأكاديمية والاعتمادات</a></li>
+          <li><a href="#schedules">المواعيد</a></li>
+          <li><a href="#gallery">البطولات والمعرض</a></li>
+          <li><a href="#contact">تواصل معي</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="hero-badge">RANA EL MASHAD | OFFICIAL WEBSITE</span>
+      <h1 id="hero-name-ar">المهندسة رنا رأفت المشد</h1>
+      <span class="hero-en-name" id="hero-name-en">Eng. Rana El Mashad</span>
+      <p class="hero-subtitle" id="hero-title">رئيس مجلس إدارة ومؤسسة أكاديمية القمة ماث | مدربة دولية معتمدة في الحساب الذهني والفيدك ماث وألعاب الذكاء</p>
+      <p class="hero-desc" id="hero-short-desc">نُنمّي القدرات العقلية والمهارات الحسابية لدى الأطفال ونؤهل المدربين وفق أحدث الأساليب التعليمية الحديثة لصناعة جيل أكثر ذكاءً وثقةً وإبداعاً.</p>
+      <div class="hero-actions">
+        <a id="whatsapp-hero-btn" href="https://wa.me/201507178455" target="_blank" rel="noopener noreferrer" class="btn-gold">تواصل عبر واتساب</a>
+        <a href="#gallery" class="btn-outline">شاهد البطولات والأنشطة</a>
+      </div>
+    </div>
+    <div class="hero-image-box">
+      <div class="hero-frame" id="hero-photo-container">
+        <div class="hero-placeholder">
+          <strong>Eng. Rana El Mashad</strong>
+          <p style="font-size: 0.9rem; margin-top: 8px; color: #b0b0ba;">أكاديمية القمة ماث</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-title">
+      <h2>النبذة الرسمية والرسالة</h2>
+      <p>رؤية تعليمية حديثة لبناء عقل قادر على التفكير والإبداع</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="about-card">
+      <p id="about-p1">تُعد المهندسة رنا رأفت المشد من المهتمين بتطوير القدرات العقلية والمهارات الحسابية لدى الأطفال، من خلال توظيف أساليب تعليمية حديثة ومبتكرة تهدف إلى تنمية التركيز، وسرعة التفكير، والقدرة على التحليل، والإبداع.</p>
+      <p id="about-p2">تمتلك خبرة في تدريب الأطفال وإعداد وتأهيل المدربين في مجالات الحساب الذهني والفيدك ماث وألعاب الذكاء، وتسعى من خلال أكاديمية القمة ماث إلى تقديم تجربة تعليمية متطورة تساعد كل طفل على اكتشاف قدراته والوصول إلى أفضل مستوى ممكن.</p>
+      <p id="about-p3">حصلت على اعتمادات وشهادات تدريبية من الجامعة الأمريكية والبورد الأمريكي وجامعة عين شمس، بالإضافة إلى شهادات في إعداد المدربين TOT واعتمادات مرتبطة بمجال الحساب الذهني، كما شاركت في تنظيم وإعداد البطولات والمسابقات التعليمية المحلية والعربية والدولية.</p>
+      <div class="mission-box">
+        <strong>رسالتنا:</strong>
+        <span id="mission-text">صناعة جيل أكثر ذكاءً وثقةً وقدرةً على التفكير، وفتح آفاق جديدة للتعلم والتميز.</span>
+      </div>
+      <div class="slogan-banner" id="slogan-text">معنا مفيش مستحيل.. من مستوى زيرو للقمة بإذن الله.</div>
+    </div>
+  </section>
+
+  <section id="academy">
+    <div class="section-title">
+      <h2>أكاديمية القمة ماث والاعتمادات</h2>
+      <p>برامج متخصصة وتأهيل معتمد للأطفال والمدربين</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>الحساب الذهني والفيدك ماث</h3>
+        <p>برامج تدريبية متدرجة لتنمية سرعة البديهة، التركيز، والعمليات الحسابية الذهنية للأطفال بأسلوب تفاعلي شيّق.</p>
+      </div>
+      <div class="card">
+        <h3>إعداد وتأهيل المدربين (TOT)</h3>
+        <p>تأهيل المدربين في الحساب الذهني والفيدك ماث وألعاب الذكاء وفق معايير أكاديمية وتطبيقية احترافية.</p>
+      </div>
+      <div class="card">
+        <h3>الاعتمادات والبطولات</h3>
+        <p>شهادات واعتمادات تدريبية من الجامعة الأمريكية والبورد الأمريكي وجامعة عين شمس، وإعداد الأبطال للمنافسات والمسابقات.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedules">
+    <div class="section-title">
+      <h2>المواعيد والأنشطة</h2>
+      <p>أحدث مواعيد التدريب والفعاليات الخاصة بأكاديمية القمة ماث</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="schedule-list" id="schedules-container">
+      <div class="schedule-card">
+        <span class="schedule-tag">مجموعات الأطفال</span>
+        <h3>تدريبات الحساب الذهني والفيدك ماث</h3>
+        <p>يتم تحديث المواعيد الدورية باستمرار عبر لوحة الإدارة أو التواصل المباشر على واتساب الأكاديمية.</p>
+      </div>
+      <div class="schedule-card">
+        <span class="schedule-tag">تأهيل المدربين</span>
+        <h3>دورات إعداد المدربين TOT</h3>
+        <p>للاستفسار عن مواعيد الدفعات الجديدة والحجز، يرجى التواصل عبر الرقم الرسمي للأكاديمية.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="section-title">
+      <h2>البطولات ومعرض الصور والفيديوهات</h2>
+      <p>لقطات من إنجازات أبطال القمة ماث والفعاليات والتكريمات</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="grid-3" id="gallery-container">
+      <div class="card">
+        <h3>بطولات أبطال القمة ماث</h3>
+        <p>يمكن إضافة صور البطولات والشهادات وروابط الفيديوهات مباشرة من لوحة الإدارة لتظهر هنا فوراً.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-title">
+      <h2>تواصل معي وصفحاتنا الرسمية</h2>
+      <p>يسعدنا تواصلكم للاستفسار عن التدريبات، البرامج، أو التعاون الأكاديمي</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="social-grid">
+      <a id="link-whatsapp" href="https://wa.me/201507178455" target="_blank" rel="noopener noreferrer" class="social-card">واتساب العمل: 01507178455</a>
+      <a id="link-facebook" href="https://www.facebook.com/share/191tXKoGRM/" target="_blank" rel="noopener noreferrer" class="social-card">الصفحة الرسمية على فيسبوك</a>
+      <a id="link-tiktok" href="https://www.tiktok.com/@rana.elmashad?_r=1&_t=ZS-9BYsPc1Nj67" target="_blank" rel="noopener noreferrer" class="social-card">حساب تيك توك الرسمي</a>
+      <a id="link-instagram" href="https://www.instagram.com/aldhmhmwd982?avpt=N2dyaWNxa3c1emo4" target="_blank" rel="noopener noreferrer" class="social-card">حساب إنستجرام الرسمي</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Eng. Rana El Mashad | المهندسة رنا رأفت المشد - أكاديمية القمة ماث. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAy-ob2Kqh3coQManWKyxZy6juJWyH1Nv0",
+      authDomain: "rana-elmashad-site.firebaseapp.com",
+      databaseURL: "https://rana-elmashad-site-default-rtdb.firebaseio.com",
+      projectId: "rana-elmashad-site",
+      storageBucket: "rana-elmashad-site.firebasestorage.app",
+      messagingSenderId: "681936082590",
+      appId: "1:681936082590:web:6c679a68eb60d877fd0d8f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    function isSafeUrl(url) {
+      if (!url || typeof url !== "string") return false;
+      try {
+        const parsed = new URL(url.trim());
+        return parsed.protocol === "https:" || parsed.protocol === "http:";
+      } catch {
+        return false;
+      }
+    }
+
+    const contentRef = ref(db, "siteContent");
+    onValue(contentRef, (snapshot) => {
+      const data = snapshot.val();
+      if (!data) return;
+
+      if (data.profile) {
+        if (data.profile.nameAr) document.getElementById("hero-name-ar").textContent = data.profile.nameAr;
+        if (data.profile.nameEn) document.getElementById("hero-name-en").textContent = data.profile.nameEn;
+        if (data.profile.title) document.getElementById("hero-title").textContent = data.profile.title;
+        if (data.profile.shortDesc) document.getElementById("hero-short-desc").textContent = data.profile.shortDesc;
+        if (data.profile.aboutP1) document.getElementById("about-p1").textContent = data.profile.aboutP1;
+        if (data.profile.aboutP2) document.getElementById("about-p2").textContent = data.profile.aboutP2;
+        if (data.profile.aboutP3) document.getElementById("about-p3").textContent = data.profile.aboutP3;
+        if (data.profile.mission) document.getElementById("mission-text").textContent = data.profile.mission;
+        if (data.profile.slogan) document.getElementById("slogan-text").textContent = data.profile.slogan;
+
+        if (data.profile.photoUrl && isSafeUrl(data.profile.photoUrl)) {
+          const container = document.getElementById("hero-photo-container");
+          container.replaceChildren();
+          const img = document.createElement("img");
+          img.src = data.profile.photoUrl.trim();
+          img.alt = "المهندسة رنا رأفت المشد";
+          container.appendChild(img);
+        }
+      }
+
+      if (data.links) {
+        if (data.links.whatsappNumber) {
+          const cleanNum = String(data.links.whatsappNumber).replace(/[^0-9]/g, "");
+          if (cleanNum) {
+            const waUrl = `https://wa.me/${cleanNum.startsWith("20") ? cleanNum : "2" + cleanNum}`;
+            document.getElementById("whatsapp-hero-btn").href = waUrl;
+            const waCard = document.getElementById("link-whatsapp");
+            waCard.href = waUrl;
+            waCard.textContent = `واتساب العمل: ${data.links.whatsappNumber}`;
+          }
+        }
+        if (data.links.facebook && isSafeUrl(data.links.facebook)) {
+          document.getElementById("link-facebook").href = data.links.facebook.trim();
+        }
+        if (data.links.tiktok && isSafeUrl(data.links.tiktok)) {
+          document.getElementById("link-tiktok").href = data.links.tiktok.trim();
+        }
+        if (data.links.instagram && isSafeUrl(data.links.instagram)) {
+          document.getElementById("link-instagram").href = data.links.instagram.trim();
+        }
+      }
+
+      if (data.schedules && typeof data.schedules === "object") {
+        const schedContainer = document.getElementById("schedules-container");
+        const entries = Object.values(data.schedules);
+        if (entries.length > 0) {
+          schedContainer.replaceChildren();
+          entries.forEach((item) => {
+            const card = document.createElement("div");
+            card.className = "schedule-card";
+
+            const tag = document.createElement("span");
+            tag.className = "schedule-tag";
+            tag.textContent = item.tag || "موعد تدريبي";
+
+            const title = document.createElement("h3");
+            title.textContent = item.title || "";
+
+            const details = document.createElement("p");
+            details.textContent = item.details || "";
+
+            card.append(tag, title, details);
+            schedContainer.appendChild(card);
+          });
+        }
+      }
+
+      if (data.gallery && typeof data.gallery === "object") {
+        const galContainer = document.getElementById("gallery-container");
+        const items = Object.values(data.gallery);
+        if (items.length > 0) {
+          galContainer.replaceChildren();
+          items.forEach((item) => {
+            const card = document.createElement("div");
+            card.className = "media-item";
+
+            if (item.imageUrl && isSafeUrl(item.imageUrl)) {
+              const img = document.createElement("img");
+              img.src = item.imageUrl.trim();
+              img.alt = item.title || "صورة من فعاليات القمة ماث";
+              card.appendChild(img);
+            }
+
+            const body = document.createElement("div");
+            body.className = "media-body";
+
+            const title = document.createElement("h4");
+            title.textContent = item.title || "";
+
+            const desc = document.createElement("p");
+            desc.textContent = item.description || "";
+
+            body.append(title, desc);
+
+            if (item.videoUrl && isSafeUrl(item.videoUrl)) {
+              const link = document.createElement("a");
+              link.className = "video-link";
+              link.href = item.videoUrl.trim();
+              link.target = "_blank";
+              link.rel = "noopener noreferrer";
+              link.textContent = "مشاهدة الفيديو ◀";
+              body.appendChild(link);
+            }
+
+            card.appendChild(body);
+            galContainer.appendChild(card);
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>
