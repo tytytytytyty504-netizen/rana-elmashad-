@@ -9,21 +9,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy-dark: #061021;
-      --navy-main: #0a1931;
-      --navy-card: #112547;
-      --navy-input: #08152c;
+      --bg-dark: #061021;
+      --bg-main: #0a1931;
+      --bg-card: #112547;
+      --bg-input: #08152c;
       --gold: #c9a23f;
       --gold-light: #e6cb7a;
-      --gold-dark: #9f7c24;
       --white: #ffffff;
       --text-soft: #dce5f5;
-      --line-gold: rgba(201, 162, 63, 0.28);
+      --line: rgba(201, 162, 63, 0.25);
       --danger: #ff7373;
       --success: #4cd98b;
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -31,10 +30,10 @@
 
     body {
       font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
-      background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy-main) 100%);
+      background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-main) 100%);
       color: var(--white);
       line-height: 1.75;
-      padding: 20px;
+      padding: 18px;
       min-height: 100vh;
     }
 
@@ -44,26 +43,26 @@
     }
 
     .login-box {
-      max-width: 430px;
-      margin: 65px auto;
-      background: var(--navy-card);
-      border: 1px solid var(--line-gold);
+      max-width: 420px;
+      margin: 64px auto;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 32px;
+      padding: 30px;
     }
 
     .login-box h1 {
       color: var(--gold-light);
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       text-align: center;
       margin-bottom: 6px;
     }
 
     .login-box p {
       color: var(--text-soft);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     .dashboard {
@@ -76,16 +75,16 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      background: var(--navy-card);
-      border: 1px solid var(--line-gold);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 18px 22px;
-      margin-bottom: 18px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
     }
 
     .top-bar h2 {
       color: var(--gold-light);
-      font-size: 1.3rem;
+      font-size: 1.25rem;
     }
 
     .top-bar small {
@@ -97,25 +96,25 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .tab-btn {
-      background: var(--navy-card);
+      background: var(--bg-card);
       color: var(--white);
-      border: 1px solid var(--line-gold);
-      padding: 9px 14px;
+      border: 1px solid var(--line);
+      padding: 8px 14px;
       border-radius: 9px;
       font-family: inherit;
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       cursor: pointer;
     }
 
     .tab-btn.active,
     .tab-btn:hover {
       background: var(--gold);
-      color: var(--navy-dark);
+      color: var(--bg-dark);
     }
 
     .tab-panel {
@@ -127,36 +126,36 @@
     }
 
     .panel {
-      background: var(--navy-card);
-      border: 1px solid var(--line-gold);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 24px;
-      margin-bottom: 22px;
+      padding: 22px;
+      margin-bottom: 20px;
     }
 
     .panel h3 {
       color: var(--gold-light);
-      font-size: 1.12rem;
-      margin-bottom: 16px;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
       padding-bottom: 8px;
-      border-bottom: 1px solid var(--line-gold);
+      border-bottom: 1px solid var(--line);
     }
 
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 14px;
     }
 
     .color-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
     }
 
-    .color-item {
-      background: var(--navy-input);
-      border: 1px solid var(--line-gold);
+    .color-card {
+      background: var(--bg-input);
+      border: 1px solid var(--line);
       border-radius: 10px;
       padding: 12px;
       display: flex;
@@ -165,12 +164,44 @@
       gap: 10px;
     }
 
-    .color-item input[type="color"] {
+    .color-card input[type="color"] {
       width: 48px;
       height: 36px;
       padding: 2px;
       border: none;
       background: transparent;
+      cursor: pointer;
+    }
+
+    .gradient-bar-preview {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--bg-input);
+    }
+
+    .gradient-strip {
+      height: 44px;
+      border-radius: 8px;
+      margin-top: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .shades-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .shade-swatch {
+      border-radius: 8px;
+      padding: 8px 6px;
+      text-align: center;
+      font-size: 0.74rem;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.18);
       cursor: pointer;
     }
 
@@ -180,7 +211,7 @@
 
     label {
       display: block;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--white);
       margin-bottom: 5px;
@@ -188,13 +219,13 @@
 
     input, textarea, select {
       width: 100%;
-      background: var(--navy-input);
-      border: 1px solid var(--line-gold);
+      background: var(--bg-input);
+      border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 10px 13px;
+      padding: 10px 12px;
       color: var(--white);
       font-family: inherit;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
 
     input:focus, textarea:focus, select:focus {
@@ -203,29 +234,38 @@
     }
 
     textarea {
-      min-height: 82px;
+      min-height: 78px;
       resize: vertical;
     }
 
-    .hero-upload-box {
-      background: var(--navy-input);
-      border: 1px dashed var(--line-gold);
+    .upload-box {
+      background: var(--bg-input);
+      border: 1px dashed var(--line);
       border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 16px;
+      padding: 14px;
+      margin-bottom: 14px;
       display: flex;
-      gap: 16px;
+      gap: 14px;
       align-items: center;
       flex-wrap: wrap;
     }
 
-    .hero-mini-preview {
-      width: 96px;
-      height: 115px;
+    .mini-preview {
+      width: 84px;
+      height: 96px;
+      border-radius: 9px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      background: var(--bg-dark);
+    }
+
+    .mini-logo-preview {
+      width: 64px;
+      height: 64px;
       border-radius: 10px;
       object-fit: cover;
-      border: 1px solid var(--line-gold);
-      background: var(--navy-dark);
+      border: 1px solid var(--line);
+      background: var(--bg-dark);
     }
 
     .checkbox-row {
@@ -248,13 +288,13 @@
 
     .btn-gold {
       background: var(--gold);
-      color: var(--navy-dark);
+      color: var(--bg-dark);
       border: none;
       border-radius: 8px;
-      padding: 10px 20px;
+      padding: 10px 18px;
       font-family: inherit;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
     }
 
@@ -263,10 +303,10 @@
       color: var(--gold-light);
       border: 1px solid var(--gold);
       border-radius: 8px;
-      padding: 9px 16px;
+      padding: 8px 14px;
       font-family: inherit;
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       cursor: pointer;
       text-decoration: none;
       display: inline-flex;
@@ -281,13 +321,13 @@
       padding: 6px 12px;
       font-family: inherit;
       font-weight: 600;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       cursor: pointer;
     }
 
     .status-msg {
       margin-top: 10px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 700;
     }
 
@@ -300,16 +340,16 @@
     }
 
     .list-box {
-      margin-top: 16px;
+      margin-top: 14px;
       display: grid;
       gap: 10px;
     }
 
     .list-item {
-      background: var(--navy-input);
-      border: 1px solid var(--line-gold);
+      background: var(--bg-input);
+      border: 1px solid var(--line);
       border-radius: 10px;
-      padding: 14px;
+      padding: 12px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -324,20 +364,20 @@
 
     .list-item span {
       color: var(--text-soft);
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       display: block;
     }
 
     .media-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      gap: 14px;
-      margin-top: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
     }
 
     .media-card {
-      background: var(--navy-input);
-      border: 1px solid var(--line-gold);
+      background: var(--bg-input);
+      border: 1px solid var(--line);
       border-radius: 10px;
       padding: 10px;
       display: flex;
@@ -347,26 +387,15 @@
 
     .media-card img {
       width: 100%;
-      height: 120px;
+      height: 115px;
       object-fit: cover;
       border-radius: 6px;
     }
 
     .media-card small {
       color: var(--text-soft);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       word-break: break-all;
-    }
-
-    .preview-box {
-      margin-top: 16px;
-      background: var(--navy-input);
-      border: 1px dashed var(--gold);
-      border-radius: 10px;
-      padding: 16px;
-      color: var(--text-soft);
-      white-space: pre-wrap;
-      font-size: 0.88rem;
     }
   </style>
 </head>
@@ -404,18 +433,18 @@
     </div>
 
     <div class="tabs-bar" role="tablist">
-      <button type="button" class="tab-btn active" data-tab="tab-profile">الرئيسية والسيرة والاعتمادات</button>
+      <button type="button" class="tab-btn active" data-tab="tab-profile">الرئيسية واللوجو والسيرة</button>
       <button type="button" class="tab-btn" data-tab="tab-gallery">البطولات والإنجازات والفيديوهات</button>
       <button type="button" class="tab-btn" data-tab="tab-media">مكتبة الوسائط والصور</button>
       <button type="button" class="tab-btn" data-tab="tab-schedules">المواعيد والدورات</button>
       <button type="button" class="tab-btn" data-tab="tab-stats-links">الإحصائيات والروابط</button>
-      <button type="button" class="tab-btn" data-tab="tab-theme-layout">الألوان والأقسام والنسخ الاحتياطي</button>
+      <button type="button" class="tab-btn" data-tab="tab-theme-layout">الألوان وتدرجاتها والأقسام</button>
     </div>
 
     <!-- TAB 1 -->
     <div class="tab-panel active" id="tab-profile">
       <div class="panel">
-        <h3>الواجهة الرئيسية والسيرة الذاتية</h3>
+        <h3>الهوية واللوجو والواجهة الرئيسية</h3>
         <div class="grid-2">
           <div class="form-group">
             <label for="name-ar">الاسم بالعربية</label>
@@ -426,29 +455,48 @@
             <input type="text" id="name-en" />
           </div>
         </div>
-        <div class="form-group">
-          <label for="hero-title">اللقب والمسمى الوظيفي</label>
-          <input type="text" id="hero-title" />
-        </div>
-        <div class="form-group">
-          <label for="short-desc">مقدمة مختصرة في الصفحة الرئيسية</label>
-          <textarea id="short-desc"></textarea>
-        </div>
-
-        <div class="hero-upload-box">
-          <img id="hero-mini-preview" class="hero-mini-preview" src="" alt="معاينة الصورة الرئيسية" style="display: none;" />
-          <div style="flex: 1; min-width: 220px;">
-            <label for="hero-photo-file">رفع الصورة الشخصية الرئيسية من الجهاز مباشرة</label>
-            <input type="file" id="hero-photo-file" accept="image/*" />
-            <small style="color: var(--text-soft); display: block; margin-top: 6px;">يتم ضغط الصورة تلقائياً في المتصفح وتجهيزها للحفظ دون الحاجة لروابط.</small>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="academy-name">اسم الأكاديمية أو الشعار النصي</label>
+            <input type="text" id="academy-name" />
+          </div>
+          <div class="form-group">
+            <label for="hero-title">اللقب والمسمى الوظيفي</label>
+            <input type="text" id="hero-title" />
           </div>
         </div>
 
-        <input type="hidden" id="photo-url" />
-        <div class="form-group">
-          <label for="photo-alt">النص البديل للصورة الشخصية (Alt)</label>
-          <input type="text" id="photo-alt" />
+        <!-- Logo Upload -->
+        <div class="upload-box">
+          <img id="logo-mini-preview" class="mini-logo-preview" src="" alt="معاينة اللوجو" style="display: none;" />
+          <div style="flex: 1; min-width: 210px;">
+            <label for="logo-file-input">لوجو الموقع / الأكاديمية (رفع من الجهاز)</label>
+            <input type="file" id="logo-file-input" accept="image/*" />
+            <input type="hidden" id="logo-url" />
+          </div>
         </div>
+
+        <!-- Hero Photo Upload -->
+        <div class="upload-box">
+          <img id="hero-mini-preview" class="mini-preview" src="" alt="معاينة الصورة الرئيسية" style="display: none;" />
+          <div style="flex: 1; min-width: 210px;">
+            <label for="hero-photo-file">الصورة الشخصية الرئيسية (رفع من الجهاز)</label>
+            <input type="file" id="hero-photo-file" accept="image/*" />
+            <input type="hidden" id="photo-url" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="photo-alt">النص البديل للصورة الشخصية (Alt)</label>
+            <input type="text" id="photo-alt" />
+          </div>
+          <div class="form-group">
+            <label for="short-desc">مقدمة مختصرة في الصفحة الرئيسية</label>
+            <input type="text" id="short-desc" />
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="about-p1">السيرة الذاتية — الفقرة الأولى</label>
           <textarea id="about-p1"></textarea>
@@ -471,12 +519,9 @@
             <input type="text" id="slogan-text" />
           </div>
         </div>
-        <div class="btn-row">
-          <button type="button" id="preview-profile-btn" class="btn-outline">معاينة التعديلات</button>
-          <button type="button" id="save-profile-btn" class="btn-gold">حفظ ونشر البيانات</button>
-        </div>
+
+        <button type="button" id="save-profile-btn" class="btn-gold">حفظ ونشر البيانات</button>
         <div id="profile-status" class="status-msg"></div>
-        <div id="profile-preview" class="preview-box" style="display: none;"></div>
       </div>
 
       <div class="panel">
@@ -501,10 +546,10 @@
         <button type="button" id="add-hc-btn" class="btn-gold">إضافة عنصر</button>
         <div id="hc-status" class="status-msg"></div>
 
-        <h4 style="color: var(--gold-light); margin-top: 18px;">أبرز الإنجازات الحالية</h4>
+        <h4 style="color: var(--gold-light); margin-top: 16px;">أبرز الإنجازات الحالية</h4>
         <div class="list-box" id="highlights-list"></div>
 
-        <h4 style="color: var(--gold-light); margin-top: 18px;">الاعتمادات والبرامج الحالية</h4>
+        <h4 style="color: var(--gold-light); margin-top: 16px;">الاعتمادات والبرامج الحالية</h4>
         <div class="list-box" id="credentials-list"></div>
       </div>
     </div>
@@ -517,7 +562,7 @@
         <div class="grid-2">
           <div class="form-group">
             <label for="gal-title">عنوان الإنجاز أو البطولة</label>
-            <input type="text" id="gal-title" required />
+            <input type="text" id="gal-title" />
           </div>
           <div class="form-group">
             <label for="gal-activity-type">نوع النشاط</label>
@@ -531,12 +576,12 @@
         <div class="grid-2">
           <div class="form-group">
             <label for="gal-category">اسم البطولة أو التصنيف</label>
-            <input type="text" id="gal-category" list="categories-datalist" placeholder="مثال: بطولة الحساب الذهني" />
+            <input type="text" id="gal-category" list="categories-datalist" />
             <datalist id="categories-datalist"></datalist>
           </div>
           <div class="form-group">
             <label for="gal-year">السنة</label>
-            <input type="text" id="gal-year" placeholder="مثال: 2026" />
+            <input type="text" id="gal-year" />
           </div>
         </div>
         <div class="form-group">
@@ -545,8 +590,9 @@
         </div>
         <div class="grid-2">
           <div class="form-group">
-            <label for="gal-img">رابط أو صورة المعرض</label>
-            <input type="text" id="gal-img" placeholder="اختر من مكتبة الوسائط أو أدخل رابطاً" />
+            <label for="gal-img">صورة المعرض (اختر من مكتبة الوسائط أو ارفع مباشرة)</label>
+            <input type="file" id="gal-img-file" accept="image/*" style="margin-bottom: 8px;" />
+            <input type="text" id="gal-img" placeholder="سيتم ملؤه تلقائياً عند اختيار صورة أو من مكتبة الوسائط" />
           </div>
           <div class="form-group">
             <label for="gal-alt">النص البديل للصورة (Alt)</label>
@@ -556,11 +602,11 @@
         <div class="grid-2">
           <div class="form-group">
             <label for="gal-video">رابط الفيديو (اختياري)</label>
-            <input type="url" id="gal-video" placeholder="https://..." />
+            <input type="url" id="gal-video" />
           </div>
           <div class="form-group">
             <label for="gal-order">رقم الترتيب</label>
-            <input type="number" id="gal-order" placeholder="1" />
+            <input type="number" id="gal-order" />
           </div>
         </div>
         <div class="checkbox-row">
@@ -583,14 +629,14 @@
     <!-- TAB 3 -->
     <div class="tab-panel" id="tab-media">
       <div class="panel">
-        <h3>رفع صور متعددة وضغطها وتصغيرها تلقائياً</h3>
+        <h3>رفع صور متعددة وضغطها تلقائياً</h3>
         <div class="grid-2">
           <div class="form-group">
-            <label for="media-files-input">اختر صورة أو عدة صور دفعة واحدة</label>
+            <label for="media-files-input">اختر صورة أو عدة صور من الجهاز</label>
             <input type="file" id="media-files-input" accept="image/*" multiple />
           </div>
           <div class="form-group">
-            <label for="media-default-alt">نص بديل افتراضي للصور المرفوعة</label>
+            <label for="media-default-alt">نص بديل افتراضي للصور</label>
             <input type="text" id="media-default-alt" />
           </div>
         </div>
@@ -598,13 +644,13 @@
           <div class="form-group">
             <label for="media-format">صيغة الضغط</label>
             <select id="media-format">
-              <option value="image/webp">WebP</option>
               <option value="image/jpeg">JPEG</option>
+              <option value="image/webp">WebP</option>
             </select>
           </div>
           <div class="form-group">
             <label for="media-max-width">أقصى عرض للصورة (بكسل)</label>
-            <input type="number" id="media-max-width" value="1280" min="400" max="2500" />
+            <input type="number" id="media-max-width" value="1080" min="400" max="2000" />
           </div>
         </div>
         <button type="button" id="process-media-btn" class="btn-gold">ضغط وإضافة إلى مكتبة الوسائط</button>
@@ -622,8 +668,8 @@
             <label for="media-filter-type">تصفية حسب الصيغة</label>
             <select id="media-filter-type">
               <option value="">الكل</option>
-              <option value="image/webp">WebP</option>
               <option value="image/jpeg">JPEG</option>
+              <option value="image/webp">WebP</option>
             </select>
           </div>
         </div>
@@ -706,36 +752,55 @@
       </div>
     </div>
 
-    <!-- TAB 6 -->
+    <!-- TAB 6: Full Color Control + Gradients + Sections + Backup -->
     <div class="tab-panel" id="tab-theme-layout">
       <div class="panel">
-        <h3>تخصيص ألوان الموقع</h3>
+        <h3>تحكم كامل في الألوان وتدرجاتها</h3>
         <div class="color-grid">
-          <div class="color-item">
-            <label for="col-navy-royal" style="margin: 0;">اللون الأساسي الداكن</label>
-            <input type="color" id="col-navy-royal" value="#0a1931" />
+          <div class="color-card">
+            <label for="col-bg-primary" style="margin: 0;">خلفية الموقع الأساسية</label>
+            <input type="color" id="col-bg-primary" value="#0b172a" />
           </div>
-          <div class="color-item">
-            <label for="col-navy-deep" style="margin: 0;">لون الهيدر والعمق</label>
-            <input type="color" id="col-navy-deep" value="#061021" />
+          <div class="color-card">
+            <label for="col-bg-header" style="margin: 0;">لون الهيدر والعمق</label>
+            <input type="color" id="col-bg-header" value="#07101f" />
           </div>
-          <div class="color-item">
-            <label for="col-navy-surface" style="margin: 0;">لون الكروت والأسطح</label>
-            <input type="color" id="col-navy-surface" value="#112547" />
+          <div class="color-card">
+            <label for="col-bg-card" style="margin: 0;">لون الكروت الداكنة</label>
+            <input type="color" id="col-bg-card" value="#12233d" />
           </div>
-          <div class="color-item">
-            <label for="col-offwhite" style="margin: 0;">لون الأقسام الفاتحة</label>
-            <input type="color" id="col-offwhite" value="#f7f8fb" />
+          <div class="color-card">
+            <label for="col-bg-light" style="margin: 0;">لون الأقسام الفاتحة</label>
+            <input type="color" id="col-bg-light" value="#f5f7fb" />
           </div>
-          <div class="color-item">
-            <label for="col-gold" style="margin: 0;">اللون الذهبي الأساسي</label>
-            <input type="color" id="col-gold" value="#c9a23f" />
+          <div class="color-card">
+            <label for="col-accent" style="margin: 0;">لون التمييز والأزرار</label>
+            <input type="color" id="col-accent" value="#c89d3c" />
           </div>
-          <div class="color-item">
-            <label for="col-gold-soft" style="margin: 0;">اللون الذهبي الفاتح</label>
-            <input type="color" id="col-gold-soft" value="#e6cb7a" />
+          <div class="color-card">
+            <label for="col-text-light" style="margin: 0;">لون النص الفاتح</label>
+            <input type="color" id="col-text-light" value="#f3f6fb" />
+          </div>
+          <div class="color-card">
+            <label for="col-text-dark" style="margin: 0;">لون النص الداكن</label>
+            <input type="color" id="col-text-dark" value="#101d32" />
           </div>
         </div>
+
+        <div class="gradient-bar-preview">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <strong style="color: var(--gold-light); font-size: 0.92rem;">معاينة التدرج اللوني للون التمييز المختار</strong>
+            <select id="shade-target-select" style="width: auto; padding: 6px 10px; font-size: 0.82rem;">
+              <option value="col-accent">تطبيق الدرجة على: لون التمييز</option>
+              <option value="col-bg-primary">تطبيق الدرجة على: الخلفية الأساسية</option>
+              <option value="col-bg-card">تطبيق الدرجة على: لون الكروت</option>
+              <option value="col-bg-header">تطبيق الدرجة على: لون الهيدر</option>
+            </select>
+          </div>
+          <div class="gradient-strip" id="gradient-strip-box"></div>
+          <div class="shades-row" id="shades-swatches-box"></div>
+        </div>
+
         <div class="btn-row" style="margin-top: 16px;">
           <button type="button" id="save-theme-btn" class="btn-gold">حفظ الألوان وتطبيقها</button>
           <button type="button" id="reset-theme-btn" class="btn-outline">استعادة الافتراضي</button>
@@ -784,12 +849,14 @@
     const db = getDatabase(app);
 
     const DEFAULT_THEME = {
-      navyRoyal: "#0a1931",
-      navyDeep: "#061021",
-      navySurface: "#112547",
-      offwhite: "#f7f8fb",
-      gold: "#c9a23f",
-      goldSoft: "#e6cb7a"
+      bgPrimary: "#0b172a",
+      bgHeader: "#07101f",
+      bgCard: "#12233d",
+      bgLight: "#f5f7fb",
+      accent: "#c89d3c",
+      accentSoft: "#e7c878",
+      textLight: "#f3f6fb",
+      textDark: "#101d32"
     };
 
     const DEFAULT_SECTIONS = [
@@ -806,6 +873,7 @@
 
     let latestSiteData = {};
     let mediaLibraryList = [];
+    let isInitialLoadDone = false;
 
     function cleanText(val) {
       return typeof val === "string" ? val.trim() : "";
@@ -827,6 +895,61 @@
       el.textContent = msg;
       el.className = "status-msg " + (isOk ? "status-ok" : "status-err");
     }
+
+    function shadeHex(hex, percent) {
+      if (typeof hex !== "string") return hex;
+      const clean = hex.replace("#", "").trim();
+      if (clean.length !== 6) return hex;
+      const num = parseInt(clean, 16);
+      if (Number.isNaN(num)) return hex;
+      const r = (num >> 16) & 255;
+      const g = (num >> 8) & 255;
+      const b = num & 255;
+      const amt = Math.round(2.55 * percent);
+      const clamp = (v) => Math.max(0, Math.min(255, v + amt));
+      const toHex = (v) => clamp(v).toString(16).padStart(2, "0");
+      return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    }
+
+    function updateGradientPreview() {
+      const targetInputId = document.getElementById("shade-target-select").value || "col-accent";
+      const baseColor = document.getElementById(targetInputId)?.value || "#c89d3c";
+      const darker2 = shadeHex(baseColor, -28);
+      const darker1 = shadeHex(baseColor, -14);
+      const lighter1 = shadeHex(baseColor, 16);
+      const lighter2 = shadeHex(baseColor, 32);
+
+      const strip = document.getElementById("gradient-strip-box");
+      strip.style.background = `linear-gradient(90deg, ${darker2} 0%, ${darker1} 25%, ${baseColor} 50%, ${lighter1} 75%, ${lighter2} 100%)`;
+
+      const swatches = document.getElementById("shades-swatches-box");
+      swatches.replaceChildren();
+      const levels = [
+        { label: "-28%", hex: darker2 },
+        { label: "-14%", hex: darker1 },
+        { label: "الأساسي", hex: baseColor },
+        { label: "+16%", hex: lighter1 },
+        { label: "+32%", hex: lighter2 }
+      ];
+      levels.forEach((lvl) => {
+        const div = document.createElement("div");
+        div.className = "shade-swatch";
+        div.style.background = lvl.hex;
+        div.style.color = "#ffffff";
+        div.style.textShadow = "0 1px 2px rgba(0,0,0,0.85)";
+        div.textContent = `${lvl.label}\n${lvl.hex}`;
+        div.addEventListener("click", () => {
+          document.getElementById(targetInputId).value = lvl.hex;
+          updateGradientPreview();
+        });
+        swatches.appendChild(div);
+      });
+    }
+
+    ["col-bg-primary", "col-bg-header", "col-bg-card", "col-bg-light", "col-accent", "col-text-light", "col-text-dark", "shade-target-select"].forEach((id) => {
+      document.getElementById(id).addEventListener("input", updateGradientPreview);
+      document.getElementById(id).addEventListener("change", updateGradientPreview);
+    });
 
     document.querySelectorAll(".tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -871,14 +994,14 @@
       }
     });
 
-    function setHeroMiniPreview(src) {
-      const mini = document.getElementById("hero-mini-preview");
+    function setMiniImage(imgId, src) {
+      const el = document.getElementById(imgId);
       if (src && isSafeOptionalUrl(src)) {
-        mini.src = src;
-        mini.style.display = "block";
+        el.src = src;
+        el.style.display = "block";
       } else {
-        mini.src = "";
-        mini.style.display = "none";
+        el.src = "";
+        el.style.display = "none";
       }
     }
 
@@ -897,7 +1020,7 @@
             canvas.height = targetH;
             canvas.getContext("2d").drawImage(img, 0, 0, targetW, targetH);
 
-            const thumbScale = targetW > 320 ? 320 / targetW : 1;
+            const thumbScale = targetW > 300 ? 300 / targetW : 1;
             const thumbCanvas = document.createElement("canvas");
             thumbCanvas.width = Math.round(targetW * thumbScale);
             thumbCanvas.height = Math.round(targetH * thumbScale);
@@ -917,6 +1040,30 @@
       });
     }
 
+    // Logo Upload -> immediately saved to Firebase so refresh never loses it
+    document.getElementById("logo-file-input").addEventListener("change", async (e) => {
+      const statusEl = document.getElementById("profile-status");
+      const file = e.target.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/")) {
+        setStatus(statusEl, "اختر ملف صورة صالح للوجو.", false);
+        return;
+      }
+      setStatus(statusEl, "جاري حفظ اللوجو...", true);
+      try {
+        const outMime = file.type === "image/png" ? "image/png" : "image/jpeg";
+        const processed = await compressImageFile(file, 320, outMime, 0.85);
+        document.getElementById("logo-url").value = processed.dataUrl;
+        setMiniImage("logo-mini-preview", processed.dataUrl);
+        await update(ref(db, "siteContent/profile"), { logoUrl: processed.dataUrl });
+        e.target.value = "";
+        setStatus(statusEl, "تم حفظ اللوجو بنجاح وسيبقى محفوظاً بعد التحديث.", true);
+      } catch {
+        setStatus(statusEl, "تعذر رفع اللوجو.", false);
+      }
+    });
+
+    // Hero Photo Upload -> immediately saved to Firebase so refresh never loses it
     document.getElementById("hero-photo-file").addEventListener("change", async (e) => {
       const statusEl = document.getElementById("profile-status");
       const file = e.target.files?.[0];
@@ -925,26 +1072,50 @@
         setStatus(statusEl, "اختر ملف صورة صالح من الجهاز.", false);
         return;
       }
-      setStatus(statusEl, "جاري ضغط الصورة الرئيسية...", true);
+      setStatus(statusEl, "جاري ضغط وحفظ الصورة الرئيسية...", true);
       try {
         const outMime = file.type === "image/png" ? "image/png" : "image/jpeg";
         const processed = await compressImageFile(file, 960, outMime, 0.82);
         document.getElementById("photo-url").value = processed.dataUrl;
-        setHeroMiniPreview(processed.dataUrl);
-        setStatus(statusEl, "تم تجهيز الصورة الرئيسية. اضغط (حفظ ونشر البيانات) لتثبيتها في الموقع.", true);
+        setMiniImage("hero-mini-preview", processed.dataUrl);
+        await update(ref(db, "siteContent/profile"), { photoUrl: processed.dataUrl });
+        e.target.value = "";
+        setStatus(statusEl, "تم حفظ الصورة الرئيسية بنجاح وستظهر حتى بعد عمل ريفريش.", true);
       } catch {
-        setStatus(statusEl, "تعذر قراءة أو ضغط الصورة المختارة.", false);
+        setStatus(statusEl, "تعذر معالجة وحفظ الصورة.", false);
+      }
+    });
+
+    // Gallery Direct File Upload
+    document.getElementById("gal-img-file").addEventListener("change", async (e) => {
+      const statusEl = document.getElementById("gallery-status");
+      const file = e.target.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/")) {
+        setStatus(statusEl, "اختر ملف صورة صالح.", false);
+        return;
+      }
+      setStatus(statusEl, "جاري تجهيز صورة المعرض...", true);
+      try {
+        const processed = await compressImageFile(file, 1080, "image/jpeg", 0.82);
+        document.getElementById("gal-img").value = processed.dataUrl;
+        e.target.value = "";
+        setStatus(statusEl, "تم تجهيز الصورة. اضغط (حفظ العنصر في المعرض) لتثبيتها.", true);
+      } catch {
+        setStatus(statusEl, "تعذر معالجة الصورة.", false);
       }
     });
 
     function fillThemeInputs(theme) {
       const t = { ...DEFAULT_THEME, ...(theme || {}) };
-      document.getElementById("col-navy-royal").value = t.navyRoyal;
-      document.getElementById("col-navy-deep").value = t.navyDeep;
-      document.getElementById("col-navy-surface").value = t.navySurface;
-      document.getElementById("col-offwhite").value = t.offwhite;
-      document.getElementById("col-gold").value = t.gold;
-      document.getElementById("col-gold-soft").value = t.goldSoft;
+      document.getElementById("col-bg-primary").value = t.bgPrimary;
+      document.getElementById("col-bg-header").value = t.bgHeader;
+      document.getElementById("col-bg-card").value = t.bgCard;
+      document.getElementById("col-bg-light").value = t.bgLight;
+      document.getElementById("col-accent").value = t.accent;
+      document.getElementById("col-text-light").value = t.textLight;
+      document.getElementById("col-text-dark").value = t.textDark;
+      updateGradientPreview();
     }
 
     function renderSectionsEditor(sectionsConfig) {
@@ -1050,35 +1221,42 @@
         const data = snap.val() || {};
         latestSiteData = data;
 
-        fillThemeInputs(data.themeConfig);
+        if (!isInitialLoadDone) {
+          fillThemeInputs(data.themeConfig);
+          if (data.profile) {
+            document.getElementById("name-ar").value = data.profile.nameAr || "";
+            document.getElementById("name-en").value = data.profile.nameEn || "";
+            document.getElementById("academy-name").value = data.profile.academyName || "";
+            document.getElementById("hero-title").value = data.profile.title || "";
+            document.getElementById("short-desc").value = data.profile.shortDesc || "";
+            document.getElementById("photo-url").value = data.profile.photoUrl || "";
+            document.getElementById("logo-url").value = data.profile.logoUrl || "";
+            document.getElementById("photo-alt").value = data.profile.photoAlt || "";
+            document.getElementById("about-p1").value = data.profile.aboutP1 || "";
+            document.getElementById("about-p2").value = data.profile.aboutP2 || "";
+            document.getElementById("about-p3").value = data.profile.aboutP3 || "";
+            document.getElementById("mission-text").value = data.profile.mission || "";
+            document.getElementById("slogan-text").value = data.profile.slogan || "";
+          }
+          if (data.stats) {
+            document.getElementById("stat-championships").value = data.stats.championships || "";
+            document.getElementById("stat-trainers").value = data.stats.trainers || "";
+            document.getElementById("stat-champions").value = data.stats.champions || "";
+            document.getElementById("stat-experience").value = data.stats.experience || "";
+          }
+          if (data.links) {
+            document.getElementById("wa-number").value = data.links.whatsappNumber || "";
+            document.getElementById("fb-link").value = data.links.facebook || "";
+            document.getElementById("tt-link").value = data.links.tiktok || "";
+            document.getElementById("ig-link").value = data.links.instagram || "";
+          }
+          renderSectionsEditor(data.sectionsConfig);
+          isInitialLoadDone = true;
+        }
 
         if (data.profile) {
-          document.getElementById("name-ar").value = data.profile.nameAr || "";
-          document.getElementById("name-en").value = data.profile.nameEn || "";
-          document.getElementById("hero-title").value = data.profile.title || "";
-          document.getElementById("short-desc").value = data.profile.shortDesc || "";
-          document.getElementById("photo-url").value = data.profile.photoUrl || "";
-          setHeroMiniPreview(data.profile.photoUrl || "");
-          document.getElementById("photo-alt").value = data.profile.photoAlt || "";
-          document.getElementById("about-p1").value = data.profile.aboutP1 || "";
-          document.getElementById("about-p2").value = data.profile.aboutP2 || "";
-          document.getElementById("about-p3").value = data.profile.aboutP3 || "";
-          document.getElementById("mission-text").value = data.profile.mission || "";
-          document.getElementById("slogan-text").value = data.profile.slogan || "";
-        }
-
-        if (data.stats) {
-          document.getElementById("stat-championships").value = data.stats.championships || "";
-          document.getElementById("stat-trainers").value = data.stats.trainers || "";
-          document.getElementById("stat-champions").value = data.stats.champions || "";
-          document.getElementById("stat-experience").value = data.stats.experience || "";
-        }
-
-        if (data.links) {
-          document.getElementById("wa-number").value = data.links.whatsappNumber || "";
-          document.getElementById("fb-link").value = data.links.facebook || "";
-          document.getElementById("tt-link").value = data.links.tiktok || "";
-          document.getElementById("ig-link").value = data.links.instagram || "";
+          setMiniImage("hero-mini-preview", data.profile.photoUrl || "");
+          setMiniImage("logo-mini-preview", data.profile.logoUrl || "");
         }
 
         const hList = document.getElementById("highlights-list");
@@ -1210,64 +1388,26 @@
           ? Object.entries(data.mediaLibrary).map(([id, val]) => ({ id, ...val })).reverse()
           : [];
         renderMediaLibrary();
-        renderSectionsEditor(data.sectionsConfig);
       });
     }
-
-    document.getElementById("save-theme-btn").addEventListener("click", async () => {
-      const statusEl = document.getElementById("theme-status");
-      try {
-        await set(ref(db, "siteContent/themeConfig"), {
-          navyRoyal: document.getElementById("col-navy-royal").value,
-          navyDeep: document.getElementById("col-navy-deep").value,
-          navySurface: document.getElementById("col-navy-surface").value,
-          offwhite: document.getElementById("col-offwhite").value,
-          gold: document.getElementById("col-gold").value,
-          goldSoft: document.getElementById("col-gold-soft").value
-        });
-        setStatus(statusEl, "تم حفظ الألوان وتطبيقها على الموقع بنجاح.", true);
-      } catch {
-        setStatus(statusEl, "تعذر حفظ الألوان.", false);
-      }
-    });
-
-    document.getElementById("reset-theme-btn").addEventListener("click", async () => {
-      const statusEl = document.getElementById("theme-status");
-      fillThemeInputs(DEFAULT_THEME);
-      try {
-        await set(ref(db, "siteContent/themeConfig"), DEFAULT_THEME);
-        setStatus(statusEl, "تمت استعادة الألوان الافتراضية.", true);
-      } catch {
-        setStatus(statusEl, "تعذر استعادة الألوان الافتراضية.", false);
-      }
-    });
-
-    document.getElementById("preview-profile-btn").addEventListener("click", () => {
-      const box = document.getElementById("profile-preview");
-      box.style.display = "block";
-      box.textContent = [
-        "الاسم: " + cleanText(document.getElementById("name-ar").value),
-        "اللقب: " + cleanText(document.getElementById("hero-title").value),
-        "الصورة الرئيسية: " + (cleanText(document.getElementById("photo-url").value) ? "مرفوعة من الجهاز" : "غير محددة"),
-        "الرسالة: " + cleanText(document.getElementById("mission-text").value),
-        "الشعار: " + cleanText(document.getElementById("slogan-text").value)
-      ].join("\n");
-    });
 
     document.getElementById("save-profile-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("profile-status");
       const photoUrl = cleanText(document.getElementById("photo-url").value);
-      if (!isSafeOptionalUrl(photoUrl)) {
-        setStatus(statusEl, "الصورة الرئيسية غير صالحة.", false);
+      const logoUrl = cleanText(document.getElementById("logo-url").value);
+      if (!isSafeOptionalUrl(photoUrl) || !isSafeOptionalUrl(logoUrl)) {
+        setStatus(statusEl, "الصورة أو اللوجو غير صالح.", false);
         return;
       }
       try {
-        await set(ref(db, "siteContent/profile"), {
+        await update(ref(db, "siteContent/profile"), {
           nameAr: cleanText(document.getElementById("name-ar").value),
           nameEn: cleanText(document.getElementById("name-en").value),
+          academyName: cleanText(document.getElementById("academy-name").value),
           title: cleanText(document.getElementById("hero-title").value),
           shortDesc: cleanText(document.getElementById("short-desc").value),
           photoUrl,
+          logoUrl,
           photoAlt: cleanText(document.getElementById("photo-alt").value),
           aboutP1: cleanText(document.getElementById("about-p1").value),
           aboutP2: cleanText(document.getElementById("about-p2").value),
@@ -1275,8 +1415,7 @@
           mission: cleanText(document.getElementById("mission-text").value),
           slogan: cleanText(document.getElementById("slogan-text").value)
         });
-        document.getElementById("hero-photo-file").value = "";
-        setStatus(statusEl, "تم حفظ النبذة والصورة الرئيسية ونشرها بنجاح.", true);
+        setStatus(statusEl, "تم حفظ ونشر جميع البيانات بنجاح.", true);
       } catch {
         setStatus(statusEl, "تعذر الحفظ.", false);
       }
@@ -1373,11 +1512,11 @@
         return;
       }
 
-      const maxWidth = Number(document.getElementById("media-max-width").value) || 1280;
-      const mimeType = document.getElementById("media-format").value || "image/webp";
+      const maxWidth = Number(document.getElementById("media-max-width").value) || 1080;
+      const mimeType = document.getElementById("media-format").value || "image/jpeg";
       const defaultAlt = cleanText(document.getElementById("media-default-alt").value);
 
-      setStatus(statusEl, "جاري ضغط وتجهيز الصور...", true);
+      setStatus(statusEl, "جاري ضغط وإضافة الصور...", true);
       try {
         for (const file of files) {
           if (!file.type.startsWith("image/")) continue;
@@ -1392,7 +1531,7 @@
           });
         }
         filesInput.value = "";
-        setStatus(statusEl, "تم ضغط الصور وإضافتها إلى مكتبة الوسائط بنجاح.", true);
+        setStatus(statusEl, "تم ضغط الصور وإضافتها بنجاح.", true);
       } catch {
         setStatus(statusEl, "تعذر معالجة بعض الصور.", false);
       }
@@ -1426,7 +1565,7 @@
     document.getElementById("save-stats-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("stats-status");
       try {
-        await set(ref(db, "siteContent/stats"), {
+        await update(ref(db, "siteContent/stats"), {
           championships: cleanText(document.getElementById("stat-championships").value),
           trainers: cleanText(document.getElementById("stat-trainers").value),
           champions: cleanText(document.getElementById("stat-champions").value),
@@ -1448,7 +1587,7 @@
         return;
       }
       try {
-        await set(ref(db, "siteContent/links"), {
+        await update(ref(db, "siteContent/links"), {
           whatsappNumber: cleanText(document.getElementById("wa-number").value),
           facebook: fb,
           tiktok: tt,
@@ -1457,6 +1596,37 @@
         setStatus(statusEl, "تم حفظ الروابط بنجاح.", true);
       } catch {
         setStatus(statusEl, "تعذر حفظ الروابط.", false);
+      }
+    });
+
+    document.getElementById("save-theme-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("theme-status");
+      const accent = document.getElementById("col-accent").value;
+      try {
+        await update(ref(db, "siteContent/themeConfig"), {
+          bgPrimary: document.getElementById("col-bg-primary").value,
+          bgHeader: document.getElementById("col-bg-header").value,
+          bgCard: document.getElementById("col-bg-card").value,
+          bgLight: document.getElementById("col-bg-light").value,
+          accent,
+          accentSoft: shadeHex(accent, 22),
+          textLight: document.getElementById("col-text-light").value,
+          textDark: document.getElementById("col-text-dark").value
+        });
+        setStatus(statusEl, "تم حفظ الألوان وتطبيقها بنجاح.", true);
+      } catch {
+        setStatus(statusEl, "تعذر حفظ الألوان.", false);
+      }
+    });
+
+    document.getElementById("reset-theme-btn").addEventListener("click", async () => {
+      const statusEl = document.getElementById("theme-status");
+      fillThemeInputs(DEFAULT_THEME);
+      try {
+        await set(ref(db, "siteContent/themeConfig"), DEFAULT_THEME);
+        setStatus(statusEl, "تمت استعادة الألوان الافتراضية.", true);
+      } catch {
+        setStatus(statusEl, "تعذر استعادة الألوان الافتراضية.", false);
       }
     });
 
@@ -1500,6 +1670,7 @@
           return;
         }
         await set(ref(db, "siteContent"), parsed);
+        isInitialLoadDone = false;
         setStatus(statusEl, "تمت استعادة النسخة الاحتياطية بنجاح.", true);
       } catch {
         setStatus(statusEl, "تعذر قراءة أو استعادة ملف النسخة الاحتياطية.", false);
