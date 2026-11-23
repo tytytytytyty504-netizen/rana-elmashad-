@@ -207,6 +207,27 @@
       resize: vertical;
     }
 
+    .hero-upload-box {
+      background: var(--navy-input);
+      border: 1px dashed var(--line-gold);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-mini-preview {
+      width: 96px;
+      height: 115px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid var(--line-gold);
+      background: var(--navy-dark);
+    }
+
     .checkbox-row {
       display: flex;
       align-items: center;
@@ -413,15 +434,20 @@
           <label for="short-desc">مقدمة مختصرة في الصفحة الرئيسية</label>
           <textarea id="short-desc"></textarea>
         </div>
-        <div class="grid-2">
-          <div class="form-group">
-            <label for="photo-url">رابط الصورة الشخصية الرئيسية (HTTPS)</label>
-            <input type="url" id="photo-url" placeholder="https://..." />
+
+        <div class="hero-upload-box">
+          <img id="hero-mini-preview" class="hero-mini-preview" src="" alt="معاينة الصورة الرئيسية" style="display: none;" />
+          <div style="flex: 1; min-width: 220px;">
+            <label for="hero-photo-file">رفع الصورة الشخصية الرئيسية من الجهاز مباشرة</label>
+            <input type="file" id="hero-photo-file" accept="image/*" />
+            <small style="color: var(--text-soft); display: block; margin-top: 6px;">يتم ضغط الصورة تلقائياً في المتصفح وتجهيزها للحفظ دون الحاجة لروابط.</small>
           </div>
-          <div class="form-group">
-            <label for="photo-alt">النص البديل للصورة الشخصية (Alt)</label>
-            <input type="text" id="photo-alt" />
-          </div>
+        </div>
+
+        <input type="hidden" id="photo-url" />
+        <div class="form-group">
+          <label for="photo-alt">النص البديل للصورة الشخصية (Alt)</label>
+          <input type="text" id="photo-alt" />
         </div>
         <div class="form-group">
           <label for="about-p1">السيرة الذاتية — الفقرة الأولى</label>
@@ -519,8 +545,8 @@
         </div>
         <div class="grid-2">
           <div class="form-group">
-            <label for="gal-img">رابط الصورة (HTTPS)</label>
-            <input type="url" id="gal-img" placeholder="https://..." />
+            <label for="gal-img">رابط أو صورة المعرض</label>
+            <input type="text" id="gal-img" placeholder="اختر من مكتبة الوسائط أو أدخل رابطاً" />
           </div>
           <div class="form-group">
             <label for="gal-alt">النص البديل للصورة (Alt)</label>
@@ -680,7 +706,7 @@
       </div>
     </div>
 
-    <!-- TAB 6: Colors, Sections & Backup -->
+    <!-- TAB 6 -->
     <div class="tab-panel" id="tab-theme-layout">
       <div class="panel">
         <h3>تخصيص ألوان الموقع</h3>
@@ -788,7 +814,7 @@
     function isSafeOptionalUrl(url) {
       const trimmed = cleanText(url);
       if (!trimmed) return true;
-      if (trimmed.startsWith("data:image/")) return true;
+      if (/^data:image\/(png|jpeg|jpg|webp|gif);base64,/i.test(trimmed)) return true;
       try {
         const parsed = new URL(trimmed);
         return parsed.protocol === "https:" || parsed.protocol === "http:";
@@ -842,6 +868,72 @@
       } else {
         document.getElementById("login-screen").style.display = "block";
         document.getElementById("admin-dashboard").style.display = "none";
+      }
+    });
+
+    function setHeroMiniPreview(src) {
+      const mini = document.getElementById("hero-mini-preview");
+      if (src && isSafeOptionalUrl(src)) {
+        mini.src = src;
+        mini.style.display = "block";
+      } else {
+        mini.src = "";
+        mini.style.display = "none";
+      }
+    }
+
+    function compressImageFile(file, maxWidth, mimeType, quality) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const img = new Image();
+          img.onload = () => {
+            const scale = img.width > maxWidth ? maxWidth / img.width : 1;
+            const targetW = Math.round(img.width * scale);
+            const targetH = Math.round(img.height * scale);
+
+            const canvas = document.createElement("canvas");
+            canvas.width = targetW;
+            canvas.height = targetH;
+            canvas.getContext("2d").drawImage(img, 0, 0, targetW, targetH);
+
+            const thumbScale = targetW > 320 ? 320 / targetW : 1;
+            const thumbCanvas = document.createElement("canvas");
+            thumbCanvas.width = Math.round(targetW * thumbScale);
+            thumbCanvas.height = Math.round(targetH * thumbScale);
+            thumbCanvas.getContext("2d").drawImage(canvas, 0, 0, thumbCanvas.width, thumbCanvas.height);
+
+            resolve({
+              dataUrl: canvas.toDataURL(mimeType, quality),
+              thumbDataUrl: thumbCanvas.toDataURL(mimeType, 0.72),
+              mimeType
+            });
+          };
+          img.onerror = reject;
+          img.src = ev.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    document.getElementById("hero-photo-file").addEventListener("change", async (e) => {
+      const statusEl = document.getElementById("profile-status");
+      const file = e.target.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/")) {
+        setStatus(statusEl, "اختر ملف صورة صالح من الجهاز.", false);
+        return;
+      }
+      setStatus(statusEl, "جاري ضغط الصورة الرئيسية...", true);
+      try {
+        const outMime = file.type === "image/png" ? "image/png" : "image/jpeg";
+        const processed = await compressImageFile(file, 960, outMime, 0.82);
+        document.getElementById("photo-url").value = processed.dataUrl;
+        setHeroMiniPreview(processed.dataUrl);
+        setStatus(statusEl, "تم تجهيز الصورة الرئيسية. اضغط (حفظ ونشر البيانات) لتثبيتها في الموقع.", true);
+      } catch {
+        setStatus(statusEl, "تعذر قراءة أو ضغط الصورة المختارة.", false);
       }
     });
 
@@ -966,6 +1058,7 @@
           document.getElementById("hero-title").value = data.profile.title || "";
           document.getElementById("short-desc").value = data.profile.shortDesc || "";
           document.getElementById("photo-url").value = data.profile.photoUrl || "";
+          setHeroMiniPreview(data.profile.photoUrl || "");
           document.getElementById("photo-alt").value = data.profile.photoAlt || "";
           document.getElementById("about-p1").value = data.profile.aboutP1 || "";
           document.getElementById("about-p2").value = data.profile.aboutP2 || "";
@@ -1121,7 +1214,6 @@
       });
     }
 
-    // Theme Save & Reset
     document.getElementById("save-theme-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("theme-status");
       try {
@@ -1156,6 +1248,7 @@
       box.textContent = [
         "الاسم: " + cleanText(document.getElementById("name-ar").value),
         "اللقب: " + cleanText(document.getElementById("hero-title").value),
+        "الصورة الرئيسية: " + (cleanText(document.getElementById("photo-url").value) ? "مرفوعة من الجهاز" : "غير محددة"),
         "الرسالة: " + cleanText(document.getElementById("mission-text").value),
         "الشعار: " + cleanText(document.getElementById("slogan-text").value)
       ].join("\n");
@@ -1165,7 +1258,7 @@
       const statusEl = document.getElementById("profile-status");
       const photoUrl = cleanText(document.getElementById("photo-url").value);
       if (!isSafeOptionalUrl(photoUrl)) {
-        setStatus(statusEl, "رابط الصورة الشخصية غير صالح.", false);
+        setStatus(statusEl, "الصورة الرئيسية غير صالحة.", false);
         return;
       }
       try {
@@ -1182,7 +1275,8 @@
           mission: cleanText(document.getElementById("mission-text").value),
           slogan: cleanText(document.getElementById("slogan-text").value)
         });
-        setStatus(statusEl, "تم حفظ النبذة والبيانات ونشرها بنجاح.", true);
+        document.getElementById("hero-photo-file").value = "";
+        setStatus(statusEl, "تم حفظ النبذة والصورة الرئيسية ونشرها بنجاح.", true);
       } catch {
         setStatus(statusEl, "تعذر الحفظ.", false);
       }
@@ -1237,7 +1331,7 @@
         return;
       }
       if (!isSafeOptionalUrl(imageUrl) || !isSafeOptionalUrl(videoUrl)) {
-        setStatus(statusEl, "تأكد أن روابط الصورة والفيديو تبدأ بـ https:// أو http://", false);
+        setStatus(statusEl, "تأكد أن الصورة أو الرابط صالح.", false);
         return;
       }
 
@@ -1269,41 +1363,6 @@
         setStatus(statusEl, "تعذر حفظ العنصر.", false);
       }
     });
-
-    function compressImageFile(file, maxWidth, mimeType, quality) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-          const img = new Image();
-          img.onload = () => {
-            const scale = img.width > maxWidth ? maxWidth / img.width : 1;
-            const targetW = Math.round(img.width * scale);
-            const targetH = Math.round(img.height * scale);
-
-            const canvas = document.createElement("canvas");
-            canvas.width = targetW;
-            canvas.height = targetH;
-            canvas.getContext("2d").drawImage(img, 0, 0, targetW, targetH);
-
-            const thumbScale = targetW > 320 ? 320 / targetW : 1;
-            const thumbCanvas = document.createElement("canvas");
-            thumbCanvas.width = Math.round(targetW * thumbScale);
-            thumbCanvas.height = Math.round(targetH * thumbScale);
-            thumbCanvas.getContext("2d").drawImage(canvas, 0, 0, thumbCanvas.width, thumbCanvas.height);
-
-            resolve({
-              dataUrl: canvas.toDataURL(mimeType, quality),
-              thumbDataUrl: thumbCanvas.toDataURL(mimeType, 0.72),
-              mimeType
-            });
-          };
-          img.onerror = reject;
-          img.src = ev.target.result;
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
 
     document.getElementById("process-media-btn").addEventListener("click", async () => {
       const statusEl = document.getElementById("media-status");
