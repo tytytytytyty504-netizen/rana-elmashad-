@@ -1117,7 +1117,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // Mobile Drawer Controls
     const drawer = document.getElementById("mobile-drawer");
     const backdrop = document.getElementById("drawer-backdrop");
     const openMenuBtn = document.getElementById("mobile-menu-open");
@@ -1136,7 +1135,6 @@
       link.addEventListener("click", () => setDrawerOpen(false));
     });
 
-    // Subtle Scroll Reveal
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -1153,7 +1151,6 @@
       observer.observe(sec);
     });
 
-    // Lightbox Controls
     const lightboxOverlay = document.getElementById("lightbox-overlay");
     const lightboxImg = document.getElementById("lightbox-img");
     const lightboxCap = document.getElementById("lightbox-cap");
@@ -1161,7 +1158,7 @@
     function isSafeUrl(url) {
       if (!url || typeof url !== "string") return false;
       const trimmed = url.trim();
-      if (trimmed.startsWith("data:image/")) return true;
+      if (/^data:image\/(png|jpeg|jpg|webp|gif);base64,/i.test(trimmed)) return true;
       try {
         const parsed = new URL(trimmed);
         return parsed.protocol === "https:" || parsed.protocol === "http:";
@@ -1188,7 +1185,6 @@
       if (e.target === lightboxOverlay) closeLightbox();
     });
 
-    // Gallery Filtering & Rendering
     let allGalleryItems = [];
     let activeType = "all";
     let activeCategory = "";
@@ -1388,13 +1384,8 @@
       const data = snapshot.val();
       if (!data) return;
 
-      if (data.themeConfig) {
-        applyThemeConfig(data.themeConfig);
-      }
-
-      if (data.sectionsConfig) {
-        applySectionsConfig(data.sectionsConfig);
-      }
+      if (data.themeConfig) applyThemeConfig(data.themeConfig);
+      if (data.sectionsConfig) applySectionsConfig(data.sectionsConfig);
 
       if (data.profile) {
         if (data.profile.nameAr) {
